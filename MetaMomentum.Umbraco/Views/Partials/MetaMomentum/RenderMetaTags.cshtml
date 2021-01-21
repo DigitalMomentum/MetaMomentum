@@ -1,0 +1,12 @@
+﻿@inherits UmbracoViewPage<MetaValues>
+@using MetaMomentum.Models;
+
+@{
+    if (Model == null) { return; }
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.Title))
+{
+<title>@(Model.Title)</title>
+}
+<meta name="description" content="">

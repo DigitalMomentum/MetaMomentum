@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Digital Momentum, David Sheiles</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <!-- <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl> -->
+    <!-- <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl> -->
+    <description>Creates a Meta Doctype to manage Search engine results, open Graph and Twitter cards</description>
+    <releaseNotes>First release</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>Umbraco seo twitter opengraph Umbraco8</tags>
+  </metadata>
+  <files>
+    <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\editorView.controller.js" target="App_Plugins\MetaMomentum\" />
+    <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\editorView.html" target="App_Plugins\MetaMomentum\" />
+    <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\package.manifest" target="App_Plugins\MetaMomentum\" />
+    <file src="..\MetaMomentum.Umbraco\Views\Partials\MetaMomentum\RenderMetaTags.cshtml" target="Views\Partials\MetaMomentum\" />
+  </files>
+</package>
