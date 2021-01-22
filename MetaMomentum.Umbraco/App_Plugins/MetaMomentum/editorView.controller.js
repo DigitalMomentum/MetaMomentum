@@ -67,8 +67,7 @@
                 }
 
                 if ($scope.model.value.title == "") {
-                    console.log(editorState.current);
-
+                  
                     for (var i = 0; i < editorState.current.variants.length; i++) {
                         if (editorState.current.variants[i].active) {
 
@@ -76,7 +75,6 @@
                             $scope.model.value.title = editorState.current.variants[i].name;
                         }
                     }
-
                 }
                 return $scope.model.value.title;
             }

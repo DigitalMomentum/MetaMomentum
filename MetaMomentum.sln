@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{BB8F5612-BAD2-4C50-B000-77B528FF42A0}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\release.yml = .github\workflows\release.yml
 		.github\workflows\stage.yml = .github\workflows\stage.yml
 	EndProjectSection
 EndProject
