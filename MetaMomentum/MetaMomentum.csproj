@@ -148,12 +148,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Content\App_Plugins\MetaMomentum\package.manifest" />
+    <Content Include="Content\Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
     <None Include="MetaMomentum.1.0.0.nupkg" />
     <None Include="MetaMomentum.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Compositions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\App_Plugins\MetaMomentum\editorView.controller.js" />
+    <Content Include="Content\App_Plugins\MetaMomentum\editorView.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />

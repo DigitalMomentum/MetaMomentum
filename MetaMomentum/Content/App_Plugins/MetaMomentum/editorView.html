@@ -1,0 +1,62 @@
+﻿<div ng-controller="DM.MetaMomentum">
+
+    <div class="control-group umb-control-group">
+        <div class="umb-el-wrap">
+            <div style="display:flex">
+                <div style="max-width:800px; width:100%;padding-right:30px;">
+
+
+
+
+                    <div class="clearfix">
+
+                        <div class="control-header">
+                            <label class="control-label" for="heroHeader" title=""> Title </label>
+                            <small class="control-description">
+                                The title will appear in the browser tab and as the first line in search results.
+
+                            </small>
+                        </div>
+
+                        <div class="controls">
+                            <div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.title.length >= 60}, {'color-orange' : model.value.title.length >= 45}]">{{ model.value.title.length}} / 60</div>
+                            <input type="text" ng-model="model.value.default.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateSearchTitle()">
+                            <div style="font-size:14px;color:#202124;text-align:right;"><a href="https://moz.com/learn/seo/title-tag" target="_blank"><i>How to write a good title <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+
+                        <div class="control-header">
+                            <label class="control-label" for="heroHeader" title=""> Description </label>
+                            <small class="control-description">The description provides a brief summary of a web page and is shown under the title in search results.</small>
+                        </div>
+
+                        <div class="controls">
+                            <div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.description.length >= 160}, {'color-orange' : model.value.description.length >= 150}]">{{ model.value.description.length}} / 160</div>
+
+                            <textarea ng-model="model.value.default.description" rows="4" class="umb-property-editor umb-textarea textstring " ng-change="updateSearchDescription()"></textarea>
+                            <div style="font-size:14px;color:#202124;text-align:right;"><a href="https://moz.com/learn/seo/meta-description" target="_blank"><i>Write a compelling description <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+                <div style="width:600px">
+
+                    <div style="font-color:#202124;font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif">{{searchUrl}}</div>
+                    <div style="width:570px;color:#1a0dab;font-size:20px; margin: 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif" ng-bind-html="updateSearchTitle()"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+                    <div style="font-color:#202124;font-size:14px;font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchDescription(), 160)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+
