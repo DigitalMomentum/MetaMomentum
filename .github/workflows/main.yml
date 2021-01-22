@@ -35,7 +35,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Run Nuget restore
-        run: nuget restore MetaMomentum/metamomentum.csproj
+        run: nuget restore metamomentum.sln
       
       - name: build
         run: msbuild 
