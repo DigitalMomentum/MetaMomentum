@@ -1,0 +1,59 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release version to Nuget
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: nuget/setup-nuget@v1.0.2
+        with:
+          nuget-api-key: ${{ secrets.NUGETAPI }}
+          nuget-version: 'latest'
+        env:  
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+        env:
+          working-directory: MetaMomentum/
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: Run Nuget restore
+        run: nuget restore metamomentum.sln
+      
+      - name: build
+        run: msbuild 
+        working-directory: MetaMomentum/
+        
+      - name: Nuget Add Source
+        run: nuget sources Add -Name "nuget" -Source https://api.nuget.org/v3/index.json
+    
+      - name: Nuget SetAPIKey
+        run: nuget setapikey ${{ secrets.NUGETAPI }} -Source "nuget"
+        
+      - name: Nuget Pack
+        working-directory: MetaMomentum/
+        run: nuget pack
+      
+      - name: Publish the package to GitHub packages
+        working-directory: MetaMomentum/
+        run: nuget push *.nupkg -source "nuget" -SkipDuplicate
+        
+        
+        

@@ -150,7 +150,6 @@
     <None Include="app.config" />
     <Content Include="Content\App_Plugins\MetaMomentum\package.manifest" />
     <Content Include="Content\Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
-    <None Include="MetaMomentum.1.0.0.nupkg" />
     <None Include="MetaMomentum.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
