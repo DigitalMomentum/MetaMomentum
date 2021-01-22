@@ -32,6 +32,7 @@ jobs:
         uses: warrenbuckley/Setup-MSBuild@v1
         env:
           working-directory: MetaMomentum/
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - run: msbuild -t:restore
         working-directory: MetaMomentum/
