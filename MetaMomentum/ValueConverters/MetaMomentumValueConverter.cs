@@ -69,6 +69,8 @@ namespace MetaMomentum.ValueConverters
 
         public bool? IsValue(object value, PropertyValueLevel level)
         {
+            if (value == null) return false;
+
             var val = mapToMetaValue(value);
 
             return (
