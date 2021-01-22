@@ -24,6 +24,10 @@ jobs:
         with:
           nuget-api-key: ${{ secrets.MYGETAPI }}
           nuget-version: 'latest'
+        env:  
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+          
       - name: Setup MSBuild.exe
         uses: warrenbuckley/Setup-MSBuild@v1
         env:
