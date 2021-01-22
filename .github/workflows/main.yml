@@ -35,7 +35,7 @@ jobs:
       - run: msbuild -t:build
         working-directory: MetaMomentum/
         
-       - name: Nuget Add Source
+      - name: Nuget Add Source
         run: nuget sources Add -Name "myget" -Source https://www.myget.org/F/digital-momentum/api/v2/package
     
       - name: Nuget SetAPIKey
