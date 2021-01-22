@@ -67,9 +67,16 @@
                 }
 
                 if ($scope.model.value.title == "") {
+                    console.log(editorState.current);
 
-                    //Fall back to page name
-                    $scope.model.value.title = editorState.current.contentTypeName;
+                    for (var i = 0; i < editorState.current.variants.length; i++) {
+                        if (editorState.current.variants[i].active) {
+
+                            //Fall back to page name
+                            $scope.model.value.title = editorState.current.variants[i].name;
+                        }
+                    }
+
                 }
                 return $scope.model.value.title;
             }
