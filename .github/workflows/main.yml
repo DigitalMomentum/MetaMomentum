@@ -27,18 +27,18 @@ jobs:
         env:  
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
-          
-      - name: Setup MSBuild.exe
-        uses: warrenbuckley/Setup-MSBuild@v1
+
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
         env:
           working-directory: MetaMomentum/
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
-      - run: msbuild -t:restore
+      - run: msbuild 
         working-directory: MetaMomentum/
         
-      - run: msbuild -t:build
-        working-directory: MetaMomentum/
+#      - run: msbuild -t:build
+#        working-directory: MetaMomentum/
         
       - name: Nuget Add Source
         run: nuget sources Add -Name "myget" -Source https://www.myget.org/F/digital-momentum/api/v2/package
