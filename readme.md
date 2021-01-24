@@ -56,8 +56,24 @@ Description:   @Model.MetaMomentum.Description
 
 ## Contributing
 
-An umbraco installation is setup under MetaMomentumPageMeta.Umbraco which contains the App_plugins folder and the partial view. 
+To report a new bug, create an issue on the github repository. 
+
+To fix a problem or add features:
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+I reccomend creating an issue on the issue tracker before adding to discuss new features to make sure that we can include them. Any contributions you make are greatly appreciated. 
+
+
+### Running the project
+
+A working umbraco installation is setup under MetaMomentumPageMeta.Umbraco which contains the App_plugins folder and the partial view. 
 
 You can login to the back office with
+
 email: david@digitalmomentum.com.au
 password: password99
