@@ -73,6 +73,8 @@ namespace MetaMomentum.ValueConverters
 
             var val = mapToMetaValue(value);
 
+            if(val == null) return false; //mapToMetaValue can return false, so need to catch this
+
             return (
                 val.Title != null ||
                 val.Description != null
