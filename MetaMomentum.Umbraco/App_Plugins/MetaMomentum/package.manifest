@@ -14,6 +14,7 @@
             editor: {
                 view: "~/App_Plugins/MetaMomentum/editorView.html",
                 "hideLabel": true,
+				"valueType": "JSON"
             },
             "prevalues": {
                 "fields": [
