@@ -149,7 +149,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="MetaMomentum.nuspec" />
-    <None Include="MetaMomentum-beta.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

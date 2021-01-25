@@ -49,7 +49,7 @@ jobs:
         
       - name: Nuget Pack
         working-directory: MetaMomentum/
-        run: nuget pack MetaMomentum-beta.nuspec
+        run: nuget pack
       
       - name: Publish the package to GitHub packages
         working-directory: MetaMomentum/
