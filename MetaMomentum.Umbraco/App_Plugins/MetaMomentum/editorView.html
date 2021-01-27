@@ -2,8 +2,8 @@
 
     <div class="control-group umb-control-group">
         <div class="umb-el-wrap">
-            <div style="display:flex">
-                <div style="max-width:800px; width:100%;padding-right:30px;">
+            <div style="display:flex;flex-wrap:wrap;align-content:stretch;">
+                <div style="max-width:600px; width:100%;padding-right:30px;">
 
 
 
@@ -48,9 +48,9 @@
 
                 <div style="width:600px">
 
-                    <div style="font-color:#202124;font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif">{{searchUrl}}</div>
+                    <div style="color:#202124;font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif">{{searchHost}}<span style="color: #4d5156;">{{searchUrl}}</span></div>
                     <div style="width:570px;color:#1a0dab;font-size:20px; margin: 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif" ng-bind-html="updateSearchTitle()"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
-                    <div style="font-color:#202124;font-size:14px;font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchDescription(), 160)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+                    <div style="color:#4d5156;font-size:14px;font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchDescription(), 160)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
                 </div>
 
             </div>

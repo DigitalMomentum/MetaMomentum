@@ -25,9 +25,10 @@
 
 
                 if (typeof editorState.current.urls !== "undefined") {
-                    $scope.searchUrl = window.location.host + editorState.current.urls[0].text;
+                    $scope.searchHost = window.location.host;
+                    $scope.searchUrl = editorState.current.urls[0].text;
 
-                    $scope.searchUrl = $scope.searchUrl.replace(/\/$/g, "").replace(/\//g, " > ")
+                    $scope.searchUrl = $scope.searchUrl.replace(/\/$/g, "").replace(/\//g, " › ")
 
                     //for (var i = 0; i < editorState.current.urls.length; i++) {
                     //    console.log(editorState.current.urls[i].text)
