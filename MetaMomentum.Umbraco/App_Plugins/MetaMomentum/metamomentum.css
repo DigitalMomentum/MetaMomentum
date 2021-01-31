@@ -1,0 +1,18 @@
+﻿
+
+
+.mm-hidden-fields {
+    overflow: hidden;
+    transition: 1.6s ease-in-out all;
+    max-width: 600px;
+    max-height: 100%;
+}
+
+
+        .mm-hidden-fields.hide {
+           
+
+            max-width:0;
+            max-height:0;
+        }
+

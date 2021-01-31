@@ -18,6 +18,19 @@
             },
             "prevalues": {
                 "fields": [
+                  {
+                        "label": "Title / Description fields for search",
+                        "description": "Show the Title and Description fields to the editor",
+                        "key": "showSearchFields",
+                        "view": "boolean"
+                    },
+                     {
+                        "label": "Google search preview",
+                        "description": "Show a preview of how the Google search entry will look",
+                        "key": "showSearchPreviewGoogle",
+                        "view": "boolean"
+                    },
+
                     {
                         "label": "Fallback Title Fields",
                         "description": "enter a csv of fallback property editors aliases",
@@ -31,12 +44,49 @@
                         "key": "fallbackDescriptionFields",
                         "view": "textstring",
                         "valueType": "STRING"
+                    },
+                     {
+                        "label": "Social Share fields",
+                        "description": "Show the Title and Description and share image fields for Open Graph/Twitter to the editor",
+                        "key": "showSocialFields",
+                        "view": "boolean"
+                    },
+                     {
+                        "label": "Facebook share preview",
+                        "description": "Show a preview of how the Facebook link preview will look",
+                        "key": "showSocialPreviewFacebook",
+                        "view": "boolean"
+                    },
+                     {
+                        "label": "Twitter share preview",
+                        "description": "Show a preview of how the Twitter link preview will look",
+                        "key": "showSocialPreviewTwitter",
+                        "view": "boolean"
+                    },
+                     {
+                        "label": "LinkedIn share preview",
+                        "description": "Show a preview of how the LinkedIn link preview will look",
+                        "key": "showSocialPreviewLinkedIn",
+                        "view": "boolean"
                     }
                 ]
+            },
+            "defaultConfig": {
+                "showSearchFields": "1",
+                "showSearchPreviewGoogle": "1",
+                "showSocialFields": "1",
+                "showSocialPreviewFacebook": "1",
+                "showSocialPreviewTwitter": "1",
+                "showSocialPreviewLinkedIn": "1",
+                "fallbackTitleFields": "title,pageTitle",
+                "fallbackDescriptionFields": "description,desc"
             }
         }
     ]
     ,
+    css:[
+        '~/App_Plugins/MetaMomentum/metamomentum.css'
+    ],
     // array of files we want to inject into the application on app_start
     javascript: [
         '~/App_Plugins/MetaMomentum/editorView.controller.js'
