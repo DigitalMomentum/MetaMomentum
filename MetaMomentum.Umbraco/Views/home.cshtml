@@ -1,8 +1,11 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{ Layout = "master.cshtml";
-                var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : String.Empty; }
-
+    var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : String.Empty;
+    var bob = Model.Value("metaMomentum");
+    var bob2 = Model.Value("heroBackgroundImage");
+//    var bob3 = Model.Value<MetaMomentum.Models.MetaValues>("metaMomentum").GetShareImage();
+    }
 @*@(Model.Value("metaMomentum"))*@
 @*@(Model.Value<MetaMomentum.Models.MetaValues>("metaMomentum").Description)*@
 
@@ -16,7 +19,7 @@
         {
 <a class="button button--border--solid" href="@Model.HeroCtalink.Url">
     @Model.HeroCtacaption
-</a>            }
+</a>        }
     </div>
 </section>
 

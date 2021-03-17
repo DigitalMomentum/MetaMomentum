@@ -22,7 +22,7 @@
                     description: "",
                     shareTitle: "",
                     shareDescription: "",
-                    shareImg: null,
+                    shareImage: null,
                     default: {
                         title: "",
                         description: ""
@@ -203,6 +203,7 @@
                         editorService.close();
                         console.log(JSON.stringify(imgmodel)); // Do something with selected image data
                         $scope.model.value.share.image = imgmodel.selection[0];
+                        $scope.model.value.shareImage = imgmodel.selection[0].udi;
                         $scope.mediaItems.push(imgmodel.selection[0])
                     },
                     close: function () {
@@ -215,6 +216,7 @@
 
             $scope.removeMedia = function () {
                 $scope.model.value.share.image = null;
+                $scope.model.value.shareImage = null;
             }
 
             //$scope.showSharefields = function(){
