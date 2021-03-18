@@ -1,7 +1,11 @@
 ﻿angular.module("umbraco")
     .controller("DM.MetaMomentum",
         function ($scope, $filter, editorState, contentEditingHelper, editorService) {
-            $scope.sharePreviewType = null;
+			$scope.sharePreviewType = null;
+			$scope.showSearchPreview = false;
+			$scope.showSocialPreview = false;
+
+
             if ($scope.model.config.showSocialPreviewFacebook == 1) {
                 $scope.sharePreviewType = "facebook";
             } else if ($scope.model.config.showSocialPreviewtwitter == 1) {
@@ -217,7 +221,23 @@
             $scope.removeMedia = function () {
                 $scope.model.value.share.image = null;
                 $scope.model.value.shareImage = null;
-            }
+			}
+
+
+
+			$scope.toggleSearchPreview = function () {
+				$scope.showSearchPreview = !$scope.showSearchPreview ;
+				document.querySelector('#SearchPreview').scrollIntoView({
+					behavior: 'smooth'
+				});
+			}
+
+			$scope.toggleSocialPreview = function () {
+				$scope.showSocialPreview = !$scope.showSocialPreview;
+				document.querySelector('#SocialPreview').scrollIntoView({
+					behavior: 'smooth'
+				});
+			}
 
             //$scope.showSharefields = function(){
             //    $scope.showShare = !$scope.showShare;
