@@ -79,10 +79,16 @@ namespace MetaMomentum.ValueConverters
         public bool? IsValue(object value, PropertyValueLevel level)
         {
             if (value == null) return false;
-            //TODO: This gets run each time, so need to check in a more efficient manner
-            var val = mapToMetaValue(value);
+			
 
-            if (val == null) return false; //mapToMetaValue can return false, so need to catch this
+
+			var sourceString = value.ToString();
+			if (String.IsNullOrWhiteSpace(sourceString)) return null;
+
+			MetaValuesIntermediateModel val = JsonConvert.DeserializeObject<MetaValuesIntermediateModel>(sourceString);
+
+
+			if (val == null) return false; //mapToMetaValue can return false, so need to catch this
 
             return (
                 val.Title != null ||
@@ -95,7 +101,7 @@ namespace MetaMomentum.ValueConverters
         public object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview)
         {
 
-            return mapToMetaValue(source, propertyType, owner);
+            return mapToMetaValue(source, preview, propertyType, owner);
 
 
 
@@ -110,7 +116,7 @@ namespace MetaMomentum.ValueConverters
         /// <param name="propertyType">Pass the property type, to sucessfully use the fallbacks</param>
         /// <param name="IPublishedElement">Pass the page element, to sucessfully use the fallbacks</param>
         /// <returns></returns>
-        private MetaValues mapToMetaValue(object source, IPublishedPropertyType propertyType = null, IPublishedElement owner = null)
+        private MetaValues mapToMetaValue(object source, bool preview, IPublishedPropertyType propertyType = null, IPublishedElement owner = null)
         {
             if (source == null) return null;
             var sourceString = source.ToString();
@@ -156,14 +162,17 @@ namespace MetaMomentum.ValueConverters
 
             var objectType = UmbracoObjectTypes.Media;
             GuidUdi guidUdi = md.GetShareImageUdi();
-          
-          // var image = GetPublishedContent(guidUdi, ref objectType, UmbracoObjectTypes.Media, id => _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(guidUdi.Guid));
+
+			// var image = GetPublishedContent(guidUdi, ref objectType, UmbracoObjectTypes.Media, id => _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(guidUdi.Guid));
+
+			IPublishedContent img = (guidUdi == null)? null : _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(preview, guidUdi.Guid);
+
 
             return new MetaValues()
                 {
                     Description = md.Description,
                     ShareDescription = md.ShareDescription,
-                    ShareImage = _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(guidUdi.Guid),
+                    ShareImage = img,
                     ShareTitle = md.ShareTitle,
                     Title = md.Title
                 };
