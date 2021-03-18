@@ -9,14 +9,15 @@
     <license type="expression">MIT</license>
     <!-- <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl> -->
     <!-- <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl> -->
-    <description>Creates a Meta Doctype to manage Search engine results, open Graph and Twitter cards</description>
-    <releaseNotes>First release</releaseNotes>
+    <description>A DataType to manage Search engine results, open Graph and Twitter cards</description>
+    <releaseNotes>First Release</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Umbraco seo twitter opengraph Umbraco8</tags>
   </metadata>
   <files>
     <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\editorView.controller.js" target="content\App_Plugins\MetaMomentum\editorView.controller.js" />
     <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\editorView.html" target="content\App_Plugins\MetaMomentum\editorView.html" />
+    <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\metamomentum.css" target="content\App_Plugins\MetaMomentum\metamomentum.css" />
     <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\package.manifest" target="content\App_Plugins\MetaMomentum\package.manifest" />
     <file src="..\MetaMomentum.Umbraco\Views\Partials\MetaMomentum\RenderMetaTags.cshtml" target="content\Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
   </files>

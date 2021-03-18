@@ -1,5 +1,7 @@
 # Meta Momentum for Umbraco 8
 
+#### A DataType to manage Search engine results, open Graph and Twitter cards
+
 Meta Momentum is a data type editor for Umbraco to manage Title and description tags, with a visual representation of how it will look in a google search. 
 
 The search display follows googles search restrictions in terms of titles being restricted by width, instead of a character count. 
@@ -18,7 +20,7 @@ The easiest way to install the plugin is though Nuget.
 
 `Install-Package MetaMomentum`
 
-After installation, you can create and configure a new MetaMomentum Data Type ** Umbraco -> Settings -> Data Types -> New Data Type **. 
+After installation, you can create and configure a new MetaMomentum Data Type **Umbraco -> Settings -> Data Types -> New Data Type**. 
 
 ## Configuration
 Canfiguration can be done via the following Data Type setting fields: 
