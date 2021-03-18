@@ -194,9 +194,13 @@
                 }
                 if (value.length <= length) {
                     return value;
-                }
+				}
 
-                return value.substring(0, length) + "&#x2026;"
+				var trimmedText = value.substring(0, length);
+
+				trimmedText = trimmedText.substring(0, trimmedText.lastIndexOf(" "));
+
+				return trimmedText + " &#x2026;"
             }
 
             $scope.mediaItems = [];

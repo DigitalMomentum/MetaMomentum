@@ -12,7 +12,7 @@
     <description>A DataType to manage Search engine results, open Graph and Twitter cards</description>
     <releaseNotes>First Release</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Umbraco seo twitter opengraph Umbraco8</tags>
+    <tags>Umbraco seo twitter opengraph Umbraco8 Datatype</tags>
   </metadata>
   <files>
     <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\editorView.controller.js" target="content\App_Plugins\MetaMomentum\editorView.controller.js" />

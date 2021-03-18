@@ -17,7 +17,7 @@
 				<div class="mm-preview-box" ng-if="model.config.showSearchPreviewGoogle == 1">
 
 					<div style="color:#202124;font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif">{{searchHost}}<span style="color: #4d5156;">{{searchUrl}}</span></div>
-					<div style="width:570px;color:#1a0dab;font-size:20px; line-height:21px; margin: 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif" ng-bind-html="updateSearchTitle()"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+					<div style="width:570px;color:#1a0dab;font-size:20px; line-height:21px; margin: 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;word-wrap:break-word; font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchTitle(), 70)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
 					<div style="color:#4d5156;font-size:14px;font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchDescription(), 160)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
 
 

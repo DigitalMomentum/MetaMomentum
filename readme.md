@@ -2,7 +2,8 @@
 
 #### A DataType to manage Search engine results, open Graph and Twitter cards
 
-Meta Momentum is a data type editor for Umbraco to manage Title and description tags, with a visual representation of how it will look in a google search. 
+Meta Momentum is an Umbraco Data Type editor to manage SEO Title & description tags and Open Graph / Twitter Cards, 
+with a visual representation of how it will look in a Google Search / Social Platform. 
 
 The search display follows googles search restrictions in terms of titles being restricted by width, instead of a character count. 
 This gives the user a good idea on how the title / description will show in an actual google search.
