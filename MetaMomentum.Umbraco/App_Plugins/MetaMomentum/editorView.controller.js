@@ -60,10 +60,21 @@
 
 
                 if (typeof editorState.current.urls !== "undefined") {
-                    $scope.searchHost = window.location.host;
-                    $scope.searchUrl = editorState.current.urls[0].text;
+					$scope.searchHost = window.location.host;
+					if (editorState.current.urls[0].text.startsWith("/")) {
+						//No domain name specified
+						console.log("no domain", editorState.current.urls)
+						$scope.searchUrl = editorState.current.urls[0].text;
 
-                    $scope.searchUrl = $scope.searchUrl.replace(/\/$/g, "").replace(/\//g, " › ")
+						
+					} else if (editorState.current.urls[0].text.startsWith("http")) {
+						var endOfDomain = getPositionInString(editorState.current.urls[0].text, "/", 3);
+						console.log(endOfDomain)
+						$scope.searchHost = editorState.current.urls[0].text.substring(0, endOfDomain);
+						$scope.searchUrl = editorState.current.urls[0].text.substring(endOfDomain);
+					}
+
+					$scope.searchUrl = $scope.searchUrl.replace(/\/$/g, "").replace(/\//g, " › ")
 
                     //for (var i = 0; i < editorState.current.urls.length; i++) {
                     //    console.log(editorState.current.urls[i].text)
@@ -72,7 +83,12 @@
                     //    }
                     //}
                 }
-            }
+			}
+
+			function getPositionInString(string, subString, index) {
+				return string.split(subString, index).join(subString).length;
+			}
+
 
           
 
