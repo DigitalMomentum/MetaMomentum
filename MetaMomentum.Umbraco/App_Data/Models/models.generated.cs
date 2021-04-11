@@ -17,7 +17,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4182b86a0d336101")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "27443d47d99da21b")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedModels
@@ -785,6 +785,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.10.1")]
 		[ImplementPropertyType("mapHeader")]
 		public string MapHeader => this.Value<string>("mapHeader");
+
+		///<summary>
+		/// MetaMomentum
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.10.1")]
+		[ImplementPropertyType("metaMomentum")]
+		public global::MetaMomentum.Models.MetaValues MetaMomentum => this.Value<global::MetaMomentum.Models.MetaValues>("metaMomentum");
 
 		///<summary>
 		/// Page Title: The title of the page, this is also the first text in a google search result. The ideal length is between 40 and 60 characters

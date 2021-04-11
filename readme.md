@@ -16,6 +16,8 @@ In the future, it will also allow the user to maintain Open Graph and Twitter ca
 This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewis/seo-metadata) which I've used for Umbraco 7 for many years and 
 was no longer being maintained and not avaliable for Umbraco 8.
 
+![Google and Facebook Editor previews](GithubFiles/Images/Preview_Screenshot.png)
+
 ## Installation
 The easiest way to install the plugin is though Nuget.
 
@@ -26,11 +28,28 @@ After installation, you can create and configure a new MetaMomentum Data Type **
 ## Configuration
 Canfiguration can be done via the following Data Type setting fields: 
 
+- *Title / Description fields for search:* Turn this on to allow the content editor to edit the title and description tags. 
+If turned off the content editor will not be able to edit the title and description and will be shown the text from the default falbacks.
+
+- *Google Search Preview:* Turn on to show the google search preview to the content editor. This will show a preview of how the Google search entry will look
+
 - *Fallback Title Fields:* You can enter a comma seperated list of DataType aliases, so that if the title is not filled in by the user, it will fall back to each alias in the list. 
 If the alias is not filled in or does not exist in the DocType, then it will fall back to the next, until finally, it will use the page name as the title. 
 The fallbacks only support fields in the form of a string, and does not support complex data types like the grid or nested content.
 
 - *Fallback Description Fields:* This is the same as the Fallback Title fields setting, however, if it finds no value, the description will be empty. 
+
+- *Social Share fields:* Turn this on to allow the content editor to edit the title and description tags for the share meta. 
+If turned off the content editor will not be able to edit the title and description and will be shown the text from the default falbacks.
+
+- *Facebook, Twitter, LinkedIn share preview*: These 3 options will allow you to turn on / off the different share prewviews avaliable to the content editor. 
+
+### App Settings
+Additional global configuration can be added via the web.config AppSettings
+
+ - `<add key="MetaMomentum.OGSiteName" value="Meta Momentum" />` This sets the MetaMomentum.OGSiteName property which can be used to set the the `og:site_name` meta tag.
+
+ - `<add key="MetaMomentum.TwitterName" value="@DigitalMomentum" />` This sets the MetaMomentum.TwitterName property which can be used for the `twitter:site` meta tag for the Twitter Cart
 
 ## Usage
 There is a razor file that can be found under `/Views/Partials/Metamomentum/RenderMetaTags.cshtml` which will write out the specific tags. 
@@ -40,18 +59,28 @@ This can be included in the head of each page like the following (where `metaMom
  @Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))
 ```
 
-Alternativly, you can access each of the properties using the following syntax:
+Alternatively, you can access each of the properties using the following syntax:
 
 ```c#
-Title:         @Model.Value<MetaMomentum.Models.MetaValues>.Title
-Description:   @Model.Value<MetaMomentum.Models.MetaValues>.Description
+Title:					@Model.Value<MetaMomentum.Models.MetaValues>.Title
+Description:			@Model.Value<MetaMomentum.Models.MetaValues>.Description
+Share Title:			@Model.Value<MetaMomentum.Models.MetaValues>.ShareTitle
+Share Description:		@Model.Value<MetaMomentum.Models.MetaValues>.ShareDescription
+Share Image:			@Model.Value<MetaMomentum.Models.MetaValues>.ShareImage
+Open Graph Site Name:	@Model.Value<MetaMomentum.Models.MetaValues>.OGSiteName
+TwitterName:			@Model.Value<MetaMomentum.Models.MetaValues>.TwitterName
 ```
 
 Or with Models Builder, strongly typed models:
 
 ```c#
-Title:         @Model.MetaMomentum.Title
-Description:   @Model.MetaMomentum.Description
+Title:					@Model.MetaMomentum.Title
+Description:			@Model.MetaMomentum.Description
+Share Title:			@Model.MetaMomentum.ShareTitle
+Share Description:		@Model.MetaMomentum.ShareDescription
+Share Image:			@Model.MetaMomentum.ShareImage
+Open Graph Site Name:	@Model.MetaMomentum.OGSiteName
+TwitterName:			@Model.MetaMomentum.TwitterName
 ```
 
 
