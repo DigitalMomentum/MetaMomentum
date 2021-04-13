@@ -23,7 +23,8 @@
             if ($scope.model.value === "") {
                 $scope.model.value = {
                     title: "",
-                    description: "",
+					description: "",
+					noIndex: false,
                     shareTitle: "",
                     shareDescription: "",
                     shareImage: null,
@@ -37,7 +38,16 @@
                         image: null
                     }
                 };
-            } else {
+			} else {
+		
+				if (typeof $scope.model.value.default === 'undefined') {
+					//possible upgrade from Seo Meta
+					$scope.model.value.default = {
+						title: $scope.model.value.title,
+						description: $scope.model.value.description
+					}
+				}
+
                 if (typeof $scope.model.value.share === 'undefined') {
                     $scope.model.value.share = {
                         title: "",
@@ -63,13 +73,13 @@
 					$scope.searchHost = window.location.host;
 					if (editorState.current.urls[0].text.startsWith("/")) {
 						//No domain name specified
-						console.log("no domain", editorState.current.urls)
+						//console.log("no domain", editorState.current.urls)
 						$scope.searchUrl = editorState.current.urls[0].text;
 
 						
 					} else if (editorState.current.urls[0].text.startsWith("http")) {
 						var endOfDomain = getPositionInString(editorState.current.urls[0].text, "/", 3);
-						console.log(endOfDomain)
+						//console.log(endOfDomain)
 						$scope.searchHost = editorState.current.urls[0].text.substring(0, endOfDomain);
 						$scope.searchUrl = editorState.current.urls[0].text.substring(endOfDomain);
 					}

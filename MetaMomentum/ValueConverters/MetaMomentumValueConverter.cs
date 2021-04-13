@@ -174,7 +174,8 @@ namespace MetaMomentum.ValueConverters
                     ShareDescription = md.ShareDescription,
                     ShareImage = img,
                     ShareTitle = md.ShareTitle,
-                    Title = md.Title
+                    Title = md.Title,
+					NoIndex = md.NoIndex
                 };
             //}
             //catch (Exception e)
@@ -219,6 +220,7 @@ namespace MetaMomentum.ValueConverters
         {
             public string Title { get; set; }
             public string Description { get; set; }
+            public bool NoIndex { get; set; }
 
             public string ShareTitle { get; set; }
             public string ShareDescription { get; set; }

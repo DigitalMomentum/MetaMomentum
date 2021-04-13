@@ -2,12 +2,12 @@
 @using MetaMomentum.Models;
 
 @{
-    if (Model == null) { return; }
+	if (Model == null) { return; }
 }
 
 @if (!string.IsNullOrWhiteSpace(Model.Title))
 {
-    <title>@(Model.Title)</title>
+	<title>@(Model.Title)</title>
 }
 <meta name="description" content="@Model.Description">
 
@@ -15,13 +15,18 @@
 <meta property="og:title" content='@Model.ShareTitle' />
 @if (Model.ShareImage != null)
 {
-    <meta property="og:image" content="@(Request.Url.Scheme)://@(Request.Url.Authority)@((Model.ShareImage).Url())&width=1200&height=630&bgcolor=white" />
+	<meta property="og:image" content="@(Request.Url.Scheme)://@(Request.Url.Authority)@((Model.ShareImage).Url())&width=1200&height=630&bgcolor=white" />
 }
 <meta property="og:description" content="@Model.ShareDescription" />
 
+@if (Model.NoIndex)
+{
+	<meta name="robots" content="noindex">
+}
+
 @if (Model.OGSiteName != null)
 {
-    <meta property="og:site_name" content="@Model.OGSiteName" />
+	<meta property="og:site_name" content="@Model.OGSiteName" />
 }
 <meta property="og:url" content="@Request.Url.AbsoluteUri" />
 <meta property="og:image:width" content="1200" />
@@ -31,12 +36,12 @@
 <meta name="twitter:card" content="summary_large_image">
 @if (Model.OGSiteName != null)
 {
-    <meta name="twitter:site" content="@Html.Raw(Model.TwitterName)">
+	<meta name="twitter:site" content="@Html.Raw(Model.TwitterName)">
 }
-    <meta name="twitter:title" content="@Model.ShareTitle">
-    <meta name="twitter:description" content="@Model.ShareDescription">
-    @if (Model.ShareImage != null)
-    {
-        <meta name="twitter:image" content="@(Request.Url.Scheme)://@(Request.Url.Authority)@((Model.ShareImage).Url())?width=1200&height=675&bgcolor=white">
-    }
-    <meta name="twitter:url" content="@Request.Url.AbsoluteUri">
+<meta name="twitter:title" content="@Model.ShareTitle">
+<meta name="twitter:description" content="@Model.ShareDescription">
+@if (Model.ShareImage != null)
+{
+	<meta name="twitter:image" content="@(Request.Url.Scheme)://@(Request.Url.Authority)@((Model.ShareImage).Url())?width=1200&height=675&bgcolor=white">
+}
+<meta name="twitter:url" content="@Request.Url.AbsoluteUri">
