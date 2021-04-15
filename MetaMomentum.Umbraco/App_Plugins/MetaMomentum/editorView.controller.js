@@ -2,8 +2,8 @@
     .controller("DM.MetaMomentum",
         function ($scope, $filter, editorState, contentEditingHelper, editorService) {
 			$scope.sharePreviewType = null;
-			$scope.showSearchPreview = false;
-			$scope.showSocialPreview = false;
+			$scope.showEditSearch = false;
+			$scope.showEditSocial = false;
 
 
             if ($scope.model.config.showSocialPreviewFacebook == 1) {
@@ -256,14 +256,14 @@
 
 
 			$scope.toggleSearchPreview = function () {
-				$scope.showSearchPreview = !$scope.showSearchPreview ;
+				$scope.showEditSearch = !$scope.showEditSearch ;
 				document.querySelector('#SearchPreview').scrollIntoView({
 					behavior: 'smooth'
 				});
 			}
 
 			$scope.toggleSocialPreview = function () {
-				$scope.showSocialPreview = !$scope.showSocialPreview;
+				$scope.showEditSocial = !$scope.showEditSocial;
 				document.querySelector('#SocialPreview').scrollIntoView({
 					behavior: 'smooth'
 				});

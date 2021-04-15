@@ -10,7 +10,7 @@
 						<label class="control-label" id="SearchPreview">
 							Search Engine Preview
 						</label>
-						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSearchPreview()">{{(showSocialPreview)? "Hide Preview" : "Edit Preview"}}</button>
+						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSearchPreview()">{{(showEditSearch)? "Hide Preview" : "Edit Preview"}}</button>
 
 					</div>
 				</div>
@@ -21,7 +21,7 @@
 					<div style="color:#4d5156;font-size:14px;font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchDescription(), 160)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
 
 
-					<div class="mm-preview-edit" ng-if="showSearchPreview">
+					<div class="mm-preview-edit" ng-if="showEditSearch">
 						<div class="clearfix">
 
 							<div class="control-header">
@@ -97,7 +97,7 @@
 						<label class="control-label" id="SocialPreview" for="heroHeader" title="" style="">
 							Social Platform Preview
 						</label>
-						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showSocialPreview)? "Hide Preview" : "Edit Preview"}}</button>
+						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</button>
 					</div>
 				</div>
 
@@ -178,7 +178,7 @@
 
 
 
-					<div class="mm-preview-edit" ng-if="showSocialPreview">
+					<div class="mm-preview-edit" ng-if="showEditSocial">
 
 
 
