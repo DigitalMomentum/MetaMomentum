@@ -1,9 +1,11 @@
 # Meta Momentum for Umbraco 8
 
-#### A DataType to manage Search engine results, open Graph and Twitter cards
+#### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 
 Meta Momentum is an Umbraco Data Type editor to manage SEO Title & description tags and Open Graph / Twitter Cards, 
 with a visual representation of how it will look in a Google Search / Social Platform. 
+
+![Video of Meta Momentum in action](GithubFiles/Images/Newtons_Cradle_In_Action.gif)
 
 The search display follows googles search restrictions in terms of titles being restricted by width, instead of a character count. 
 This gives the user a good idea on how the title / description will show in an actual google search.
@@ -17,6 +19,7 @@ This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewi
 was no longer being maintained and not avaliable for Umbraco 8.
 
 ![Google and Facebook Editor previews](GithubFiles/Images/Preview_Screenshot.png)
+
 
 ## Installation
 The easiest way to install the plugin is though Nuget.
