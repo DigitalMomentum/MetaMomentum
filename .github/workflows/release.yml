@@ -41,8 +41,8 @@ jobs:
         run: msbuild 
         working-directory: MetaMomentum/
         
-      - name: Nuget Add Source
-        run: nuget sources Add -Name "nuget" -Source https://api.nuget.org/v3/index.json
+      #- name: Nuget Add Source
+      #  run: nuget sources Add -Name "nuget" -Source https://api.nuget.org/v3/index.json
     
       - name: Nuget SetAPIKey
         run: nuget setapikey ${{ secrets.NUGETAPI }} -Source "nuget"
