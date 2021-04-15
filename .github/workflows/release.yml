@@ -45,7 +45,7 @@ jobs:
       #  run: nuget sources Add -Name "nuget" -Source https://api.nuget.org/v3/index.json
     
       - name: Nuget SetAPIKey
-        run: nuget setapikey ${{ secrets.NUGETAPI }} -Source "nuget"
+        run: nuget setapikey ${{ secrets.NUGETAPI }} #-Source "nuget"
         
       - name: Nuget Pack
         working-directory: MetaMomentum/
@@ -53,7 +53,7 @@ jobs:
       
       - name: Publish the package to GitHub packages
         working-directory: MetaMomentum/
-        run: nuget push *.nupkg -source "nuget" -SkipDuplicate
+        run: nuget push *.nupkg #-source "nuget" -SkipDuplicate
         
         
         
