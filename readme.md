@@ -7,22 +7,34 @@ with a visual representation of how it will look in a Google Search / Social Pla
 
 ![Video of Meta Momentum in action](GithubFiles/Images/Newtons_Cradle_In_Action.gif)
 
+## Search features
 The search display follows googles search restrictions in terms of titles being restricted by width, instead of a character count. 
 This gives the user a good idea on how the title / description will show in an actual google search.
 
 Additionally, you can specify fallbacks to other text properties in the document, so that the title for instance will fall back to a "Page Title" property 
 if no title tag is supplied by the user.
 
-In the future, it will also allow the user to maintain Open Graph and Twitter cards, with previews. 
+## Share Features
+The Socal Share preview will give an acurate preview of the Facebook, Twiter and Linked in share previews. 
+The content editor can swtich between the 3 previews to see how they will look when shared.
+
+You can specify falbacks to other text fields for the share title and description. 
+
+
+## Backwards Compatible with Seo Metadata...
 
 This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewis/seo-metadata) which I've used for Umbraco 7 for many years and 
 was no longer being maintained and not avaliable for Umbraco 8.
 
+If you were using this plugin in Umbraco 7, you can replace your SeoMetadata document type with Meta Momentum without any migration of data, or mucking around.
+
+
+## Editor Screenshot
 ![Google and Facebook Editor previews](GithubFiles/Images/Preview_Screenshot.png)
 
 
 ## Installation
-The easiest way to install the plugin is though Nuget.
+You can either install the plugin is though Nuget or using the package manager in Umbraco.
 
 `Install-Package MetaMomentum`
 
