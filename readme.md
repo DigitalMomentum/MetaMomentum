@@ -30,7 +30,8 @@ If you were using this plugin in Umbraco 7, you can replace your SeoMetadata doc
 
 
 ## Editor Screenshot
-![Google and Facebook Editor previews](GithubFiles/Images/Preview_Screenshot.png)
+![Google  Editor previews](GithubFiles/Images/Edit_SEO_Screenshot.png)
+![Facebook Editor previews](GithubFiles/Images/Edit_SocialShare_Screenshot.png)
 
 
 ## Installation
