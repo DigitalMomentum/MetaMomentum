@@ -15,7 +15,7 @@
 <meta property="og:title" content='@Model.ShareTitle' />
 @if (Model.ShareImage != null)
 {
-	<meta property="og:image" content="@(Request.Url.Scheme)://@(Request.Url.Authority)@((Model.ShareImage).Url())&width=1200&height=630&bgcolor=white" />
+	<meta property="og:image" content="@(Request.Url.Scheme)://@(Request.Url.Authority)@((Model.ShareImage).Url())?width=1200&height=630&bgcolor=white" />
 }
 <meta property="og:description" content="@Model.ShareDescription" />
 
