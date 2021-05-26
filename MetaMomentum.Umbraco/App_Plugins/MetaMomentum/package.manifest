@@ -45,6 +45,13 @@
                         "view": "textstring",
                         "valueType": "STRING"
                     },
+                    {
+                        "label": "Fallback Image Fields",
+                        "description": "Enter a csv of fallback property editors aliases",
+                        "key": "fallbackImageFields",
+                        "view": "textstring",
+                        "valueType": "STRING"
+                    },
                      {
                         "label": "Social Share fields",
                         "description": "Show the Title and Description and share image fields for Open Graph/Twitter to the editor",
@@ -79,7 +86,8 @@
                 "showSocialPreviewTwitter": "1",
                 "showSocialPreviewLinkedIn": "1",
                 "fallbackTitleFields": "title,pageTitle",
-                "fallbackDescriptionFields": "description,desc"
+                "fallbackDescriptionFields": "description,desc",
+                "fallbackImageFields": "featureImage,heroImage"
             }
         }
     ]

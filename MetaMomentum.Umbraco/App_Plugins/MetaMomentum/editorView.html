@@ -111,10 +111,8 @@
 						<umb-radiobutton value="linkedIn" model="sharePreviewType" text="LinkedIn" style="margin-right:15px;" ng-show="model.config.showSocialPreviewLinkedIn == 1"></umb-radiobutton>
 					</fieldset>
 					<div ng-if="model.config.showSocialPreviewFacebook == 1 && sharePreviewType==='facebook'" style="width:527px;font-family:Helvetica, Arial, sans-serif;position:relative;margin:auto;">
-
-						<img ng-if="model.value.share.image" ng-class="{'trashed': model.value.share.image.trashed}" ng-src="{{model.value.share.image.image}}?width=540&height=281&mode=crop"
-							 ng-attr-title="{{model.value.share.image.trashed ? 'Trashed' + ': ' + model.value.share.image.name : model.value.share.image.name}}"
-							 alt="{{model.value.share.image.name}}" style="border:1px solid #dddfe2;width:calc(100% - 2px);" />
+						<img ng-if="model.value.shareImageUrl" ng-src="{{model.value.shareImageUrl}}?width=540&height=281&mode=crop"
+							 style="border:1px solid #dddfe2;width:calc(100% - 2px);" />
 						<div style="border:1px solid #dddfe2;background-color:#e9ebee;padding:10px 12px;">
 							<div style="color:#606770;text-transform:uppercase; line-height:11px;font-size:12px">
 								{{searchHost}}
@@ -131,9 +129,8 @@
 
 					<div ng-if="model.config.showSocialPreviewTwitter== 1 && sharePreviewType==='twitter'" style="width:438px;font-family:'Helvetica Neue' ,Helvetica,Arial,sans-serif;font-size:14px;position:relative;line-height:1.3em;border-radius:.85714em;overflow:hidden;border:1px solid #dddfe2;margin:auto;">
 
-						<img ng-if="model.value.share.image" ng-class="{'trashed': model.value.share.image.trashed}" ng-src="{{model.value.share.image.image}}?width=438&height=220&mode=crop"
-							 ng-attr-title="{{model.value.share.image.trashed ? 'Trashed' + ': ' + model.value.share.image.name : model.value.share.image.name}}"
-							 alt="{{model.value.share.image.name}}" style="border:1px solid #dddfe2;width:calc(100%);" />
+						<img ng-if="model.value.shareImageUrl"  ng-src="{{model.value.shareImageUrl}}?width=438&height=220&mode=crop"
+							  style="border:1px solid #dddfe2;width:calc(100%);" />
 						<div style="padding:10px 12px;">
 
 							<div style="max-height:1.3em; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;margin:0 0 .15em;color:#000;" ng-bind-html="updateShareTitle()">
@@ -154,9 +151,8 @@
 
 					<div ng-if="model.config.showSocialPreviewLinkedIn == 1 && sharePreviewType==='linkedIn'" style="width:438px;font-family:-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,F;font-size:14px;position:relative;line-height:1.3em;border-radius:.85714em;overflow:hidden;border:1px solid #dddfe2;margin:auto;">
 
-						<img ng-if="model.value.share.image" ng-class="{'trashed': model.value.share.image.trashed}" ng-src="{{model.value.share.image.image}}?width=502&height=263&mode=crop"
-							 ng-attr-title="{{model.value.share.image.trashed ? 'Trashed' + ': ' + model.value.share.image.name : model.value.share.image.name}}"
-							 alt="{{model.value.share.image.name}}" style="border:1px solid #dddfe2;width:calc(100%);" />
+						<img ng-if="model.value.shareImageUrl"  ng-src="{{model.value.shareImageUrl}}?width=502&height=263&mode=crop"
+							  style="border:1px solid #dddfe2;width:calc(100%);" />
 						<div style="padding: 8px 12px; background-color: #E7EAEC">
 
 							<div style="max-height:40px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;margin:0 0 .15em;color:rgba(0,0,0,0.9);" ng-bind-html="updateShareTitle()">

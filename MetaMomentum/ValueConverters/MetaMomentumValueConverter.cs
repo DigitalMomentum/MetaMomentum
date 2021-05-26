@@ -166,13 +166,17 @@ namespace MetaMomentum.ValueConverters
 			// var image = GetPublishedContent(guidUdi, ref objectType, UmbracoObjectTypes.Media, id => _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(guidUdi.Guid));
 
 			IPublishedContent img = (guidUdi == null)? null : _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(preview, guidUdi.Guid);
-
+			if(img!= null && md.ShareImageUrl == null) {
+				//Handle Backwards compatibility where we used to store the image as an IPublished Content, rather than a URL
+				md.ShareImageUrl = img.Url(mode: UrlMode.Absolute);
+			}
 
             return new MetaValues()
                 {
                     Description = md.Description,
                     ShareDescription = md.ShareDescription,
                     ShareImage = img,
+					ShareImageUrl = md.ShareImageUrl,
                     ShareTitle = md.ShareTitle,
                     Title = md.Title,
 					NoIndex = md.NoIndex
@@ -225,6 +229,7 @@ namespace MetaMomentum.ValueConverters
             public string ShareTitle { get; set; }
             public string ShareDescription { get; set; }
             public string ShareImage { get; set; }
+            public string ShareImageUrl { get; set; }
 
             public GuidUdi GetShareImageUdi(
                 //IContentService _contentService

@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "27443d47d99da21b")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "1dbe95dcf59cb638")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -696,6 +696,13 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Feature Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "8.10.1")]
+		[ImplementPropertyType("featureImage")]
+		public string FeatureImage => this.Value<string>("featureImage");
 
 		///<summary>
 		/// Meta Momentum
