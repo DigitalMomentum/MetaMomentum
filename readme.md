@@ -55,6 +55,8 @@ The fallbacks only support fields in the form of a string, and does not support 
 
 - *Fallback Description Fields:* This is the same as the Fallback Title fields setting, however, if it finds no value, the description will be empty. 
 
+- *Fallback Image Fields:* Same as Fallback Title Fields, but for images. You can specify media picker or upload fields (*Upload feild is limited*) as fallbacks. *Note: Upload fields have Limitations: When the image falls back to an upload field, the first time an image is selected, it needs to be saved and published twice (once to upload the image, and then a second time for it to be saved into the social media image).*
+
 - *Social Share fields:* Turn this on to allow the content editor to edit the title and description tags for the share meta. 
 If turned off the content editor will not be able to edit the title and description and will be shown the text from the default falbacks.
 
@@ -82,7 +84,7 @@ Title:					@Model.Value<MetaMomentum.Models.MetaValues>.Title
 Description:			@Model.Value<MetaMomentum.Models.MetaValues>.Description
 Share Title:			@Model.Value<MetaMomentum.Models.MetaValues>.ShareTitle
 Share Description:		@Model.Value<MetaMomentum.Models.MetaValues>.ShareDescription
-Share Image:			@Model.Value<MetaMomentum.Models.MetaValues>.ShareImage
+Share Image:			@Model.Value<MetaMomentum.Models.MetaValues>.ShareImageUrl
 Open Graph Site Name:	@Model.Value<MetaMomentum.Models.MetaValues>.OGSiteName
 TwitterName:			@Model.Value<MetaMomentum.Models.MetaValues>.TwitterName
 ```
@@ -94,12 +96,20 @@ Title:					@Model.MetaMomentum.Title
 Description:			@Model.MetaMomentum.Description
 Share Title:			@Model.MetaMomentum.ShareTitle
 Share Description:		@Model.MetaMomentum.ShareDescription
-Share Image:			@Model.MetaMomentum.ShareImage
+Share Image:			@Model.MetaMomentum.ShareImageUrl
 Open Graph Site Name:	@Model.MetaMomentum.OGSiteName
 TwitterName:			@Model.MetaMomentum.TwitterName
 ```
 
 
+## Version History
+
+##### V1.0:
+ - Initial release.
+
+##### V1.1:
+ - Added support for fallback images.
+ - Added **og:title** tag (defaulting to website) to the RenderMetaTags.cshtml partial.
 
 
 ## Contributing
