@@ -87,7 +87,9 @@ angular.module("umbraco")
 						$scope.searchUrl = editorState.current.urls[0].text.substring(endOfDomain);
 					}
 
-					$scope.searchUrl = $scope.searchUrl.replace(/\/$/g, "").replace(/\//g, " › ")
+					if ($scope.searchUrl) {
+						$scope.searchUrl = $scope.searchUrl.replace(/\/$/g, "").replace(/\//g, " › ");
+					}
 				}
 
 				//Todo: Need to find a better way of checking if a fallback property has changed. Works for text but not images
