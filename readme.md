@@ -37,9 +37,13 @@ If you were using this plugin in Umbraco 7, you can replace your SeoMetadata doc
 ## Installation
 You can either install the plugin is though Nuget or using the package manager in Umbraco.
 
-`Install-Package MetaMomentum`
-
 After installation, you can create and configure a new MetaMomentum Data Type **Umbraco -> Settings -> Data Types -> New Data Type**. 
+
+Install stable releases via Nuget; development releases are available via MyGet.
+
+| Package Name                   | Release (NuGet) | Nightly (MyGet) |
+|--------------------------------|-----------------|-----------------|
+| `MetaMomentum`         | [![NuGet](https://img.shields.io/nuget/v/MetaMomentum.svg)](https://www.nuget.org/packages/MetaMomentum/) | [![MyGet](https://img.shields.io/myget/digital-momentum/vpre/MetaMomentum.svg)](https://www.myget.org/feed/digital-momentum/package/nuget/MetaMomentum) |
 
 ## Configuration
 Canfiguration can be done via the following Data Type setting fields: 
@@ -110,6 +114,12 @@ TwitterName:			@Model.MetaMomentum.TwitterName
 ##### V1.1:
  - Added support for fallback images.
  - Added **og:title** tag (defaulting to website) to the RenderMetaTags.cshtml partial.
+
+
+## Pre-Release Versions
+
+If you can't wait for a feature to be released, you can install the latest pre-release version via my MyGet feed. 
+These versions are quickly tested, but may at time cause 
 
 
 ## Contributing
