@@ -232,18 +232,26 @@ angular.module("umbraco")
 								if (typeof properties[p].value !== "undefined" && properties[p].value !== "" && properties[p].value !== null) {
 									//Found a fallback property value
 									console.log("fallback", properties[p])
-									$scope.model.value.shareImage = properties[p].value;
+									$scope.model.value.shareImage = properties[p];
 
 
-									if ($scope.model.value.shareImage != null && $scope.model.value.shareImage.startsWith("umb://")) {
+									if ($scope.model.value.shareImage.view == "mediapicker" && $scope.model.value.shareImage.value != null && $scope.model.value.shareImage.value.startsWith("umb://")) {
 										//The fallback is a media picker
-										entityResource.getById($scope.model.value.shareImage, "Media")
+										entityResource.getById($scope.model.value.shareImage.value, "Media")
 											.then(function (mediaEntity) {
 												$scope.model.value.shareImageUrl = mediaEntity.metaData.MediaPath;
 											});
-									} else if ($scope.model.value.shareImage.startsWith("/")) {
+									} else if ($scope.model.value.shareImage.view == "mediapicker3" && $scope.model.value.shareImage.value.length > 0) {
+										//The fallback is a media picker
+										$scope.model.value.shareImage = properties[p].value[0].mediaKey
+										entityResource.getById($scope.model.value.shareImage, "Media")
+											.then(function (mediaEntity) {
+												console.log(mediaEntity);
+												$scope.model.value.shareImageUrl = mediaEntity.metaData.MediaPath;
+											});
+									} else if ($scope.model.value.shareImage.value.startsWith("/")) {
 										//Probably an upload field. Could be another random property too, so be careful
-										$scope.model.value.shareImageUrl = $scope.model.value.shareImage;
+										$scope.model.value.shareImageUrl = $scope.model.value.shareImage.value;
 									} else {
 										//Not a property with a valid source image
 										$scope.model.value.shareImageUrl = null;
