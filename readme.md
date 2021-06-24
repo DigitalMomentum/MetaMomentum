@@ -111,6 +111,9 @@ TwitterName:			@Model.MetaMomentum.TwitterName
  - Added support for fallback images.
  - Added **og:title** tag (defaulting to website) to the RenderMetaTags.cshtml partial.
 
+##### V1.2:
+ - Added mediapicker3 support for Umbraco 8.14+
+
 
 ## Contributing
 
