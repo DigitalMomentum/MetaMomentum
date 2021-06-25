@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Umbraco.Core.Models;
-using Umbraco.Core.Models.PublishedContent;
 
+#if NET472
+using Umbraco.Core.Models.PublishedContent;
+using System.Web;
+#elif NET5_0_OR_GREATER
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Microsoft.AspNetCore.Http;
+#endif
 namespace MetaMomentum.Models {
 	public class MetaValues {
 		public string Title { get; set; }
@@ -22,7 +22,12 @@ namespace MetaMomentum.Models {
 		/// </summary>
 		public string OGSiteName {
 			get {
+#if NET5_0_OR_GREATER
+				throw new Exception("Not yet configured");
+#else
 				return ConfigurationManager.AppSettings["MetaMomentum.OGSiteName"];
+
+#endif
 			}
 		}
 
@@ -31,7 +36,12 @@ namespace MetaMomentum.Models {
 		/// </summary>
 		public string TwitterName {
 			get {
+#if NET5_0_OR_GREATER
+				throw new Exception("Not yet configured");
+#else
 				return ConfigurationManager.AppSettings["MetaMomentum.TwitterName"];
+
+#endif
 			}
 		}
 
@@ -39,7 +49,19 @@ namespace MetaMomentum.Models {
 		public IPublishedContent ShareImage { get; set; }
 
 
-		 public string ShareImageUrl { get; set; }
+		public string ShareImageUrl { get; set; }
+
+
+#if NET5_0_OR_GREATER
+
+		public string GetAbsoluteShareImageUrl(HttpRequest httpRequest) {
+			return httpRequest.Scheme + "://" + httpRequest.Host + ShareImageUrl;
+		}
+#else
+		public string GetAbsoluteShareImageUrl(HttpRequestBase httpRequest) {
+			return httpRequest.Url.Scheme + "://" + httpRequest.Url.Authority + ShareImageUrl;
+		}
+#endif
 
 
 	}
