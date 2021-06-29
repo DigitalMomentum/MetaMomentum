@@ -50,7 +50,7 @@ jobs:
       
       - name: Publish the package to GitHub packages
         working-directory: MetaMomentum/
-        run: dotnet nuget push *.nupkg --api-key ${{ secrets.MYGETAPI }} -source https://www.myget.org/F/umbracoprereleases/api/v3/index.json
+        run: dotnet nuget push *.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/umbracoprereleases/api/v3/index.json
         
         
         
