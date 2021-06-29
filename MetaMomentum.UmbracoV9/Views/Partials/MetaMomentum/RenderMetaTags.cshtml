@@ -1,0 +1,50 @@
+﻿@inherits UmbracoViewPage<MetaValues>
+@using MetaMomentum.Models;
+
+@{
+	if (Model == null) { return; }
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.Title))
+{
+	<title>@(Model.Title)</title>
+}
+<meta name="description" content="@Model.Description">
+
+
+<meta property="og:title" content='@Model.ShareTitle' />
+@if (Model.ShareImageUrl != null)
+{
+	<meta property="og:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=630&bgcolor=white" />
+}
+<meta property="og:description" content="@Model.ShareDescription" />
+
+@if (Model.NoIndex)
+{
+	<meta name="robots" content="noindex">
+}
+
+
+<meta property="og:type" content="website" />
+@if (Model.OGSiteName != null)
+{
+	<meta property="og:site_name" content="@Model.OGSiteName" />
+}
+@*<meta property="og:url" content="@Request.Url.AbsoluteUri" />*@
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+
+<meta name="twitter:card" content="summary_large_image">
+@if (Model.OGSiteName != null)
+{
+	<meta name="twitter:site" content="@Html.Raw(Model.TwitterName)">
+}
+<meta name="twitter:title" content="@Model.ShareTitle">
+<meta name="twitter:description" content="@Model.ShareDescription">
+@if (Model.ShareImageUrl != null)
+{
+	@*<meta name="twitter:image" content="@(Model.ShareImage.Url(mode: UrlMode.Absolute))?width=1200&height=675&bgcolor=white">*@
+	<meta name="twitter:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=675&bgcolor=white">
+}
+@*<meta name="twitter:url" content="@Request.Url.AbsoluteUri">*@

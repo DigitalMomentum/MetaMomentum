@@ -283,3 +283,4 @@ __pycache__/
 
 # ImageProcessor DiskCache 
 **/App_Data/cache/
+/MetaMomentum.UmbracoV9/App_Plugins/MetaMomentum

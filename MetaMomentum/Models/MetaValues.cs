@@ -23,7 +23,8 @@ namespace MetaMomentum.Models {
 		public string OGSiteName {
 			get {
 #if NET5_0_OR_GREATER
-				throw new Exception("Not yet configured");
+				//TODO: OGSite Name needs to be added to App settings
+				return null;
 #else
 				return ConfigurationManager.AppSettings["MetaMomentum.OGSiteName"];
 
@@ -37,7 +38,8 @@ namespace MetaMomentum.Models {
 		public string TwitterName {
 			get {
 #if NET5_0_OR_GREATER
-				throw new Exception("Not yet configured");
+				//TODO: Twitter Name needs to be added to App settings
+				return null;
 #else
 				return ConfigurationManager.AppSettings["MetaMomentum.TwitterName"];
 

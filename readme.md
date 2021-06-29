@@ -1,4 +1,4 @@
-# Meta Momentum for Umbraco 8
+# Meta Momentum for Umbraco 8 (& 9 Beta)
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 
@@ -24,7 +24,7 @@ You can specify falbacks to other text fields for the share title and descriptio
 ## Backwards Compatible with Seo Metadata...
 
 This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewis/seo-metadata) which I've used for Umbraco 7 for many years and 
-was no longer being maintained and not avaliable for Umbraco 8.
+was no longer being maintained and not avaliable for Umbraco 8 or 9.
 
 If you were using this plugin in Umbraco 7, you can replace your SeoMetadata document type with Meta Momentum without any migration of data, or mucking around.
 
@@ -143,5 +143,5 @@ A working umbraco installation is setup under MetaMomentumPageMeta.Umbraco which
 
 You can login to the back office with
 
-email: david@digitalmomentum.com.au
+email: admin@example.com
 password: password99
