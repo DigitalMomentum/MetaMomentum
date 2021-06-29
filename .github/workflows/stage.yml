@@ -35,7 +35,7 @@ jobs:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
       - name: Nuget Add Umbraco Prerelease Source
-        run: nuget sources Add -Name "Umbraco Prereleases" -Source https://www.myget.org/F/umbracoprereleases/api/v3/index.json
+        run: dotnet nuget add source https://www.myget.org/F/umbracoprereleases/api/v3/index.json --name "Umbraco Prereleases" 
 
       - name: Run Nuget restore
         run: nuget restore metamomentum.sln
@@ -43,20 +43,14 @@ jobs:
       - name: build
         run: msbuild 
         working-directory: MetaMomentum/
-        
-      - name: Nuget Add Source
-        run: nuget sources Add -Name "myget" -Source https://www.myget.org/F/digital-momentum/api/v2/package
-    
-      - name: Nuget SetAPIKey
-        run: nuget setapikey ${{ secrets.MYGETAPI }} -Source "myget"
-        
+
       - name: Nuget Pack
         working-directory: MetaMomentum/
-        run: nuget pack
+		run: dotnet pack --version-suffix dev
       
       - name: Publish the package to GitHub packages
         working-directory: MetaMomentum/
-        run: nuget push *.nupkg -source "myget"
+        run: dotnet nuget push *.nupkg --api-key ${{ secrets.MYGETAPI }} -source https://www.myget.org/F/umbracoprereleases/api/v3/index.json
         
         
         
