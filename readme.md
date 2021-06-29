@@ -1,4 +1,4 @@
-# Meta Momentum for Umbraco 8
+# Meta Momentum for Umbraco 8 (& 9 Beta)
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 
@@ -24,7 +24,7 @@ You can specify falbacks to other text fields for the share title and descriptio
 ## Backwards Compatible with Seo Metadata...
 
 This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewis/seo-metadata) which I've used for Umbraco 7 for many years and 
-was no longer being maintained and not avaliable for Umbraco 8.
+was no longer being maintained and not avaliable for Umbraco 8 or 9.
 
 If you were using this plugin in Umbraco 7, you can replace your SeoMetadata document type with Meta Momentum without any migration of data, or mucking around.
 
@@ -37,9 +37,13 @@ If you were using this plugin in Umbraco 7, you can replace your SeoMetadata doc
 ## Installation
 You can either install the plugin is though Nuget or using the package manager in Umbraco.
 
-`Install-Package MetaMomentum`
-
 After installation, you can create and configure a new MetaMomentum Data Type **Umbraco -> Settings -> Data Types -> New Data Type**. 
+
+Install stable releases via Nuget; development releases are available via MyGet.
+
+| Package Name                   | Release (NuGet) | Nightly (MyGet) |
+|--------------------------------|-----------------|-----------------|
+| `MetaMomentum`         | [![NuGet](https://img.shields.io/nuget/v/MetaMomentum.svg)](https://www.nuget.org/packages/MetaMomentum/) | [![MyGet](https://img.shields.io/myget/digital-momentum/vpre/MetaMomentum.svg)](https://www.myget.org/feed/digital-momentum/package/nuget/MetaMomentum) |
 
 ## Configuration
 Canfiguration can be done via the following Data Type setting fields: 
@@ -115,6 +119,12 @@ TwitterName:			@Model.MetaMomentum.TwitterName
  - Added mediapicker3 support for Umbraco 8.14+
 
 
+## Pre-Release Versions
+
+If you can't wait for a feature to be released, you can install the latest pre-release version via my MyGet feed. 
+These versions are quickly tested, but may at time cause 
+
+
 ## Contributing
 
 To report a new bug, create an issue on the github repository. 
@@ -136,5 +146,5 @@ A working umbraco installation is setup under MetaMomentumPageMeta.Umbraco which
 
 You can login to the back office with
 
-email: david@digitalmomentum.com.au
+email: admin@example.com
 password: password99

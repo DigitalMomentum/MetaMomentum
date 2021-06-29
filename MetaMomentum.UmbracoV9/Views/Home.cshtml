@@ -1,0 +1,25 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using MetaMomentum.Models;
+@{
+
+	Layout = null;
+}
+
+<html>
+<head>
+	@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))
+</head>
+<body>
+
+
+	Title:					@(Model.Value<MetaValues>("metaMomentum").Title)<br/>
+Share Title:			@(Model.Value<MetaValues>("metaMomentum").ShareTitle)<br/>
+Share Description:		@(Model.Value<MetaValues>("metaMomentum").ShareDescription)<br/>
+Description:			@(Model.Value<MetaValues>("metaMomentum").Description)<br/>
+Share Image:			@(Model.Value<MetaValues>("metaMomentum").ShareImageUrl)<br/>
+Open Graph Site Name:	@(Model.Value<MetaValues>("metaMomentum").OGSiteName)<br/>
+TwitterName:			@(Model.Value<MetaValues>("metaMomentum").TwitterName)<br/>
+</body>
+</html>

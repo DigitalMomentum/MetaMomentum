@@ -397,7 +397,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MetaMomentum\MetaMomentum.csproj">
-      <Project>{2652ecfc-0924-4d6f-a980-09d833a01671}</Project>
+      <Project>{b1f28a5d-9104-4a1a-af3e-f13f1e0a14d2}</Project>
       <Name>MetaMomentum</Name>
     </ProjectReference>
   </ItemGroup>
