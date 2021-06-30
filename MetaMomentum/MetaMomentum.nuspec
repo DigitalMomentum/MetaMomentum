@@ -9,10 +9,10 @@
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/DigitalMomentum/MetaMomentum</projectUrl>
     <iconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</iconUrl>
-    <description>A DataType to manage Search engine results, open Graph and Twitter cards</description>
-    <releaseNotes>First Release</releaseNotes>
+    <description>A DataType to manage Search engine results, open Graph and Twitter cards in Umbraco</description>
+    <releaseNotes>Package now supports both Umbraco 8 and 9 beta.</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Umbraco seo twitter opengraph Umbraco8 Datatype</tags>
+    <tags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype dotnetcore dotnet5</tags>
   </metadata>
   <files>
     <file src="..\MetaMomentum.Umbraco\App_Plugins\MetaMomentum\editorView.controller.js" target="content\App_Plugins\MetaMomentum\editorView.controller.js" />
