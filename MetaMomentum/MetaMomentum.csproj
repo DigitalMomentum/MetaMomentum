@@ -1,48 +1,74 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net5.0;net472</TargetFrameworks>
-    <Version>1.2.0$(VersionSuffix)</Version>
-    <Description>Creates a Meta Doctype  for Umbraco 8 &amp; 9 to manage Search engine results, open Graph and Twitter cards</Description>
-    <Company>Digital Momentum</Company>
-    <Product>MetaMomentum for Umbraco</Product>
-    <Authors>David Sheiles</Authors>
-    <Copyright>Copyright ©  2021</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/DigitalMomentum/MetaMomentum</PackageProjectUrl>
-    <PackageIcon>MetaMomentum-logo.png</PackageIcon>
-    <PackageIconUrl />
-    <RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype dotnetcore dotnet5</PackageTags>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net472</TargetFrameworks>
+		<Version>1.2.0$(VersionSuffix)</Version>
+		<Description>Creates a Meta Doctype  for Umbraco 8 &amp; 9 to manage Search engine results, open Graph and Twitter cards</Description>
+		<Company>Digital Momentum</Company>
+		<Product>MetaMomentum for Umbraco</Product>
+		<Authors>David Sheiles</Authors>
+		<Copyright>Copyright ©  2021</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/DigitalMomentum/MetaMomentum</PackageProjectUrl>
+		<PackageIcon>MetaMomentum-logo.png</PackageIcon>
+		<PackageIconUrl />
+		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype dotnetcore dotnet5</PackageTags>
+		<AssemblyVersion>1.2.0.0</AssemblyVersion>
+		<FileVersion>1.2.0.0</FileVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
 
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 		<PackageReference Include="UmbracoCms.Core" Version="8.2.0" />
 		<PackageReference Include="UmbracoCms.Web" Version="8.2.0" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <PackageReference Include="Umbraco.Cms.Core" Version="9.0.0-beta004" />
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="Umbraco.Cms.Core" Version="9.0.0-beta004" />
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\GithubFiles\Logo\MetaMomentum-logo.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
 
-  <ItemGroup>
-    
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\GithubFiles\Logo\MetaMomentum-logo.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+
+		<Content Include="App_Plugins\MetaMomentum\**\*.*">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
+		</Content>
+		<None Include="build\**\*.*">
+			<Pack>True</Pack>
+			<PackagePath>build</PackagePath>
+		</None>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Compile Remove="Views\MacroPartials\**" />
+	  <Compile Remove="Views\Partials\Navigation\**" />
+	  <EmbeddedResource Remove="Views\MacroPartials\**" />
+	  <EmbeddedResource Remove="Views\Partials\Navigation\**" />
+	  <None Remove="Views\MacroPartials\**" />
+	  <None Remove="Views\Partials\Navigation\**" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <None Remove="Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Content Include="Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
+	</ItemGroup>
 
 </Project>

@@ -5,21 +5,25 @@
 @{
 
 	Layout = null;
+
+	var metaMomentum = Model.Value<MetaValues>("metaMomentum");
 }
 
 <html>
 <head>
-	@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))
+	@Html.Partial("MetaMomentum/RenderMetaTags", metaMomentum)
 </head>
 <body>
 
 
-	Title:					@(Model.Value<MetaValues>("metaMomentum").Title)<br/>
-Share Title:			@(Model.Value<MetaValues>("metaMomentum").ShareTitle)<br/>
-Share Description:		@(Model.Value<MetaValues>("metaMomentum").ShareDescription)<br/>
-Description:			@(Model.Value<MetaValues>("metaMomentum").Description)<br/>
-Share Image:			@(Model.Value<MetaValues>("metaMomentum").ShareImageUrl)<br/>
-Open Graph Site Name:	@(Model.Value<MetaValues>("metaMomentum").OGSiteName)<br/>
-TwitterName:			@(Model.Value<MetaValues>("metaMomentum").TwitterName)<br/>
+Title:					@(metaMomentum.Title)<br/>
+Share Title:			@(metaMomentum.ShareTitle)<br/>
+Share Description:		@(metaMomentum.ShareDescription)<br/>
+Description:			@(metaMomentum.Description)<br/>
+Share Image:			@(metaMomentum.ShareImageUrl)<br/>
+Open Graph Site Name:	@(metaMomentum.OGSiteName)<br/>
+TwitterName:			@(metaMomentum.TwitterName)<br/>
+
+<img src="@(metaMomentum.ShareImageUrl)?width=1200&height=630&bgcolor=white" />
 </body>
 </html>
