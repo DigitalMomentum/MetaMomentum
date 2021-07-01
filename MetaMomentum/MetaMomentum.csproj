@@ -45,30 +45,15 @@
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
 		</Content>
+		<Content Include="Views\Partials\MetaMomentum\**\*.*">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
+		</Content>
+		
 		<None Include="build\**\*.*">
 			<Pack>True</Pack>
 			<PackagePath>build</PackagePath>
 		</None>
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Compile Remove="Views\MacroPartials\**" />
-	  <Compile Remove="Views\Partials\Navigation\**" />
-	  <EmbeddedResource Remove="Views\MacroPartials\**" />
-	  <EmbeddedResource Remove="Views\Partials\Navigation\**" />
-	  <None Remove="Views\MacroPartials\**" />
-	  <None Remove="Views\Partials\Navigation\**" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <None Remove="Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Content Include="Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
 	</ItemGroup>
 
 </Project>
