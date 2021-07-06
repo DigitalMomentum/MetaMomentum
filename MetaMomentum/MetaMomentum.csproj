@@ -11,7 +11,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/DigitalMomentum/MetaMomentum</PackageProjectUrl>
 		<PackageIcon>MetaMomentum-logo.png</PackageIcon>
-		<PackageIconUrl />
+		<PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype dotnetcore dotnet5</PackageTags>
