@@ -52,7 +52,7 @@ jobs:
 
       - name: Nuget Pack
         working-directory: MetaMomentum/
-        run: dotnet pack --version-suffix ""
+        run: dotnet pack
       
       - name: Publish the package to GitHub packages
         working-directory: MetaMomentum/
