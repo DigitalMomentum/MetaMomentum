@@ -8,27 +8,31 @@
 	<Target Name="CopyMetaMomentumAssets" BeforeTargets="Build">
 		<ItemGroup>
 			<MetaMomentumContentFiles Include="$(MetaMomentumContentFilesPath)" />
+			<MetaMomentumRazorFiles Include="$(MetaMomentumRazorFilesPath)" />
 		</ItemGroup>
-		<Message Text="Copying MetaMomentum files: $(MetaMomentumContentFilesPath) - #@(MetaMomentumContentFiles->Count()) files"  Importance="high" />
+		<Message Text="Copying MetaMomentum Plugin files: $(MetaMomentumContentFilesPath) - #@(MetaMomentumContentFiles->Count()) files"  Importance="high" />
 		<Copy
 				SourceFiles="@(MetaMomentumContentFiles)"
 				DestinationFiles="@(MetaMomentumContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\MetaMomentum\%(RecursiveDir)%(Filename)%(Extension)')"
 				SkipUnchangedFiles="true" />
+				
+		<Message Text="Copying MetaMomentum Razor files: $(MetaMomentumRazorFilesPath) - #@(MetaMomentumRazorFiles->Count()) files"  Importance="high" />
 		<Copy
 			SourceFiles="@(MetaMomentumRazorFiles)"
 			DestinationFiles="@(MetaMomentumRazorFiles->'$(MSBuildProjectDirectory)\Views\Partials\MetaMomentum\%(RecursiveDir)%(Filename)%(Extension)')"
-			SkipUnchangedFiles="true" />
+			SkipUnchangedFiles="true"	
+	/>
 
 	</Target>
 
 	<Target Name="ClearMetaMomentumAssets" BeforeTargets="Clean">
 		<ItemGroup>
 			<MetaMomentumDir Include="$(MSBuildProjectDirectory)\App_Plugins\MetaMomentum\" />
-			<MetaMomentumRazorDir Include="$(MSBuildProjectDirectory)\Views\Partials\MetaMomentum\" />
+			<!--<MetaMomentumRazorDir Include="$(MSBuildProjectDirectory)\Views\Partials\MetaMomentum\" />-->
 		</ItemGroup>
-		<Message Text="Clear old MetaMomentum data"  Importance="high" />
+		<Message Text="Clear old MetaMomentum plugin files"  Importance="high" />
 		<RemoveDir Directories="@(MetaMomentumDir)"  />
-		<RemoveDir Directories="@(MetaMomentumRazorDir)"  />
+		<!--<RemoveDir Directories="@(MetaMomentumRazorDir)"  />-->
 	</Target>
 
 </Project>
