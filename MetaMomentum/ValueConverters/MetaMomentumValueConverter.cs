@@ -176,8 +176,13 @@ namespace MetaMomentum.ValueConverters {
 			GuidUdi guidUdi = md.GetShareImageUdi();
 
 			// var image = GetPublishedContent(guidUdi, ref objectType, UmbracoObjectTypes.Media, id => _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(guidUdi.Guid));
-
+#if NET5_0_OR_GREATER
+			IPublishedSnapshot publishedSnapshot;
+			_publishedSnapshotAccessor.TryGetPublishedSnapshot(out publishedSnapshot);
+			IPublishedContent img = (guidUdi == null) ? null : publishedSnapshot.Media.GetById(preview, guidUdi.Guid);
+#else
 			IPublishedContent img = (guidUdi == null) ? null : _publishedSnapshotAccessor.PublishedSnapshot.Media.GetById(preview, guidUdi.Guid);
+#endif
 			if (img != null && md.ShareImageUrl == null) {
 				//Handle Backwards compatibility where we used to store the image as an IPublished Content, rather than a URL
 				md.ShareImageUrl = img.UrlSegment;// (mode: UrlMode.Absolute);
