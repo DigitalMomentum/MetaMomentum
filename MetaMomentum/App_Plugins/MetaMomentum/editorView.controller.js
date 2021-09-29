@@ -231,7 +231,7 @@ angular.module("umbraco")
 							if (typeof properties[p] !== "undefined" && properties[p].alias === fallbackImages[i]) {
 								if (typeof properties[p].value !== "undefined" && properties[p].value !== "" && properties[p].value !== null) {
 									//Found a fallback property value
-									console.log("fallback", properties[p])
+									//console.log("fallback", properties[p])
 									$scope.model.value.shareImage = properties[p].value;
 
 
@@ -243,19 +243,27 @@ angular.module("umbraco")
 											});
 									} else if (properties[p].view == "mediapicker3" && Array.isArray(properties[p].value) && properties[p].value.length > 0) {
 										//The fallback is a media picker
-										console.log(properties[p].value)
+										
 										$scope.model.value.shareImage = properties[p].value[0].mediaKey
 										entityResource.getById($scope.model.value.shareImage, "Media")
 											.then(function (mediaEntity) {
-												console.log(mediaEntity);
+												
 												$scope.model.value.shareImageUrl = mediaEntity.metaData.MediaPath;
 											});
-									} else if (!Array.isArray(properties[p].value) && $scope.model.value.shareImage.startsWith("/")) {
-										//Probably an upload field. Could be another random property too, so be careful
+									} else if (!Array.isArray(properties[p].value) && typeof $scope.model.value.shareImage.src !== "undefined" && $scope.model.value.shareImage.src.startsWith("/")) {
+										//Probably an upload field for V9. Could be another random property too, so be careful
+										$scope.model.value.shareImageUrl = $scope.model.value.shareImage.src;
+										
+
+									} else if (!Array.isArray(properties[p].value) && typeof $scope.model.value.shareImage.src === "undefined" && $scope.model.value.shareImage.startsWith("/")) {
+										//Probably an upload field for V8. Could be another random property too, so be careful
 										$scope.model.value.shareImageUrl = $scope.model.value.shareImage;
+										
 									} else {
-										//Not a property with a valid source image
+										
+										//Not a property with a valid source image, or upload that has not yet been saved
 										$scope.model.value.shareImageUrl = null;
+									
 									}
 									return $scope.model.value.shareImageUrl;
 								}
