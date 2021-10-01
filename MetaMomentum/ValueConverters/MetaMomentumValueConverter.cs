@@ -30,7 +30,8 @@ namespace MetaMomentum.ValueConverters {
 #if NET5_0_OR_GREATER
         JsonSerializerOptions jsonOptions = new JsonSerializerOptions()
         {
-            PropertyNameCaseInsensitive = true
+            PropertyNameCaseInsensitive = true,
+			
         };
 #endif
 

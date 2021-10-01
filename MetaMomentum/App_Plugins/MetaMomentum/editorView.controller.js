@@ -243,27 +243,28 @@ angular.module("umbraco")
 											});
 									} else if (properties[p].view == "mediapicker3" && Array.isArray(properties[p].value) && properties[p].value.length > 0) {
 										//The fallback is a media picker
-										
+
 										$scope.model.value.shareImage = properties[p].value[0].mediaKey
 										entityResource.getById($scope.model.value.shareImage, "Media")
 											.then(function (mediaEntity) {
-												
+
 												$scope.model.value.shareImageUrl = mediaEntity.metaData.MediaPath;
 											});
 									} else if (!Array.isArray(properties[p].value) && typeof $scope.model.value.shareImage.src !== "undefined" && $scope.model.value.shareImage.src.startsWith("/")) {
 										//Probably an upload field for V9. Could be another random property too, so be careful
 										$scope.model.value.shareImageUrl = $scope.model.value.shareImage.src;
-										
+										$scope.model.value.shareImage = null; //Share image is not rellevant, so reset to null;
 
 									} else if (!Array.isArray(properties[p].value) && typeof $scope.model.value.shareImage.src === "undefined" && $scope.model.value.shareImage.startsWith("/")) {
 										//Probably an upload field for V8. Could be another random property too, so be careful
 										$scope.model.value.shareImageUrl = $scope.model.value.shareImage;
-										
+										$scope.model.value.shareImage = null; //Share image is not rellevant, so reset to null;
 									} else {
-										
+
 										//Not a property with a valid source image, or upload that has not yet been saved
 										$scope.model.value.shareImageUrl = null;
-									
+										$scope.model.value.shareImage = null; //Share image is not rellevant, so reset to null;
+
 									}
 									return $scope.model.value.shareImageUrl;
 								}
