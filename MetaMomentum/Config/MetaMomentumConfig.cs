@@ -13,10 +13,12 @@ namespace MetaMomentum.Config {
 		public string OGSiteName { get; set; } = null;
 		public string TwitterName { get; set; } = null;
 
-		#if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER
+		public MetaMomentumConfig() {
+		}
 		public MetaMomentumConfig(IConfiguration configuration = null) {
 
-			if(configuration != null){
+			if (configuration != null) {
 				var configSection = configuration.GetSection("MetaMomentum").Get<MetaMomentumConfig>();
 
 				OGSiteName = configSection.OGSiteName;

@@ -49,7 +49,7 @@ namespace MetaMomentum.ValueConverters {
 			_contentService = contentService;
 			_publishedSnapshotAccessor = publishedSnapshotAccessor ?? throw new ArgumentNullException(nameof(publishedSnapshotAccessor));
 			if(metaMomentumConfig == null) {
-				metaMomentumConfig = new MetaMomentumConfig();
+				metaMomentumConfig = new MetaMomentumConfig(configuration);
 			}
 			_metaMomentumConfig = metaMomentumConfig;
 			_logger = logger;
