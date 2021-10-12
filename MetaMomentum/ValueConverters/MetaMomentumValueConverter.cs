@@ -12,6 +12,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Models;
 using Microsoft.Extensions.Configuration;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 #else
 using Newtonsoft.Json;
 using Umbraco.Core;
@@ -29,6 +30,7 @@ namespace MetaMomentum.ValueConverters {
 	public class MetaMomentumValueConverter : IPropertyValueConverter {
 		private readonly IContentService _contentService;
 		private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
+		
 		private readonly MetaMomentumConfig _metaMomentumConfig;
 
 #if NET5_0_OR_GREATER
@@ -40,18 +42,27 @@ namespace MetaMomentum.ValueConverters {
 
 
 #if NET5_0_OR_GREATER
-		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor, IConfiguration configuration,  MetaMomentumConfig metaMomentumConfig = null) {
+
+		private readonly ILogger<MetaMomentumValueConverter> _logger;
+
+		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor, IConfiguration configuration, ILogger<MetaMomentumValueConverter> logger, MetaMomentumConfig metaMomentumConfig = null) {
 			_contentService = contentService;
 			_publishedSnapshotAccessor = publishedSnapshotAccessor ?? throw new ArgumentNullException(nameof(publishedSnapshotAccessor));
 			if(metaMomentumConfig == null) {
 				metaMomentumConfig = new MetaMomentumConfig();
 			}
 			_metaMomentumConfig = metaMomentumConfig;
+			_logger = logger;
 		}
 #else
-		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor) {
+
+		private readonly ILogger _logger;
+
+
+		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor, ILogger logger) {
 			_contentService = contentService;
 			_publishedSnapshotAccessor = publishedSnapshotAccessor ?? throw new ArgumentNullException(nameof(publishedSnapshotAccessor));
+			_logger = logger;
 		}
 
 #endif
@@ -216,12 +227,14 @@ namespace MetaMomentum.ValueConverters {
 			return retVal;
 
 
-			}
-			catch (Exception e)
-			{
-			    _logger.Warn<MetaMomentumValueConverter>(String.Format("Can not convert MetaMomentum - {0} - {1}",
-			        e.GetType().Name, e.Message));
-			    return null;
+			} catch (Exception e) {
+#if NET5_0_OR_GREATER
+				_logger.Log(LogLevel.Warning, "Can not convert MetaMomentum - {0} - {1}", e.GetType().Name, e.Message);
+#else
+				_logger.Warn<MetaMomentumValueConverter>(String.Format("Can not convert MetaMomentum - {0} - {1}",
+					e.GetType().Name, e.Message));
+#endif
+				return null;
 			}
 
 
