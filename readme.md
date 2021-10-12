@@ -1,4 +1,4 @@
-# Meta Momentum for Umbraco 8 (& 9 Beta)
+# Meta Momentum for Umbraco 8 & 9
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 

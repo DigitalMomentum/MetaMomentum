@@ -2,10 +2,10 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net472</TargetFrameworks>
-		<Version>1.2.0.1$(VersionSuffix)</Version>
+		<Version>2.0.0</Version>
 		<Description>Creates a Meta Doctype  for Umbraco 8 &amp; 9 to manage Search engine results, open Graph and Twitter cards</Description>
 		<Company>Digital Momentum</Company>
-		<Product>MetaMomentum for Umbraco</Product>
+		<Product>MetaMomentum for Umbraco 8 &amp; 9</Product>
 		<Authors>David Sheiles</Authors>
 		<Copyright>Copyright ©  2021</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -15,8 +15,8 @@
 		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype dotnetcore dotnet5</PackageTags>
-		<AssemblyVersion>1.2.0.1</AssemblyVersion>
-		<FileVersion>1.2.0.1</FileVersion>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
