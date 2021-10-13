@@ -21,8 +21,8 @@ namespace MetaMomentum.Config {
 			if (configuration != null) {
 				var configSection = configuration.GetSection("MetaMomentum").Get<MetaMomentumConfig>();
 
-				OGSiteName = configSection.OGSiteName;
-				TwitterName = configSection.TwitterName;
+				OGSiteName = configSection?.OGSiteName;
+				TwitterName = configSection?.TwitterName;
 
 			}
 		}
