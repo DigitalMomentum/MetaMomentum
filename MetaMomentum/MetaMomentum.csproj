@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net472</TargetFrameworks>
 		<Version>2.0.0</Version>
-		<Description>Creates a Meta Doctype  for Umbraco 8 &amp; 9 to manage Search engine results, open Graph and Twitter cards</Description>
+		<Description>Creates a Meta DataType for Umbraco 8 &amp; 9 to manage Search Engine results, Open Graph and Twitter Cards</Description>
 		<Company>Digital Momentum</Company>
 		<Product>MetaMomentum for Umbraco 8 &amp; 9</Product>
 		<Authors>David Sheiles</Authors>
@@ -14,7 +14,7 @@
 		<PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype dotnetcore dotnet5</PackageTags>
+		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype PropertyEditor dotnetcore dotnet5</PackageTags>
 		<AssemblyVersion>2.0.0.0</AssemblyVersion>
 		<FileVersion>2.0.0.0</FileVersion>
 	</PropertyGroup>
