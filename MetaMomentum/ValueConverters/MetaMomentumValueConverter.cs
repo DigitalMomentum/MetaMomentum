@@ -1,5 +1,7 @@
 ﻿using MetaMomentum.Models;
 using System;
+using MetaMomentum.Config;
+
 
 #if NET5_0_OR_GREATER
 using Umbraco.Cms.Core;
@@ -8,7 +10,9 @@ using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Models;
+using Microsoft.Extensions.Configuration;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 #else
 using Newtonsoft.Json;
 using Umbraco.Core;
@@ -26,25 +30,42 @@ namespace MetaMomentum.ValueConverters {
 	public class MetaMomentumValueConverter : IPropertyValueConverter {
 		private readonly IContentService _contentService;
 		private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
+		
+		private readonly MetaMomentumConfig _metaMomentumConfig;
 
 #if NET5_0_OR_GREATER
-        JsonSerializerOptions jsonOptions = new JsonSerializerOptions()
+		JsonSerializerOptions jsonOptions = new JsonSerializerOptions()
         {
             PropertyNameCaseInsensitive = true,
-			
         };
 #endif
 
 
-		//private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
+#if NET5_0_OR_GREATER
 
-		//Injecting the PublishedSnapshotAccessor for fetching content
-		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor) {
+		private readonly ILogger<MetaMomentumValueConverter> _logger;
 
+		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor, IConfiguration configuration, ILogger<MetaMomentumValueConverter> logger, MetaMomentumConfig metaMomentumConfig = null) {
 			_contentService = contentService;
 			_publishedSnapshotAccessor = publishedSnapshotAccessor ?? throw new ArgumentNullException(nameof(publishedSnapshotAccessor));
+			if(metaMomentumConfig == null) {
+				metaMomentumConfig = new MetaMomentumConfig(configuration);
+			}
+			_metaMomentumConfig = metaMomentumConfig;
+			_logger = logger;
+		}
+#else
+
+		private readonly ILogger _logger;
+
+
+		public MetaMomentumValueConverter(IContentService contentService, IPublishedSnapshotAccessor publishedSnapshotAccessor, ILogger logger) {
+			_contentService = contentService;
+			_publishedSnapshotAccessor = publishedSnapshotAccessor ?? throw new ArgumentNullException(nameof(publishedSnapshotAccessor));
+			_logger = logger;
 		}
 
+#endif
 		public bool IsConverter(IPublishedPropertyType propertyType) {
 			return propertyType.EditorAlias.Equals("DM.MetaMomentum");
 		}
@@ -131,8 +152,7 @@ namespace MetaMomentum.ValueConverters {
 			var sourceString = source.ToString();
 			if (String.IsNullOrWhiteSpace(sourceString)) return null;
 
-			//try
-			//{
+			try{
 
 #if NET5_0_OR_GREATER
 			var md = JsonSerializer.Deserialize<MetaValuesIntermediateModel>(sourceString, jsonOptions);
@@ -189,7 +209,7 @@ namespace MetaMomentum.ValueConverters {
 				md.ShareImageUrl = img.UrlSegment;// (mode: UrlMode.Absolute);
 			}
 
-			return new MetaValues() {
+			var retVal = new MetaValues() {
 				Description = md.Description,
 				ShareDescription = md.ShareDescription,
 				ShareImage = img,
@@ -198,13 +218,24 @@ namespace MetaMomentum.ValueConverters {
 				Title = md.Title,
 				NoIndex = md.NoIndex
 			};
-			//}
-			//catch (Exception e)
-			//{
-			//    _logger.Warn<MetaMomentumValueConverter>(String.Format("Can not convert MetaMomentum - {0} - {1}",
-			//        e.GetType().Name, e.Message));
-			//    return null;
-			//}
+
+#if NET5_0_OR_GREATER
+			retVal.OGSiteName = _metaMomentumConfig.OGSiteName;
+			retVal.TwitterName = _metaMomentumConfig.TwitterName;
+#endif
+
+			return retVal;
+
+
+			} catch (Exception e) {
+#if NET5_0_OR_GREATER
+				_logger.Log(LogLevel.Warning, "Can not convert MetaMomentum - {0} - {1}", e.GetType().Name, e.Message);
+#else
+				_logger.Warn<MetaMomentumValueConverter>(String.Format("Can not convert MetaMomentum - {0} - {1}",
+					e.GetType().Name, e.Message));
+#endif
+				return null;
+			}
 
 
 		}

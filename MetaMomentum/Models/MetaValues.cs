@@ -17,35 +17,43 @@ namespace MetaMomentum.Models {
 		public string ShareTitle { get; set; }
 		public string ShareDescription { get; set; }
 
+
+#if NET5_0_OR_GREATER
+		/// <summary>
+		/// This value can be set in the Web.Config under AppSettings Name = "MetaMomentum.OGSiteName"
+		/// Note: This only works via ValueConverter OR ModelsBuilder
+		/// </summary>
+		public string OGSiteName { get; set; } = null;
+
+
+		/// <summary>
+		/// This value can be set in the Web.Config under AppSettings.json under `MetaMomentum.TwitterName`. Make sure that you include the @ symbol
+		/// Note: This only works via ValueConverter OR ModelsBuilder
+		/// </summary>
+		public string TwitterName { get; set; } = null;
+
+#else
+
 		/// <summary>
 		/// This value can be set in the Web.Config under AppSettings Name = "MetaMomentum.OGSiteName"
 		/// </summary>
 		public string OGSiteName {
 			get {
-#if NET5_0_OR_GREATER
-				//TODO: OGSite Name needs to be added to App settings
-				return null;
-#else
 				return ConfigurationManager.AppSettings["MetaMomentum.OGSiteName"];
-
-#endif
 			}
 		}
-
 		/// <summary>
 		/// This value can be set in the Web.Config under AppSettings Name = "MetaMomentum.TwitterName". Make sure that you include the @ symbol
 		/// </summary>
 		public string TwitterName {
 			get {
-#if NET5_0_OR_GREATER
-				//TODO: Twitter Name needs to be added to App settings
-				return null;
-#else
 				return ConfigurationManager.AppSettings["MetaMomentum.TwitterName"];
 
-#endif
 			}
 		}
+				
+
+#endif
 
 		[Obsolete("Please use ShareImageUrl instead")]
 		public IPublishedContent ShareImage { get; set; }

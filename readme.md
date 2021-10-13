@@ -1,4 +1,4 @@
-# Meta Momentum for Umbraco 8 (& 9 Beta)
+# Meta Momentum for Umbraco 8 & 9
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 
@@ -67,11 +67,40 @@ If turned off the content editor will not be able to edit the title and descript
 - *Facebook, Twitter, LinkedIn share preview*: These 3 options will allow you to turn on / off the different share prewviews avaliable to the content editor. 
 
 ### App Settings
-Additional global configuration can be added via the web.config AppSettings
+Additional global configuration can be added via the web.config AppSettings (Umbraco V8) Or AppSettings.json (Umbraco V9)
+
+##### Umbraco V8 (via Web.config)
+
+Add the following to the web.config Config -> Appsettings:
 
  - `<add key="MetaMomentum.OGSiteName" value="Meta Momentum" />` This sets the MetaMomentum.OGSiteName property which can be used to set the the `og:site_name` meta tag.
 
  - `<add key="MetaMomentum.TwitterName" value="@DigitalMomentum" />` This sets the MetaMomentum.TwitterName property which can be used for the `twitter:site` meta tag for the Twitter Cart
+
+ ##### Umbraco V9 (via Appsettings.json)
+ Add the following to the app settings.json file
+ ```
+"MetaMomentum": {
+    "OGSiteName": "Meta Momentum",
+    "TwitterName": "@DigitalMomentum"
+}
+ ```
+
+##### Umbraco V9 (via Startup.cs)
+You can add dynamic settings in the `startup.cs` file by adding `.AddMetaMomentum()` before `.Build()` so it looks like the following:
+```
+services.AddUmbraco(_env, _config)
+    .AddBackOffice()
+    .AddWebsite()
+    .AddComposers()
+    .AddMetaMomentum(
+    c => {
+        c.TwitterName = "@DM";
+        c.OGSiteName = "MetaMomentum";
+    }
+)
+.Build();
+```
 
 ## Usage
 There is a razor file that can be found under `/Views/Partials/Metamomentum/RenderMetaTags.cshtml` which will write out the specific tags. 
