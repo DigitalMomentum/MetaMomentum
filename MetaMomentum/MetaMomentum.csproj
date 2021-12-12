@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net472</TargetFrameworks>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<Description>Creates a Meta DataType for Umbraco 8 &amp; 9 to manage Search Engine results, Open Graph and Twitter Cards</Description>
 		<Company>Digital Momentum</Company>
 		<Product>MetaMomentum for Umbraco 8 &amp; 9</Product>
@@ -15,30 +15,18 @@
 		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype PropertyEditor dotnetcore dotnet5</PackageTags>
-		<AssemblyVersion>2.0.0.0</AssemblyVersion>
-		<FileVersion>2.0.0.0</FileVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
-		<PlatformTarget>AnyCPU</PlatformTarget>
-	</PropertyGroup>
-
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-		<PackageReference Include="UmbracoCms.Core" Version="8.2.0" />
-		<PackageReference Include="UmbracoCms.Web" Version="8.2.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="Umbraco.Cms.Core" Version="9.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-	</ItemGroup>
-
 
 	<ItemGroup>
 		<None Include="..\GithubFiles\Logo\MetaMomentum-logo.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\readme.nuget.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
 		</None>
 
 		<Content Include="App_Plugins\MetaMomentum\**\*.*">
@@ -54,6 +42,10 @@
 			<Pack>True</Pack>
 			<PackagePath>build</PackagePath>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\MetaMomentum.Core\MetaMomentum.Core.csproj" />
 	</ItemGroup>
 
 </Project>

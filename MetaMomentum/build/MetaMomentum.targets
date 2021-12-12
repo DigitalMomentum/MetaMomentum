@@ -28,11 +28,11 @@
 	<Target Name="ClearMetaMomentumAssets" BeforeTargets="Clean">
 		<ItemGroup>
 			<MetaMomentumDir Include="$(MSBuildProjectDirectory)\App_Plugins\MetaMomentum\" />
-			<!--<MetaMomentumRazorDir Include="$(MSBuildProjectDirectory)\Views\Partials\MetaMomentum\" />-->
+			<MetaMomentumRazorDir Include="$(MSBuildProjectDirectory)\Views\Partials\MetaMomentum\" />
 		</ItemGroup>
 		<Message Text="Clear old MetaMomentum plugin files"  Importance="high" />
 		<RemoveDir Directories="@(MetaMomentumDir)"  />
-		<!--<RemoveDir Directories="@(MetaMomentumRazorDir)"  />-->
+		<RemoveDir Directories="@(MetaMomentumRazorDir)"  />
 	</Target>
 
 </Project>

@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution files", "{EDA63525-2430-4F8E-BA25-A62334658E0A}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		readme.md = readme.md
+		readme.nuget.md = readme.nuget.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{BB8F5612-BAD2-4C50-B000-77B528FF42A0}"
@@ -21,6 +22,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaMomentum.UmbracoV9", "MetaMomentum.UmbracoV9\MetaMomentum.UmbracoV9.csproj", "{C2FB6974-7CF6-4CFC-8AAF-50D280DE8082}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaMomentum.UmbracoV8", "MetaMomentum.UmbracoV8\MetaMomentum.UmbracoV8.csproj", "{35F55A84-8DEE-457D-B205-DD514DF38B46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaMomentum.Core", "MetaMomentum.Core\MetaMomentum.Core.csproj", "{CE173229-3B5C-49AF-AF0B-3A0ABAD76291}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +43,10 @@ Global
 		{35F55A84-8DEE-457D-B205-DD514DF38B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35F55A84-8DEE-457D-B205-DD514DF38B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35F55A84-8DEE-457D-B205-DD514DF38B46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE173229-3B5C-49AF-AF0B-3A0ABAD76291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE173229-3B5C-49AF-AF0B-3A0ABAD76291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE173229-3B5C-49AF-AF0B-3A0ABAD76291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE173229-3B5C-49AF-AF0B-3A0ABAD76291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
