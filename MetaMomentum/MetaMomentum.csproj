@@ -2,6 +2,14 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net472</TargetFrameworks>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<ContentTargetFolders>.</ContentTargetFolders>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<EnableNETAnalyzers>False</EnableNETAnalyzers>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<DebugType>none</DebugType>
+		
 		<Version>2.0.1</Version>
 		<Description>Creates a Meta DataType for Umbraco 8 &amp; 9 to manage Search Engine results, Open Graph and Twitter Cards</Description>
 		<Company>Digital Momentum</Company>

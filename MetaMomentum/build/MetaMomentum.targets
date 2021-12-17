@@ -1,8 +1,8 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<PropertyGroup>
-		<MetaMomentumContentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\MetaMomentum\**\*.*</MetaMomentumContentFilesPath>
-		<MetaMomentumRazorFilesPath>$(MSBuildThisFileDirectory)..\content\Views\Partials\MetaMomentum\**\*.*</MetaMomentumRazorFilesPath>
+		<MetaMomentumContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\MetaMomentum\**\*.*</MetaMomentumContentFilesPath>
+		<MetaMomentumRazorFilesPath>$(MSBuildThisFileDirectory)..\Views\Partials\MetaMomentum\**\*.*</MetaMomentumRazorFilesPath>
 	</PropertyGroup>
 
 	<Target Name="CopyMetaMomentumAssets" BeforeTargets="Build">
