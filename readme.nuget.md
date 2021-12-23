@@ -5,8 +5,6 @@
 Meta Momentum is an Umbraco Data Type editor to manage SEO Title & description tags and Open Graph / Twitter Cards, 
 with a visual representation of how it will look in a Google Search / Social Platform. 
 
-![Video of Meta Momentum in action](GithubFiles/Images/Newtons_Cradle_In_Action.gif)
-
 ## Search features
 The search display follows googles search restrictions in terms of titles being restricted by width, instead of a character count. 
 This gives the user a good idea on how the title / description will show in an actual google search.
@@ -18,33 +16,7 @@ if no title tag is supplied by the user.
 The Socal Share preview will give an acurate preview of the Facebook, Twiter and Linked in share previews. 
 The content editor can swtich between the 3 previews to see how they will look when shared.
 
-You can specify falbacks to other text fields for the share title and description. 
-
-
-## Backwards Compatible with Seo Metadata...
-
-This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewis/seo-metadata) which I've used for Umbraco 7 for many years and 
-was no longer being maintained and not avaliable for Umbraco 8 or 9.
-
-If you were using this plugin in Umbraco 7, you can replace your SeoMetadata document type with Meta Momentum without any migration of data, or mucking around.
-
-
-## Editor Screenshot
-![Google  Editor previews](GithubFiles/Images/Edit_SEO_Screenshot.png)
-![Facebook Editor previews](GithubFiles/Images/Edit_SocialShare_Screenshot.png)
-
-
-## Installation
-You can either install the plugin is though Nuget or using the package manager in Umbraco.
-
-After installation, you can create and configure a new MetaMomentum Data Type **Umbraco -> Settings -> Data Types -> New Data Type**. 
-
-Install stable releases via Nuget; development releases are available via MyGet.
-
-| Package Name                   | Release (NuGet) | Nightly (MyGet) |
-|--------------------------------|-----------------|-----------------|
-| `MetaMomentum`         | [![NuGet](https://img.shields.io/nuget/v/MetaMomentum.svg)](https://www.nuget.org/packages/MetaMomentum/) | [![MyGet](https://img.shields.io/myget/digital-momentum/vpre/MetaMomentum.svg)](https://www.myget.org/feed/digital-momentum/package/nuget/MetaMomentum) |
-| `MetaMomentum.Core`         | [![NuGet](https://img.shields.io/nuget/v/MetaMomentum.Core.svg)](https://www.nuget.org/packages/MetaMomentum.Core/) | [![MyGet](https://img.shields.io/myget/digital-momentum/vpre/MetaMomentum.Core.svg)](https://www.myget.org/feed/digital-momentum/package/nuget/MetaMomentum.Core) |
+You can specify fallbacks to other text fields for the share title and description. 
 
 ## Configuration
 Canfiguration can be done via the following Data Type setting fields: 
@@ -161,35 +133,3 @@ FacebookAppId:			@Model.MetaMomentum.FacebookAppId
 
 ##### V2.0.0:
  - Split Compiled DLL into separate MetaMomentum.Core project
-
-
-
-## Pre-Release Versions
-
-If you can't wait for a feature to be released, you can install the latest pre-release version via my MyGet feed. 
-These versions are quickly tested, but may at time cause 
-
-
-## Contributing
-
-To report a new bug, create an issue on the github repository. 
-
-To fix a problem or add features:
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-I reccomend creating an issue on the issue tracker before adding to discuss new features to make sure that we can include them. Any contributions you make are greatly appreciated. 
-
-
-### Running the project
-
-A working umbraco installation is setup under MetaMomentumPageMeta.Umbraco which contains the App_plugins folder and the partial view. 
-
-You can login to the back office with
-
-email: admin@example.com
-password: password99

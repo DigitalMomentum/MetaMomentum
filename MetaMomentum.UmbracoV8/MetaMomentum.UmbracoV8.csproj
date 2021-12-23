@@ -270,9 +270,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\MetaMomentum\editorView.controller.js" />
-    <Content Include="App_Plugins\MetaMomentum\editorView.html" />
-    <Content Include="App_Plugins\MetaMomentum\metamomentum.css" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
     <Content Include="config\Lang\da-DK.user.xml" />
@@ -311,7 +308,6 @@
     <Content Include="config\HealthChecks.config" />
     <Content Include="config\ClientDependency.config" />
     <Content Include="config\BackOfficeTours\getting-started.json" />
-    <Content Include="App_Plugins\MetaMomentum\package.manifest" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
@@ -324,6 +320,7 @@
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\Partials\BlockList\Default.cshtml" />
     <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Partials\MetaMomentum\RenderMetaTags.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -332,9 +329,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetaMomentum\MetaMomentum.csproj">
-      <Project>{b1f28a5d-9104-4a1a-af3e-f13f1e0a14d2}</Project>
-      <Name>MetaMomentum</Name>
+    <ProjectReference Include="..\MetaMomentum.Core\MetaMomentum.Core.csproj">
+      <Project>{ce173229-3b5c-49af-af0b-3a0abad76291}</Project>
+      <Name>MetaMomentum.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
