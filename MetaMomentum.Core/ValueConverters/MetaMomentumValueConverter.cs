@@ -1,5 +1,5 @@
-﻿using MetaMomentum.Core.Models;
-using MetaMomentum.Core.Config;
+﻿using MetaMomentum.Models;
+using MetaMomentum.Config;
 using System;
 #if NET5_0_OR_GREATER
 using Umbraco.Cms.Core;

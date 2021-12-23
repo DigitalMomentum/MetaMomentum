@@ -2,7 +2,7 @@
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 #else
-using MetaMomentum.Core.Config;
+using MetaMomentum.Config;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 #endif

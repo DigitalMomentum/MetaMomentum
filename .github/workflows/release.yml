@@ -39,6 +39,16 @@ jobs:
 
       - name: Run Nuget restore
         run: nuget restore metamomentum.sln
+
+      - name: Copy lucene analyser
+        run: |
+          $src = "C:\Users\runneradmin\.nuget\packages\lucene.net\4.8.0-beta00014\analyzers\dotnet\cs"
+          dest = "C:\Users\runneradmin\.nuget\packages\lucene.net\3.0.3\analyzers\dotnet\cs"
+          if (!(Test-Path -Path $dest)) {
+            New-Item -ItemType directory -Path $dest
+          }
+          Copy-Item -Path $src\*.dll -Destination $dest 
+
       
       - name: build
         run: msbuild 

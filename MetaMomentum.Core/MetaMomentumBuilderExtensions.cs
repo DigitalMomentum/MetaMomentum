@@ -1,12 +1,12 @@
 ﻿#if NET5_0_OR_GREATER
 using System;
 using System.Linq;
-using MetaMomentum.Core.Config;
+using MetaMomentum.Config;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.DependencyInjection;
 
-namespace MetaMomentum.Core {
+namespace MetaMomentum{
 	public static class MetaMomentumBuilderExtensions {
 
 		//A BIG Thanks to Kevin Jump, Your uSync Settings saved me time working the config out! https://github.com/KevinJump/uSync/blob/v9/main/uSync.BackOffice/uSyncBackOfficeBuilderExtensions.cs

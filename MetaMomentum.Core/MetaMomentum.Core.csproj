@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net5.0;net472</TargetFrameworks>
-	  <Version>2.1.0-dev1</Version>
+	  <Version>2.1.0-dev2</Version>
 	  <Description>Core MetaMomentum DLL for development only</Description>
 	  <Company>Digital Momentum</Company>
 	  <Product>MetaMomentum for Umbraco 8 &amp; 9</Product>
@@ -22,6 +22,9 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
+	<PropertyGroup>
+		<RootNamespace>MetaMomentum</RootNamespace>
+	</PropertyGroup>
 
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
@@ -35,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		
 		<None Include="..\GithubFiles\Logo\MetaMomentum-logo.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
@@ -47,10 +51,10 @@
 	
 <!-- The Below has been added because of https://github.com/dotnet/core/issues/6500 -->
 	<!-- Workaround for this bug (replace the analyzer name with the one you need to exclude (filename only, no extension) -->
-	<Target Name="RemoveLoggingAnalyzer" BeforeTargets="CoreCompile">
+	<!--<Target Name="RemoveLoggingAnalyzer" BeforeTargets="CoreCompile">
 		<ItemGroup>
 			<Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />
 		</ItemGroup>
-	</Target>
+	</Target>-->
 
 </Project>

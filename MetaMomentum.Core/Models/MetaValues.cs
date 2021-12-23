@@ -7,7 +7,7 @@ using System.Web;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Microsoft.AspNetCore.Http;
 #endif
-namespace MetaMomentum.Core.Models {
+namespace MetaMomentum.Models {
 	public class MetaValues {
 		public string Title { get; set; }
 		public string Description { get; set; }

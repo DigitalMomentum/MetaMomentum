@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.Configuration;
 #endif
 
-namespace MetaMomentum.Core.Config {
+namespace MetaMomentum.Config {
 
 	public class MetaMomentumConfig {
 		public string OGSiteName { get; set; } = null;

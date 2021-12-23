@@ -1,4 +1,4 @@
-﻿namespace MetaMomentum.Core {
+﻿namespace MetaMomentum {
 	internal static class Constants {
 		internal static class Configuration {
 			internal const string SectionName = "MetaMomentum";

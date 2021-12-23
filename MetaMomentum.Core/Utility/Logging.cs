@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Core.Logging;
 #endif
 
-namespace MetaMomentum.Core.Utility {
+namespace MetaMomentum.Utility {
 	internal class Logging<TType> {
 #if NET5_0_OR_GREATER
 		internal ILogger<TType> logger;
