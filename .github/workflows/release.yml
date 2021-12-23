@@ -34,8 +34,8 @@ jobs:
           working-directory: MetaMomentum/
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
-      - name: Nuget Add Umbraco Prerelease Source
-        run: dotnet nuget add source https://www.myget.org/F/umbracoprereleases/api/v3/index.json --name "Umbraco Prereleases" 
+ #     - name: Nuget Add Umbraco Prerelease Source
+ #       run: dotnet nuget add source https://www.myget.org/F/umbracoprereleases/api/v3/index.json --name "Umbraco Prereleases" 
 
       - name: Run Nuget restore
         run: nuget restore metamomentum.sln
