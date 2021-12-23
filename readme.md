@@ -156,12 +156,12 @@ FacebookAppId:			@Model.MetaMomentum.FacebookAppId
 ##### V1.2:
  - Added mediapicker3 support for Umbraco 8.14+
 
-##### V2.0.0:
- - Now multi-targeting Umbraco 8 and 9
+##### V2.0:
+ - Full Umbraco 9.0+ Support
+ - Bug fix: Fallbacks to the Image Cropper field threw an error
 
-##### V2.0.0:
- - Split Compiled DLL into separate MetaMomentum.Core project
-
+##### V2.1:
+- Split Compiled DLL into separate MetaMomentum.Core project
 
 
 ## Pre-Release Versions
