@@ -61,12 +61,7 @@ jobs:
 #        working-directory: MetaMomentum/
 #        run: dotnet pack --version-suffix "-dev"
       
-      - name: Publish the package to GitHub packages
-        working-directory: MetaMomentum/
-        run: dotnet nuget push **\*.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/digital-momentum/api/v2/package
-        
-        
-        
+
       - name: Publish MetaMomentum to MyGet
         working-directory: MetaMomentum/
         run: dotnet nuget push **\*.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/digital-momentum/api/v2/package  

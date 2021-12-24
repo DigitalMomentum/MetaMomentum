@@ -61,16 +61,16 @@ jobs:
 #- name: Nuget Add Source
 #  run: nuget sources Add -Name "nuget" -Source https://api.nuget.org/v3/index.json
     
-      - name: Nuget SetAPIKey
-        run: nuget setapikey ${{ secrets.NUGETAPI }} #-Source "nuget"
+ #     - name: Nuget SetAPIKey
+ #       run: nuget setapikey ${{ secrets.NUGETAPI }} #-Source "nuget"
 
-      - name: Nuget Pack
+
+      - name: Publish MetaMomentum to MyGet
         working-directory: MetaMomentum/
-        run: dotnet pack
-      
-      - name: Publish the package to GitHub packages
-        working-directory: MetaMomentum/
+        run: dotnet nuget push **\*.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/digital-momentum/api/v2/package  
+
+      - name: Publish MetaMomentum.core to MyGet
+        working-directory: MetaMomentum.Core/
         run: dotnet nuget push **\*.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/digital-momentum/api/v2/package
-        
         
         
