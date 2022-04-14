@@ -106,9 +106,9 @@
 
 					<fieldset style=" display: flex; flex-flow: row wrap; align-items: center;margin-bottom:10px;">
 
-						<umb-radiobutton value="facebook" model="sharePreviewType" text="Facebook" style="margin-right:15px;" ng-show="model.config.showSocialPreviewFacebook == 1"></umb-radiobutton>
-						<umb-radiobutton value="twitter" model="sharePreviewType" text="Twitter" style="margin-right:15px;" ng-show="model.config.showSocialPreviewTwitter == 1"></umb-radiobutton>
-						<umb-radiobutton value="linkedIn" model="sharePreviewType" text="LinkedIn" style="margin-right:15px;" ng-show="model.config.showSocialPreviewLinkedIn == 1"></umb-radiobutton>
+						<umb-radiobutton value="facebook" model="sharePreviewType" text="Facebook" style="margin-right:15px;" ng-show="model.config.showSocialPreviewFacebook == 1" disable-dirty-check="true"></umb-radiobutton>
+						<umb-radiobutton value="twitter" model="sharePreviewType" text="Twitter" style="margin-right:15px;" ng-show="model.config.showSocialPreviewTwitter == 1" disable-dirty-check="true"></umb-radiobutton>
+						<umb-radiobutton value="linkedIn" model="sharePreviewType" text="LinkedIn" style="margin-right:15px;" ng-show="model.config.showSocialPreviewLinkedIn == 1" disable-dirty-check="true"></umb-radiobutton>
 					</fieldset>
 					<div ng-if="model.config.showSocialPreviewFacebook == 1 && sharePreviewType==='facebook'" style="width:527px;font-family:Helvetica, Arial, sans-serif;position:relative;margin:auto;">
 						<img ng-if="model.value.shareImageUrl" ng-src="{{model.value.shareImageUrl}}?width=540&height=281&mode=crop"
