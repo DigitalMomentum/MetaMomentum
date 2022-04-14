@@ -25,6 +25,12 @@
 						"view": "boolean"
 					},
 					{
+						"label": "Show Index Option",
+						"description": "Show the Search Engine Visibility toggle. This toggle allows the user to select a page not to be indexed by google (NoIndex)",
+						"key": "showNoIndexdOption",
+						"view": "boolean"
+					},
+					{
 						"label": "Fallback Title Fields",
 						"description": "enter a csv of fallback property editors aliases",
 						"key": "fallbackTitleFields",
@@ -74,6 +80,7 @@
 			"defaultConfig": {
 				"showSearchFields": "1",
 				"showSearchPreviewGoogle": "1",
+				"showNoIndexdOption": "1",
 				"showSocialFields": "1",
 				"showSocialPreviewFacebook": "1",
 				"showSocialPreviewTwitter": "1",
