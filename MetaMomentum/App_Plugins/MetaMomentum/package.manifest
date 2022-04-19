@@ -95,6 +95,7 @@
 		"~/App_Plugins/MetaMomentum/metamomentum.css"
 	],
 	"javascript": [
-		"~/App_Plugins/MetaMomentum/editorView.controller.js"
+		"~/App_Plugins/MetaMomentum/editorView.controller.js",
+		"~/App_Plugins/MetaMomentum/stripHtml.filter.js"
 	]
 }
