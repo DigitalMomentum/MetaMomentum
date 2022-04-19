@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net5.0;net472</TargetFrameworks>
-	  <Version>2.1.1</Version>
+	  <Version>2.2.0</Version>
 	  <Description>Core MetaMomentum DLL for development only</Description>
 	  <Company>Digital Momentum</Company>
 	  <Product>MetaMomentum for Umbraco 8 &amp; 9</Product>
