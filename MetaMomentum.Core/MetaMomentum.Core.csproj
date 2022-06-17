@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net5.0;net472</TargetFrameworks>
+	  <TargetFrameworks>net6.0;net5.0;net472</TargetFrameworks>
 	  <Version>2.1.1</Version>
 	  <Description>Core MetaMomentum DLL for development only</Description>
 	  <Company>Digital Momentum</Company>
@@ -36,6 +36,12 @@
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Umbraco.Cms.Web.Common" Version="9.2.0" />
 	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="10.0.0" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		
