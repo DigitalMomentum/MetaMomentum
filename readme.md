@@ -1,4 +1,4 @@
-# Meta Momentum for Umbraco 8 & 9
+# Meta Momentum for Umbraco 8, 9 and 10
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 
@@ -24,7 +24,7 @@ You can specify falbacks to other text fields for the share title and descriptio
 ## Backwards Compatible with Seo Metadata...
 
 This plugin was inspired by [Seo Meta by Ryan Lewis](https://github.com/ryanlewis/seo-metadata) which I've used for Umbraco 7 for many years and 
-was no longer being maintained and not avaliable for Umbraco 8 or 9.
+was no longer being maintained and not avaliable for Umbraco 8, 9 and 10.
 
 If you were using this plugin in Umbraco 7, you can replace your SeoMetadata document type with Meta Momentum without any migration of data, or mucking around.
 
@@ -78,7 +78,7 @@ Add the following to the web.config Config -> Appsettings:
 
  - `<add key="MetaMomentum.TwitterName" value="@DigitalMomentum" />` This sets the MetaMomentum.TwitterName property which can be used for the `twitter:site` meta tag for the Twitter Cart
 
- ##### Umbraco V9 (via Appsettings.json)
+ ##### Umbraco V9/V10 (via Appsettings.json)
  Add the following to the app settings.json file
  ```
 "MetaMomentum": {
@@ -87,7 +87,7 @@ Add the following to the web.config Config -> Appsettings:
 }
  ```
 
-##### Umbraco V9 (via Startup.cs)
+##### Umbraco V9/V10 (via Startup.cs)
 You can add dynamic settings in the `startup.cs` file by adding `.AddMetaMomentum()` before `.Build()` so it looks like the following:
 ```
 services.AddUmbraco(_env, _config)
@@ -111,7 +111,7 @@ This can be included in the head of each page like the following (where `metaMom
  @Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))
 ```
 
-Or in Umbraco 9:
+Or in Umbraco 9/10:
 
 ```html
  <partial name="MetaMomentum/RenderMetaTags" model="Model.MetaMomentum" />
@@ -162,6 +162,10 @@ FacebookAppId:			@Model.MetaMomentum.FacebookAppId
 
 ##### V2.1:
 - Split Compiled DLL into separate MetaMomentum.Core project
+
+##### V2.1.1:
+- Bugfix: Umbraco displays "Discard Changes?" when changing bewteen social previews
+- Featue: Allow hiding the "No Index" toggle via settings
 
 
 ## Pre-Release Versions
