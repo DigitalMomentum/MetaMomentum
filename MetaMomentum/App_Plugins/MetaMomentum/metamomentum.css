@@ -1,4 +1,4 @@
-﻿
+
 
 
 .mm-hidden-fields {
@@ -16,8 +16,8 @@
 
 
 .mm-preview-header {
-	width: 610px !important;
 	display: block;
+	width:100%;
 }
 
 	.mm-preview-header button.btn-link {

@@ -1,4 +1,4 @@
-﻿var bob = null
+var bob = null
 angular.module("umbraco")
 	.controller("DM.MetaMomentum",
 		function ($scope, $filter, editorState, contentEditingHelper, editorService, mediaHelper, entityResource, $interval) {
@@ -351,6 +351,24 @@ angular.module("umbraco")
 				document.querySelector('#SocialPreview').scrollIntoView({
 					behavior: 'smooth'
 				});
+			}
+
+			$scope.openSocialPreview = function () {
+				$scope.showEditSocial = true;
+				document.querySelector('#SocialPreview').scrollIntoView({
+					behavior: 'smooth'
+				});
+			}
+
+			$scope.toggleAllowSearchEngines = function (e) {
+				console.log(e)
+				e.preventDefault();
+				$scope.model.value.noIndex = !$scope.model.value.noIndex;
+				console.log($scope.model.value.noIndex)
+			}
+
+			$scope.test = function (evt) {
+				console.log(evt)
 			}
 
 			init();
