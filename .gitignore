@@ -291,3 +291,4 @@ __pycache__/
 /MetaMomentum.UmbracoV8/Views/Partials/MetaMomentum
 **/Data/TEMP/
 **/Logs/
+/MetaMomentum.UmbracoV10/App_Plugins/MetaMomentum
