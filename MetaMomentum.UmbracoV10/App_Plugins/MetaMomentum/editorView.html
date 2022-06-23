@@ -1,5 +1,5 @@
 <div ng-controller="DM.MetaMomentum">
-	<script src="https://cdn.jsdelivr.net/npm/@umbraco-ui/uui@latest/dist/uui.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@umbraco-ui/uui@1.0.0-rc.0/dist/uui.min.js"></script>
 	<div class="control-group umb-control-group">
 		<div class="umb-el-wrap">
 
@@ -10,17 +10,10 @@
 							<label class="control-label" id="SearchPreview">
 								Search Engine Preview
 							</label>
-							<!--<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</button>-->
-							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-click="toggleSearchPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
+							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-on-click="toggleSearchPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
 						</div>
 					</div>
-					<!--<div class="clearfix">
-		<div class="control-header mm-preview-header">
 
-			<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSearchPreview()">{{(showEditSearch)? "Hide Preview" : "Edit Preview"}}</button>
-
-		</div>
-	</div>-->
 					<div class="" ng-if="model.config.showSearchPreviewGoogle == 1">
 
 						<div style="color:#202124;font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif">{{searchHost}}<span style="color: #4d5156;">{{searchUrl}}</span></div>
@@ -42,14 +35,14 @@
 									</small>
 								</div>
 
-								<div class="controls">
+								<div class="controls mm-controls">
 
-									<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.title.length >= 60}, {'color-orange' : model.value.title.length >= 45}]">{{ model.value.title.length}} / 60</div>
-									<input type="text" ng-model="model.value.default.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateSearchTitle()">
-									<uui-input ng-prop-value="model.value.default.title" ng-on-input="test($event); model.value.default.title = $event.currentTarget.value"></uui-input>
+									<div style="font-size:14px;color:#202124;text-align:right;"  class="umb-textstring" ng-class="[{'color-red' : model.value.title.length >= 60}, {'color-orange' : model.value.title.length >= 45}]">{{ model.value.title.length}} / 60</div>
+									<!--<input type="text" ng-model="model.value.default.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateSearchTitle()">-->
+									<uui-input ng-prop-value="model.value.default.title" class="umb-textstring" style="width:100%" ng-on-input="model.value.default.title = $event.currentTarget.value; updateSearchTitle()"></uui-input>
 
 
-									<div style="font-size:14px;color:#202124;text-align:right;"><a href="https://moz.com/learn/seo/title-tag" target="_blank"><i>How to write a good title <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
+									<div style="font-size:14px;color:#202124;text-align:right;"  class="umb-textstring"><a href="https://moz.com/learn/seo/title-tag" target="_blank"><i>How to write a good title <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
 								</div>
 							</div>
 							<div class="clearfix">
@@ -59,11 +52,13 @@
 									<small class="control-description">The description provides a brief summary of a web page and is shown under the title in search results.</small>
 								</div>
 
-								<div class="controls">
-									<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.description.length >= 160}, {'color-orange' : model.value.description.length >= 150}]">{{ model.value.description.length}} / 160</div>
+								<div class="controls mm-controls">
+									<div style="font-size:14px;color:#202124;text-align:right;"  class="umb-textstring"  ng-class="[{'color-red' : model.value.description.length >= 160}, {'color-orange' : model.value.description.length >= 150}]">{{ model.value.description.length}} / 160</div>
 
-									<textarea ng-model="model.value.default.description" rows="4" class="umb-property-editor umb-textarea textstring " ng-change="updateSearchDescription()"></textarea>
-									<div style="font-size:14px;color:#202124;text-align:right;"><a href="https://moz.com/learn/seo/meta-description" target="_blank"><i>Write a compelling description <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
+									<!--<textarea ng-model="model.value.default.description" rows="4" class="umb-property-editor umb-textarea textstring " ng-change="updateSearchDescription()"></textarea>-->
+									<uui-textarea ng-prop-value="model.value.default.description" class="umb-textarea" style="width:100%;" ng-on-input="model.value.default.description = $event.currentTarget.value; updateSearchDescription()"></uui-textarea>
+
+									<div style="font-size:14px;color:#202124;text-align:right;"  class="umb-textstring" ><a href="https://moz.com/learn/seo/meta-description" target="_blank"><i>Write a compelling description <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
 
 								</div>
 
@@ -78,14 +73,7 @@
 							<label class="control-label" id="SearchPreview">
 								Search Engine Visibility
 							</label>
-							<!--<umb-toggle checked="!model.value.noIndex"
-										on-click="model.value.noIndex = !model.value.noIndex"
-										show-labels="true"
-										label-off="Discorage search engines from indexing this page"
-										label-on="Allow search engines to index this page"
-										label-position="right"
-										hide-icons="true">
-							</umb-toggle>-->
+							
 
 							<uui-toggle ng-attr-checked="{{!model.value.noIndex || undefined}}" ng-on-change="model.value.noIndex = !model.value.noIndex">{{(model.value.noIndex)? "Discorage search engines from indexing this page" : "Allow search engines to index this page"}}</uui-toggle>
 							
@@ -96,21 +84,6 @@
 				</uui-box>
 		
 			
-
-
-
-
-
-	
-
-				<!--<div class="clearfix">
-					<div class="control-header mm-preview-header">
-						<label class="control-label" id="SocialPreview" for="heroHeader" title="" style="">
-							Social Platform Preview
-						</label>
-						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</button>
-					</div>
-				</div>-->
 
 
 				<uui-box style="min-width:620px" ng-show="model.config.showSocialPreviewFacebook == 1 || model.config.showSocialPreviewTwitter == 1 || model.config.showSocialPreviewLinkedIn == 1">
@@ -125,13 +98,13 @@
 					</div>
 
 					<uui-tab-group style="margin-bottom:30px">
-						<uui-tab ng-attr-active="{{sharePreviewType == 'facebook' || undefined}}" ng-click="sharePreviewType = 'facebook'" ng-show="model.config.showSocialPreviewFacebook == 1">
+						<uui-tab ng-attr-active="{{sharePreviewType == 'facebook' || undefined}}" ng-on-click="sharePreviewType = 'facebook'" ng-show="model.config.showSocialPreviewFacebook == 1">
 							<uui-icon slot="icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" /></svg>
 							</uui-icon>
 							Facebook
 						</uui-tab>
-						<uui-tab ng-attr-active="{{sharePreviewType == 'twitter' || undefined}}" ng-click="sharePreviewType = 'twitter'" ng-show="model.config.showSocialPreviewTwitter == 1">
+						<uui-tab ng-attr-active="{{sharePreviewType == 'twitter' || undefined}}" ng-on-click="sharePreviewType = 'twitter'" ng-show="model.config.showSocialPreviewTwitter == 1">
 
 							<uui-icon slot="icon">
 
@@ -140,7 +113,7 @@
 
 							Twitter
 						</uui-tab>
-						<uui-tab ng-attr-active="{{sharePreviewType == 'linkedIn' || undefined}}" ng-click="sharePreviewType = 'linkedIn'" ng-show="model.config.showSocialPreviewLinkedIn == 1">
+						<uui-tab ng-attr-active="{{sharePreviewType == 'linkedIn' || undefined}}" ng-on-click="sharePreviewType = 'linkedIn'" ng-show="model.config.showSocialPreviewLinkedIn == 1">
 							<uui-icon slot="icon">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
 							</uui-icon>
@@ -148,24 +121,12 @@
 						</uui-tab>
 					</uui-tab-group>
 
-					<!--<fieldset style=" display: flex; flex-flow: row wrap; align-items: center;margin-bottom:10px;">
-
-						<umb-radiobutton value="facebook" model="sharePreviewType" text="Facebook" style="margin-right:15px;" ng-show="model.config.showSocialPreviewFacebook == 1" disable-dirty-check="true"></umb-radiobutton>
-						<umb-radiobutton value="twitter" model="sharePreviewType" text="Twitter" style="margin-right:15px;" ng-show="model.config.showSocialPreviewTwitter == 1" disable-dirty-check="true"></umb-radiobutton>
-						<umb-radiobutton value="linkedIn" model="sharePreviewType" text="LinkedIn" style="margin-right:15px;" ng-show="model.config.showSocialPreviewLinkedIn == 1" disable-dirty-check="true"></umb-radiobutton>
-					</fieldset>-->
-
 					<uui-icon-registry-essential >
 						<uui-action-bar style="position:absolute;z-index:100;transform:translateX(5px) translateY(5px)">
-							<uui-button label="edit" look="secondary" color="default" ng-click="openSocialPreview()">
+							<uui-button label="edit" look="secondary" color="default" ng-on-click="openSocialPreview()">
 								<uui-icon name="edit"></uui-icon> Edit
 							</uui-button>
-							<!--<uui-button label="remove" look="secondary" color="default">
-								<uui-icon name="remove"></uui-icon>
-							</uui-button>
-							<uui-button label="delete" look="secondary" color="default">
-								<uui-icon name="delete"></uui-icon>
-							</uui-button>-->
+							
 						</uui-action-bar>
 					</uui-icon-registry-essential>
 
@@ -225,21 +186,8 @@
 						</div>
 					</div>
 
-
-
-
-
-
-
-
-
 					<div class="mm-preview-edit" ng-if="showEditSocial">
-
-
-
-
 						<div class="clearfix">
-
 							<div class="control-header">
 								<label class="control-label" for="heroHeader" title="">Share Title </label>
 								<small class="control-description">
@@ -247,7 +195,7 @@
 								</small>
 							</div>
 
-							<div class="controls">
+							<div class="controls  mm-controls">
 								<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.shareTitle.length >= 60}, {'color-orange' : model.value.shareTitle.length >= 45}]">{{ model.value.shareTitle.length}} / 60</div>
 								<input type="text" ng-model="model.value.share.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateShareTitle()">
 
@@ -260,15 +208,12 @@
 								<small class="control-description">The share description shown under the title when shared.</small>
 							</div>
 
-							<div class="controls">
+							<div class="controls  mm-controls">
 								<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.shareDescription.length >= 160}, {'color-orange' : model.value.shareDescription.length >= 150}]">{{ model.value.shareDescription.length}} / 160</div>
 
 								<textarea ng-model="model.value.share.description" rows="4" class="umb-property-editor umb-textarea textstring " ng-change="updateShareDescription()"></textarea>
 
 							</div>
-
-
-
 						</div>
 
 
@@ -280,47 +225,16 @@
 								<small class="control-description">&nbsp;</small>
 							</div>
 
-							<div class="controls umb-mediapicker">
+							<div class="controls umb-mediapicker  mm-controls">
 
 
-
-								<div style="display:inline-block">
-
-									<ul class="umb-sortable-thumbnails">
-										<li class="umb-sortable-thumbnails__wrapper" ng-if="model.value.share.image">
-
-											<!--<p class="label label__trashed" ng-if="media.trashed">
-												<localize key="mediaPicker_trashed"></localize>
-												<i class="icon-trash" aria-hidden="true"></i>
-											</p>-->
-											<!--<div ng-if="image.loading" class="umb-sortable-thumbnails__loading">
-												<div class="umb-button__progress"></div>
-											</div>-->
-											<!-- IMAGE -->
-											<img ng-if="model.value.share.image"
-												 ng-class="{'trashed': model.value.share.image.trashed}" ng-src="{{model.value.share.image.thumbnail}}"
-												 ng-attr-title="{{model.value.share.image.trashed ? 'Trashed' + ': ' + model.value.share.image.name : model.value.share.image.name}}"
-												 alt="{{model.value.share.image.name}}" />
-
-
-
-											<div class="umb-sortable-thumbnails__actions" data-element="sortable-thumbnail-actions">
-												<!--<button type="button" aria-label="Edit media" ng-if="allowEditMedia && !media.trashed" class="umb-sortable-thumbnails__action btn-reset" data-element="action-edit" ng-click="vm.editItem(media)">
-													<i class="icon icon-edit" aria-hidden="true"></i>
-												</button>-->
-												<button type="button" aria-label="Remove" class="umb-sortable-thumbnails__action -red btn-reset" data-element="action-remove" ng-click="removeMedia()">
-													<i class="icon icon-delete" aria-hidden="true"></i>
-												</button>
-											</div>
-										</li>
-										<li style="border: none;" class="add-wrapper unsortable" ng-if="!model.value.share.image">
-											<button type="button" aria-label="Open media picker" data-element="sortable-thumbnails-add" class="add-link btn-reset umb-outline umb-outline--surrounding add-link-square" ng-click="chooseMedia()">
-												<i class="icon icon-add large" aria-hidden="true"></i>
-											</button>
-										</li>
-									</ul>
-
-								</div>
+								<uui-card-media name="Choose Custom Image" style="max-width:300px" ng-on-open="chooseMedia()">
+									<uui-tag slot="tag" size="s" color="danger" ng-if="model.value.share.image.trashed">Trashed</uui-tag>
+									<uui-action-bar slot="actions"  ng-if="model.value.share.image">
+										<uui-button label="Remove" ng-on-click="removeMedia()" look="primary" color="danger">Remove</uui-button>
+									</uui-action-bar>
+									<img ng-attr-src="{{model.value.share.image.thumbnail}}" ng-attr-alt="{{model.value.share.image.name}}" ng-if="model.value.share.image" />
+								</uui-card-media>
 
 
 							</div>
