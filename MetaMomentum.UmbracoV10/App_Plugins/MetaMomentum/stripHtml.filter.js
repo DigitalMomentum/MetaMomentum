@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @description
  * removes html tags from HTML string to produce only text. Additional "stripLineBreaks" parameter will remove all line breaks as well
  */
