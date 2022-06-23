@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net5.0;net472</TargetFrameworks>
+		<TargetFrameworks>net6.0;net5.0;net472</TargetFrameworks>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<ContentTargetFolders>.</ContentTargetFolders>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
@@ -11,20 +11,24 @@
 		<DebugType>none</DebugType>
 		
 		<Version>2.2.0</Version>
-		<Description>Creates a Meta DataType for Umbraco 8 &amp; 9 to manage Search Engine results, Open Graph and Twitter Cards</Description>
+		<Description>Creates a Meta DataType for Umbraco 8, 9 and 10 to manage Search Engine results, Open Graph and Twitter Cards</Description>
 		<Company>Digital Momentum</Company>
-		<Product>MetaMomentum for Umbraco 8 &amp; 9</Product>
+		<Product>MetaMomentum for Umbraco 8, 9 &amp; 10</Product>
 		<Authors>David Sheiles</Authors>
-		<Copyright>Copyright ©  2021</Copyright>
+		<Copyright>Copyright ©  2022</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/DigitalMomentum/MetaMomentum</PackageProjectUrl>
 		<PackageIcon>MetaMomentum-logo.png</PackageIcon>
 		<PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Datatype PropertyEditor dotnetcore dotnet5</PackageTags>
+		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Umbraco10 Datatype PropertyEditor dotnetcore dotnet5 umbraco-marketplace</PackageTags>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
+		<Nullable>disable</Nullable>
+		<PackageReleaseNotes>- Update for Umbraco 10 release
+- Fixed dirty warning when switching between previews
+- Option to hide No Index toggle in setitngs</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,0 +1,59 @@
+﻿@inherits UmbracoViewPage<MetaValues>
+@using MetaMomentum.Models;
+@*
+*********************************************************************************************************************
+*                                                                                                                   *
+*    WARNING: THIS FILE GETS REPLACED AT BUILD TIME                                                                 *
+*    If you would like to make your own tweaks, make a copy of this file and reference the new file in you code.    *
+*                                                                                                                   *
+*********************************************************************************************************************
+*@
+
+@{
+	if (Model == null) { return; }
+}
+@if (!string.IsNullOrWhiteSpace(Model.Title))
+{
+	<title>@(Model.Title)</title>
+}
+<meta name="description" content="@Model.Description">
+<meta property="og:title" content='@Model.ShareTitle' />
+<meta property="og:description" content="@Model.ShareDescription" />
+@if (Model.ShareImageUrl != null)
+{
+    @* Meta(FB) require images at least 1200x630 https://developers.facebook.com/docs/sharing/webmasters/images/ *@
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+	<meta property="og:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=630&bgcolor=white" />
+
+    @*Twitter Card ratio is 2:1 https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image *@
+	@*<meta name="twitter:image" content="@(Model.ShareImage.Url(mode: UrlMode.Absolute))?width=1200&height=628&bgcolor=white">*@
+	<meta name="twitter:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=600&bgcolor=white">
+
+
+}
+
+@if (Model.NoIndex)
+{
+	<meta name="robots" content="noindex">
+}
+
+<meta property="og:type" content="website" />
+@if (Model.OGSiteName != null)
+{
+	<meta property="og:site_name" content="@Model.OGSiteName" />
+}
+@if (Model.TwitterName != null)
+{
+	<meta name="twitter:site" content="@Html.Raw(Model.TwitterName)">
+}
+@if (Model.FacebookAppId != null)
+{
+	<meta property="fb:app_id" content="@Model.FacebookAppId" />
+}
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@Model.ShareTitle">
+<meta name="twitter:description" content="@Model.ShareDescription">
+@*<meta name="twitter:url" content="@Request.Url.AbsoluteUri">*@
