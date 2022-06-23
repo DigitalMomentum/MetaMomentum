@@ -1,0 +1,287 @@
+﻿<div ng-controller="DM.MetaMomentum">
+
+	<div class="control-group umb-control-group">
+		<div class="umb-el-wrap">
+
+			<div ng-if="model.config.showSearchFields == 1">
+
+				<div class="clearfix">
+					<div class="control-header mm-preview-header">
+						<label class="control-label" id="SearchPreview">
+							Search Engine Preview
+						</label>
+						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSearchPreview()">{{(showEditSearch)? "Hide Preview" : "Edit Preview"}}</button>
+
+					</div>
+				</div>
+				<div class="mm-preview-box" ng-if="model.config.showSearchPreviewGoogle == 1">
+
+					<div style="color:#202124;font-size:14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;font-family:Arial, sans-serif">{{searchHost}}<span style="color: #4d5156;">{{searchUrl}}</span></div>
+					<div style="width:570px;color:#1a0dab;font-size:20px; line-height:21px; margin: 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;word-wrap:break-word; font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchTitle(), 70)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+					<div style="color:#4d5156;font-size:14px;font-family:Arial, sans-serif" ng-bind-html="truncate(updateSearchDescription(), 160)"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+
+
+					<div class="mm-preview-edit" ng-if="showEditSearch">
+						<div class="clearfix">
+
+							<div class="control-header">
+								<label class="control-label" for="heroHeader" title=""> Title </label>
+								<small class="control-description">
+									The title will appear in the browser tab and as the first line in search results.
+
+								</small>
+							</div>
+
+							<div class="controls">
+								<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.title.length >= 60}, {'color-orange' : model.value.title.length >= 45}]">{{ model.value.title.length}} / 60</div>
+								<input type="text" ng-model="model.value.default.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateSearchTitle()">
+								<div style="font-size:14px;color:#202124;text-align:right;"><a href="https://moz.com/learn/seo/title-tag" target="_blank"><i>How to write a good title <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
+							</div>
+						</div>
+						<div class="clearfix">
+
+							<div class="control-header">
+								<label class="control-label"> Description </label>
+								<small class="control-description">The description provides a brief summary of a web page and is shown under the title in search results.</small>
+							</div>
+
+							<div class="controls">
+								<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.description.length >= 160}, {'color-orange' : model.value.description.length >= 150}]">{{ model.value.description.length}} / 160</div>
+
+								<textarea ng-model="model.value.default.description" rows="4" class="umb-property-editor umb-textarea textstring " ng-change="updateSearchDescription()"></textarea>
+								<div style="font-size:14px;color:#202124;text-align:right;"><a href="https://moz.com/learn/seo/meta-description" target="_blank"><i>Write a compelling description <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="clearfix" style="margin-top:20px;"ng-if="model.config.showNoIndexdOption == 1">
+				<div class="control-header mm-preview-header">
+					<label class="control-label" id="SearchPreview">
+						Search Engine Visibility
+					</label>
+					<umb-toggle checked="!model.value.noIndex"
+								
+								on-click="model.value.noIndex = !model.value.noIndex"
+								show-labels="true"
+								label-off="Discorage search engines from indexing this page"
+								label-on="Allow search engines to index this page"
+								label-position="right"
+								hide-icons="true">
+					</umb-toggle>
+
+				</div>
+			</div>
+
+
+			<hr />
+
+
+
+
+
+
+
+
+
+			<div style="width:620px" ng-show="model.config.showSocialPreviewFacebook == 1 || model.config.showSocialPreviewTwitter == 1 || model.config.showSocialPreviewLinkedIn == 1">
+
+
+				<div class="clearfix">
+					<div class="control-header mm-preview-header">
+						<label class="control-label" id="SocialPreview" for="heroHeader" title="" style="">
+							Social Platform Preview
+						</label>
+						<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</button>
+					</div>
+				</div>
+
+
+				<div class="mm-preview-box">
+
+					<fieldset style=" display: flex; flex-flow: row wrap; align-items: center;margin-bottom:10px;">
+
+						<umb-radiobutton value="facebook" model="sharePreviewType" text="Facebook" style="margin-right:15px;" ng-show="model.config.showSocialPreviewFacebook == 1" disable-dirty-check="true"></umb-radiobutton>
+						<umb-radiobutton value="twitter" model="sharePreviewType" text="Twitter" style="margin-right:15px;" ng-show="model.config.showSocialPreviewTwitter == 1" disable-dirty-check="true"></umb-radiobutton>
+						<umb-radiobutton value="linkedIn" model="sharePreviewType" text="LinkedIn" style="margin-right:15px;" ng-show="model.config.showSocialPreviewLinkedIn == 1" disable-dirty-check="true"></umb-radiobutton>
+					</fieldset>
+					<div ng-if="model.config.showSocialPreviewFacebook == 1 && sharePreviewType==='facebook'" style="width:527px;font-family:Helvetica, Arial, sans-serif;position:relative;margin:auto;">
+						<img ng-if="model.value.shareImageUrl" ng-src="{{model.value.shareImageUrl}}?width=540&height=281&mode=crop"
+							 style="border:1px solid #dddfe2;width:calc(100% - 2px);" />
+						<div style="border:1px solid #dddfe2;background-color:#e9ebee;padding:10px 12px;">
+							<div style="color:#606770;text-transform:uppercase; line-height:11px;font-size:12px">
+								{{searchHost}}
+							</div>
+							<div style="margin-top:6px;margin-bottom: 1px;color:#1d2129;font-size:16px;font-weight:600;line-height:20px;overflow:hidden;white-space:nowrap;overflow-wrap:break-word;text-overflow:ellipsis" ng-bind-html="updateShareTitle()">
+								<!-- Make sure that you call updateShareTitle() . It will cause model.value.shareTitle to auto update with fallback fields change -->
+							</div>
+
+							<div style="color:#4d5156;font-size:14px;overflow:hidden;white-space:nowrap;overflow-wrap:break-word;text-overflow:ellipsis" ng-bind-html="updateShareDescription()"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+						</div>
+					</div>
+
+
+
+					<div ng-if="model.config.showSocialPreviewTwitter== 1 && sharePreviewType==='twitter'" style="width:438px;font-family:'Helvetica Neue' ,Helvetica,Arial,sans-serif;font-size:14px;position:relative;line-height:1.3em;border-radius:.85714em;overflow:hidden;border:1px solid #dddfe2;margin:auto;">
+
+						<img ng-if="model.value.shareImageUrl"  ng-src="{{model.value.shareImageUrl}}?width=438&height=220&mode=crop"
+							  style="border:1px solid #dddfe2;width:calc(100%);" />
+						<div style="padding:10px 12px;">
+
+							<div style="max-height:1.3em; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;margin:0 0 .15em;color:#000;" ng-bind-html="updateShareTitle()">
+								<!-- Make sure that you call updateShareTitle() . It will cause model.value.shareTitle to auto update with fallback fields change -->
+							</div>
+
+							<div style="max-height:2.6em; overflow:hidden;margin:0;margin-top:.32333em;color:#000;" ng-bind-html="updateShareDescription()"><!-- Make sure that you call updateSearchTitle() here instead of model.value.title directly. It will cause model.value.title to auto update with fallback fields change --></div>
+							<div style="text-transform:lowercase; color:#8899A6;max-height:1.3em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.32333em;">
+								{{searchHost}}
+							</div>
+
+						</div>
+					</div>
+
+
+
+
+
+					<div ng-if="model.config.showSocialPreviewLinkedIn == 1 && sharePreviewType==='linkedIn'" style="width:438px;font-family:-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,F;font-size:14px;position:relative;line-height:1.3em;border-radius:.85714em;overflow:hidden;border:1px solid #dddfe2;margin:auto;">
+
+						<img ng-if="model.value.shareImageUrl"  ng-src="{{model.value.shareImageUrl}}?width=502&height=263&mode=crop"
+							  style="border:1px solid #dddfe2;width:calc(100%);" />
+						<div style="padding: 8px 12px; background-color: #E7EAEC">
+
+							<div style="max-height:40px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;margin:0 0 .15em;color:rgba(0,0,0,0.9);" ng-bind-html="updateShareTitle()">
+								<!-- Make sure that you call updateShareTitle() . It will cause model.value.shareTitle to auto update with fallback fields change -->
+							</div>
+
+							<div style="line-height:1.33;text-transform:lowercase; color:rgba(0,0,0,0.6);max-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:8px;white-space:nowrap;font-weight:400">
+								{{searchHost}}
+							</div>
+
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+					<div class="mm-preview-edit" ng-if="showEditSocial">
+
+
+
+
+						<div class="clearfix">
+
+							<div class="control-header">
+								<label class="control-label" for="heroHeader" title="">Share Title </label>
+								<small class="control-description">
+									The title will appear as the title when shared on social media.
+								</small>
+							</div>
+
+							<div class="controls">
+								<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.shareTitle.length >= 60}, {'color-orange' : model.value.shareTitle.length >= 45}]">{{ model.value.shareTitle.length}} / 60</div>
+								<input type="text" ng-model="model.value.share.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateShareTitle()">
+
+							</div>
+						</div>
+						<div class="clearfix">
+
+							<div class="control-header">
+								<label class="control-label" for="heroHeader" title="">Share Description </label>
+								<small class="control-description">The share description shown under the title when shared.</small>
+							</div>
+
+							<div class="controls">
+								<div style="font-size:14px;color:#202124;text-align:right;" ng-class="[{'color-red' : model.value.shareDescription.length >= 160}, {'color-orange' : model.value.shareDescription.length >= 150}]">{{ model.value.shareDescription.length}} / 160</div>
+
+								<textarea ng-model="model.value.share.description" rows="4" class="umb-property-editor umb-textarea textstring " ng-change="updateShareDescription()"></textarea>
+
+							</div>
+
+
+
+						</div>
+
+
+
+						<div class="clearfix" style="margin:25px 0;">
+
+							<div class="control-header">
+								<label class="control-label" for="heroHeader" title="">Share Image</label>
+								<small class="control-description">&nbsp;</small>
+							</div>
+
+							<div class="controls umb-mediapicker">
+
+
+
+								<div style="display:inline-block">
+
+									<ul class="umb-sortable-thumbnails">
+										<li class="umb-sortable-thumbnails__wrapper" ng-if="model.value.share.image">
+
+											<!--<p class="label label__trashed" ng-if="media.trashed">
+												<localize key="mediaPicker_trashed"></localize>
+												<i class="icon-trash" aria-hidden="true"></i>
+											</p>-->
+											<!--<div ng-if="image.loading" class="umb-sortable-thumbnails__loading">
+												<div class="umb-button__progress"></div>
+											</div>-->
+											<!-- IMAGE -->
+											<img ng-if="model.value.share.image"
+												 ng-class="{'trashed': model.value.share.image.trashed}" ng-src="{{model.value.share.image.thumbnail}}"
+												 ng-attr-title="{{model.value.share.image.trashed ? 'Trashed' + ': ' + model.value.share.image.name : model.value.share.image.name}}"
+												 alt="{{model.value.share.image.name}}" />
+
+
+
+											<div class="umb-sortable-thumbnails__actions" data-element="sortable-thumbnail-actions">
+												<!--<button type="button" aria-label="Edit media" ng-if="allowEditMedia && !media.trashed" class="umb-sortable-thumbnails__action btn-reset" data-element="action-edit" ng-click="vm.editItem(media)">
+													<i class="icon icon-edit" aria-hidden="true"></i>
+												</button>-->
+												<button type="button" aria-label="Remove" class="umb-sortable-thumbnails__action -red btn-reset" data-element="action-remove" ng-click="removeMedia()">
+													<i class="icon icon-delete" aria-hidden="true"></i>
+												</button>
+											</div>
+										</li>
+										<li style="border: none;" class="add-wrapper unsortable" ng-if="!model.value.share.image">
+											<button type="button" aria-label="Open media picker" data-element="sortable-thumbnails-add" class="add-link btn-reset umb-outline umb-outline--surrounding add-link-square" ng-click="chooseMedia()">
+												<i class="icon icon-add large" aria-hidden="true"></i>
+											</button>
+										</li>
+									</ul>
+
+								</div>
+
+
+							</div>
+
+
+
+						</div>
+
+
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+
+
+
