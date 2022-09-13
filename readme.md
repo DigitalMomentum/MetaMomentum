@@ -78,12 +78,15 @@ Add the following to the web.config Config -> Appsettings:
 
  - `<add key="MetaMomentum.TwitterName" value="@DigitalMomentum" />` This sets the MetaMomentum.TwitterName property which can be used for the `twitter:site` meta tag for the Twitter Cart
 
+ - `<add key="MetaMomentum.FacebookId" value="12345" />` This sets the MetaMomentum.FacebookId property which can be used for the `fb:app_id` meta tag for the Facebook App ID, when sharing to facebook
+
  ##### Umbraco V9/V10 (via Appsettings.json)
  Add the following to the app settings.json file
  ```
 "MetaMomentum": {
     "OGSiteName": "Meta Momentum",
-    "TwitterName": "@DigitalMomentum"
+    "TwitterName": "@DigitalMomentum",
+    "FacebookId": "12345" 		
 }
  ```
 
