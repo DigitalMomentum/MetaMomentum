@@ -1,4 +1,4 @@
-# Meta Momentum for Umbraco 8 & 9
+# Meta Momentum for Umbraco 8, 9 & 10
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph / Twitter cards
 
@@ -40,7 +40,7 @@ If turned off the content editor will not be able to edit the title and descript
 - *Facebook, Twitter, LinkedIn share preview*: These 3 options will allow you to turn on / off the different share prewviews avaliable to the content editor. 
 
 ### App Settings
-Additional global configuration can be added via the web.config AppSettings (Umbraco V8) Or AppSettings.json (Umbraco V9)
+Additional global configuration can be added via the web.config AppSettings (Umbraco V8) Or AppSettings.json (Umbraco V9+)
 
 ##### Umbraco V8 (via Web.config)
 
@@ -50,7 +50,7 @@ Add the following to the web.config Config -> Appsettings:
 
  - `<add key="MetaMomentum.TwitterName" value="@DigitalMomentum" />` This sets the MetaMomentum.TwitterName property which can be used for the `twitter:site` meta tag for the Twitter Cart
 
- ##### Umbraco V9 (via Appsettings.json)
+ ##### Umbraco V9+ (via Appsettings.json)
  Add the following to the app settings.json file
  ```
 "MetaMomentum": {
@@ -59,7 +59,7 @@ Add the following to the web.config Config -> Appsettings:
 }
  ```
 
-##### Umbraco V9 (via Startup.cs)
+##### Umbraco V9+ (via Startup.cs)
 You can add dynamic settings in the `startup.cs` file by adding `.AddMetaMomentum()` before `.Build()` so it looks like the following:
 ```
 services.AddUmbraco(_env, _config)
@@ -83,7 +83,7 @@ This can be included in the head of each page like the following (where `metaMom
  @Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))
 ```
 
-Or in Umbraco 9:
+Or in Umbraco 9+:
 
 ```html
  <partial name="MetaMomentum/RenderMetaTags" model="Model.MetaMomentum" />
@@ -131,5 +131,18 @@ FacebookAppId:			@Model.MetaMomentum.FacebookAppId
 ##### V2.0.0:
  - Now multi-targeting Umbraco 8 and 9
 
-##### V2.0.0:
+##### V2.1.0:
  - Split Compiled DLL into separate MetaMomentum.Core project
+ - Adjust Share Preview
+ - Bugfix: Multitargeting
+
+##### V2.1.1:
+ - Feature: Add config option to show / hide No-Index toggle
+ - Bump minimum V9 version to 9.2.0
+ - Bugfix: Don't trigger dirty check when switchig previews only
+ - Add support for Umbraco 10
+
+ ##### V2.2.0:
+ - Change property editor to use Umbraco UUI
+ - Bugfix: Dispose of interval when controller is destroyed
+

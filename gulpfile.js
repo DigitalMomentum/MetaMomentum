@@ -17,7 +17,7 @@ gulp.task('copyfiles', function (cb) {
 
 
 	var source = '././MetaMomentum/App_Plugins',
-		destination = ['./MetaMomentum.UmbracoV9/App_Plugins', './MetaMomentum.UmbracoV8/App_Plugins'];
+		destination = ['./MetaMomentum.UmbracoV10/App_Plugins', './MetaMomentum.UmbracoV9/App_Plugins', './MetaMomentum.UmbracoV8/App_Plugins'];
 
 
 	gulp.src(source + '/**/*', { base: source })
