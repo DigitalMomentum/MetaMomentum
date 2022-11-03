@@ -10,7 +10,7 @@
 							<label class="control-label" id="SearchPreview">
 								Search Engine Preview
 							</label>
-							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-on-click="toggleSearchPreview()" label="Toggle Edit Preview panel">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
+							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-on-click="toggleSearchPreview()" ng-attr-label="{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
 						</div>
 					</div>
 
@@ -39,7 +39,7 @@
 
 									<div style="font-size:14px;color:#202124;text-align:right;"  class="umb-textstring" ng-class="[{'color-red' : model.value.title.length >= 60}, {'color-orange' : model.value.title.length >= 45}]">{{ model.value.title.length}} / 60</div>
 									<!--<input type="text" ng-model="model.value.default.title" class="umb-property-editor umb-textstring textstring" style="margin-bottom:4px" ng-change="updateSearchTitle()">-->
-									<uui-input label="Provide a title for the page" ng-prop-value="model.value.default.title" class="umb-textstring" style="width:100%" ng-on-input="model.value.default.title = $event.currentTarget.value; updateSearchTitle()"></uui-input>
+									<uui-input ng-prop-value="model.value.default.title" class="umb-textstring" style="width:100%" ng-on-input="model.value.default.title = $event.currentTarget.value; updateSearchTitle()"></uui-input>
 
 
 									<div style="font-size:14px;color:#202124;text-align:right;"  class="umb-textstring"><a href="https://moz.com/learn/seo/title-tag" target="_blank"><i>How to write a good title <i class="icon-out" style="font-size:16px;display:inline-block;transform:translateY(2px)"></i></i></a></div>
@@ -93,7 +93,7 @@
 								Social Platform Preview
 							</label>
 							<!--<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</button>-->
-							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()" label="Toggle Edit Social Panel">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
+							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()" ng-attr-label="{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
 						</div>
 					</div>
 
@@ -231,7 +231,7 @@
 								<uui-card-media name="Choose Custom Image" style="max-width:300px" ng-on-open="chooseMedia()">
 									<uui-tag slot="tag" size="s" color="danger" ng-if="model.value.share.image.trashed">Trashed</uui-tag>
 									<uui-action-bar slot="actions"  ng-if="model.value.share.image">
-										<uui-button label="Remove Image" ng-on-click="removeMedia()" look="primary" color="danger">Remove</uui-button>
+										<uui-button label="Remove" ng-on-click="removeMedia()" look="primary" color="danger">Remove</uui-button>
 									</uui-action-bar>
 									<img ng-attr-src="{{model.value.share.image.thumbnail}}" ng-attr-alt="{{model.value.share.image.name}}" ng-if="model.value.share.image" />
 								</uui-card-media>
