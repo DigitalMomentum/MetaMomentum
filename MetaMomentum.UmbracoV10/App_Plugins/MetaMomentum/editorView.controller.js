@@ -1,10 +1,25 @@
-var bob = null
 angular.module("umbraco")
 	.controller("DM.MetaMomentum",
 		function ($scope, $filter, editorState, contentEditingHelper, editorService, mediaHelper, entityResource, $interval) {
+			var shareImgUpdateInterval;
+
 			$scope.sharePreviewType = null;
 			$scope.showEditSearch = false;
 			$scope.showEditSocial = false;
+
+			
+
+			$scope.$on('$destroy', function iVeBeenDismissed() {
+				// say goodbye to your controller here
+				// release resources, cancel request...
+				if (angular.isDefined(shareImgUpdateInterval)) {
+					//Stop interval function from updating share image
+					$interval.cancel(shareImgUpdateInterval);
+					shareImgUpdateInterval = undefined;
+					
+				}
+				
+			})
 
 
 			if ($scope.model.config.showSocialPreviewFacebook == 1) {
@@ -93,7 +108,7 @@ angular.module("umbraco")
 				}
 
 				//Todo: Need to find a better way of checking if a fallback property has changed. Works for text but not images
-				$interval($scope.updateShareImage, 3000);
+				shareImgUpdateInterval = $interval($scope.updateShareImage, 3000);
 			}
 
 			function getPositionInString(string, subString, index) {
