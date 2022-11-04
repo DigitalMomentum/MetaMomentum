@@ -14,7 +14,7 @@
 	  <PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
 	  <RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
-	  <PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Umbraco10 Datatype PropertyEditor dotnetcore dotnet6 umbraco-marketplace</PackageTags>
+	  <PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Umbraco10 Datatype PropertyEditor dotnetcore dotnet6</PackageTags>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
   </PropertyGroup>

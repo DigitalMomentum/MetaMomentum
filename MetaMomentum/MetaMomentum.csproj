@@ -57,6 +57,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="App_Plugins\MetaMomentum\uui-loader.js" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\MetaMomentum.Core\MetaMomentum.Core.csproj" />
 	</ItemGroup>
 
