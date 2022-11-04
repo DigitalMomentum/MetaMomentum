@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution 
 		gulpfile.js = gulpfile.js
 		readme.md = readme.md
 		readme.nuget.md = readme.nuget.md
+		umbraco-marketplace.json = umbraco-marketplace.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{BB8F5612-BAD2-4C50-B000-77B528FF42A0}"
