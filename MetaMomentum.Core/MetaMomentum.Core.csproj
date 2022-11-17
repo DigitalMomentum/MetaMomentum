@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net6.0;net5.0;net472</TargetFrameworks>
-	  <Version>2.2.0-beta</Version>
+	  <Version>2.2.0</Version>
 	  <Description>Core MetaMomentum DLL for reference in class projects</Description>
 	  <Company>Digital Momentum</Company>
 	  <Product>MetaMomentum for Umbraco 8, 9 &amp; 10</Product>
@@ -17,6 +17,11 @@
 	  <PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Umbraco10 Datatype PropertyEditor dotnetcore dotnet6</PackageTags>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
+	  <PackageReleaseNotes>
+		  - Update UI to use the new Umbraco UI Library
+		  - RTE / Html fallbacks now strip the HTML tags
+		  - Bug Fixes and performance inprovements
+	  </PackageReleaseNotes>
   </PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">

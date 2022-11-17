@@ -163,6 +163,11 @@ FacebookAppId:			@Model.MetaMomentum.FacebookAppId
 ##### V2.1:
 - Split Compiled DLL into separate MetaMomentum.Core project
 
+##### V2.2:
+- Update UI to use the new Umbraco UI Library
+- RTE / Html fallbacks now strip the HTML tags
+- Bug Fixes and performance inprovements
+
 
 ## Pre-Release Versions
 
