@@ -1,10 +1,25 @@
-﻿var bob = null
 angular.module("umbraco")
 	.controller("DM.MetaMomentum",
 		function ($scope, $filter, editorState, contentEditingHelper, editorService, mediaHelper, entityResource, $interval) {
+			var shareImgUpdateInterval;
+
 			$scope.sharePreviewType = null;
 			$scope.showEditSearch = false;
 			$scope.showEditSocial = false;
+
+			
+
+			$scope.$on('$destroy', function iVeBeenDismissed() {
+				// say goodbye to your controller here
+				// release resources, cancel request...
+				if (angular.isDefined(shareImgUpdateInterval)) {
+					//Stop interval function from updating share image
+					$interval.cancel(shareImgUpdateInterval);
+					shareImgUpdateInterval = undefined;
+					
+				}
+				
+			})
 
 
 			if ($scope.model.config.showSocialPreviewFacebook == 1) {
@@ -93,7 +108,7 @@ angular.module("umbraco")
 				}
 
 				//Todo: Need to find a better way of checking if a fallback property has changed. Works for text but not images
-				$interval($scope.updateShareImage, 3000);
+				shareImgUpdateInterval = $interval($scope.updateShareImage, 3000);
 			}
 
 			function getPositionInString(string, subString, index) {
@@ -114,7 +129,7 @@ angular.module("umbraco")
 								if (typeof properties[p] !== "undefined" && properties[p].alias === fallbackTitles[i]) {
 									if (typeof properties[p].value !== "undefined" && properties[p].value !== "" && properties[p].value !== null)
 										//Found a fallback property value
-										$scope.model.value.title = properties[p].value;
+										$scope.model.value.title = $filter('momentumStripHtml')(properties[p].value, true);
 								}
 							}
 						}
@@ -149,7 +164,7 @@ angular.module("umbraco")
 								if (typeof properties[p] !== "undefined" && properties[p].alias === fallbackDescriptions[i]) {
 									if (typeof properties[p].value !== "undefined" && properties[p].value !== "" && properties[p].value !== null)
 										//Found a fallback property value
-										$scope.model.value.description = properties[p].value;
+										$scope.model.value.description = $filter('momentumStripHtml')(properties[p].value, true);
 								}
 							}
 						}
@@ -317,7 +332,7 @@ angular.module("umbraco")
 					multiPicker: false,
 					submit: function (imgmodel) {
 						editorService.close();
-						console.log(imgmodel.selection[0])
+
 						$scope.model.value.share.image = imgmodel.selection[0];
 						$scope.model.value.share.imageUrl = imgmodel.selection[0].image;
 
@@ -351,6 +366,24 @@ angular.module("umbraco")
 				document.querySelector('#SocialPreview').scrollIntoView({
 					behavior: 'smooth'
 				});
+			}
+
+			$scope.openSocialPreview = function () {
+				$scope.showEditSocial = true;
+				document.querySelector('#SocialPreview').scrollIntoView({
+					behavior: 'smooth'
+				});
+			}
+
+			$scope.toggleAllowSearchEngines = function (e) {
+				console.log(e)
+				e.preventDefault();
+				$scope.model.value.noIndex = !$scope.model.value.noIndex;
+				console.log($scope.model.value.noIndex)
+			}
+
+			$scope.test = function (evt) {
+				console.log(evt)
 			}
 
 			init();

@@ -170,6 +170,11 @@ FacebookAppId:			@Model.MetaMomentum.FacebookAppId
 - Bugfix: Umbraco displays "Discard Changes?" when changing bewteen social previews
 - Featue: Allow hiding the "No Index" toggle via settings
 
+##### V2.2:
+- Update UI to use the new Umbraco UI Library
+- RTE / Html fallbacks now strip the HTML tags
+- Bug Fixes and performance inprovements
+
 
 ## Pre-Release Versions
 

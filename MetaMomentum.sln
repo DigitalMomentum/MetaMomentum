@@ -6,8 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution files", "Solution files", "{EDA63525-2430-4F8E-BA25-A62334658E0A}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		gulpfile.js = gulpfile.js
 		readme.md = readme.md
 		readme.nuget.md = readme.nuget.md
+		umbraco-marketplace.json = umbraco-marketplace.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{BB8F5612-BAD2-4C50-B000-77B528FF42A0}"
@@ -25,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaMomentum.UmbracoV8", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaMomentum.Core", "MetaMomentum.Core\MetaMomentum.Core.csproj", "{CE173229-3B5C-49AF-AF0B-3A0ABAD76291}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaMomentum.UmbracoV10", "MetaMomentum.UmbracoV10\MetaMomentum.UmbracoV10.csproj", "{FD666001-34C9-4CBD-B1A1-E480ABCF4DAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetaMomentum.UmbracoV10", "MetaMomentum.UmbracoV10\MetaMomentum.UmbracoV10.csproj", "{FD666001-34C9-4CBD-B1A1-E480ABCF4DAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

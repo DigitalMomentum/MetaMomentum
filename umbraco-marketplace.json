@@ -1,0 +1,39 @@
+{
+	"AlternatePackageNames": [ ],
+	"AuthorDetails": {
+		"Description": "David runs a small agency in Sydney called Digital Momentum. This package is provided in a personal capacity and I welcome any code contributions big or small.",
+		"Url": "https://www.digitalmomentum.com.au",
+		"ImageUrl": "https://www.digitalmomentum.com.au/media/1041/david-sheiles-bw-600-x-600.jpg"
+	},
+	"Category": "CMS Extensions",
+	"LicenseType": "Free",
+	"PackageType": "Package",
+	"PackagesByAuthor": [ "MetaMomentum" ],
+	"RelatedPackages": [],
+	"Screenshots": [
+		{
+			"ImageUrl": "https://raw.githubusercontent.com/DigitalMomentum/MetaMomentum/master/GithubFiles/Images/Edit_SEO_Screenshot.png",
+			"Caption": "Preview Google Search Results"
+		},
+		{
+			"ImageUrl": "https://github.com/DigitalMomentum/MetaMomentum/blob/master/GithubFiles/Images/Edit_SocialShare_Screenshot.png",
+			"Caption": "Preview Sharing window on Social Media"
+		},
+		{
+			"ImageUrl": "https://github.com/DigitalMomentum/MetaMomentum/blob/master/GithubFiles/Images/Edit_SocialShare_Screenshot.png",
+			"Caption": "Preview Sharing window on Social Media"
+		}
+	],
+	"Tags": [
+		"seo",
+		"twitter",
+		"opengraph",
+		"Umbraco8",
+		"Umbraco9",
+		"Umbraco10",
+		"Datatype",
+		"PropertyEditor"
+	],
+	"Umbraco8PackageId": "MetaMomentum",
+	"VideoUrl": ""
+}
