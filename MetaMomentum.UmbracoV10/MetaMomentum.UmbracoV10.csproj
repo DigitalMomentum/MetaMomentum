@@ -44,6 +44,6 @@
     <RazorCompileOnPublish>false</RazorCompileOnPublish>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(SolutionDir)MetaMomentum\App_Plugins\MetaMomentum\*.* $(ProjectDir)App_Plugins\MetaMomentum\ /S /E /Y&#xD;&#xA;xcopy $(SolutionDir)MetaMomentum\Views\Partials\MetaMomentum\*.* $(ProjectDir)Views\Partials\MetaMomentum\ /S /E /Y" />
+    <Exec Command="xcopy &quot;$(SolutionDir)MetaMomentum\App_Plugins\MetaMomentum\*.*&quot; &quot;$(ProjectDir)App_Plugins\MetaMomentum\&quot; /S /E /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)MetaMomentum\Views\Partials\MetaMomentum\*.*&quot; &quot;$(ProjectDir)Views\Partials\MetaMomentum\&quot; /S /E /Y" />
   </Target>
 </Project>

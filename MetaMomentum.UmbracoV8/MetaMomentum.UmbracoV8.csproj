@@ -375,8 +375,8 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>xcopy $(SolutionDir)MetaMomentum\App_Plugins\MetaMomentum\*.* $(ProjectDir)App_Plugins\MetaMomentum\ /S /E /Y
-xcopy $(SolutionDir)MetaMomentum\Views\Partials\MetaMomentum\*.* $(ProjectDir)Views\Partials\MetaMomentum\ /S /E /Y</PreBuildEvent>
+    <PreBuildEvent>xcopy "$(SolutionDir)MetaMomentum\App_Plugins\MetaMomentum\*.*" "$(ProjectDir)App_Plugins\MetaMomentum\" /S /E /Y
+xcopy "$(SolutionDir)MetaMomentum\Views\Partials\MetaMomentum\*.*" "$(ProjectDir)Views\Partials\MetaMomentum\" /S /E /Y</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
