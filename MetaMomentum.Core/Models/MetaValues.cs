@@ -27,9 +27,14 @@ namespace MetaMomentum.Models {
 		public string TwitterName { get; set; }
 
 		/// <summary>
-		/// This value can be set in the Web.Config under AppSettings.json under `MetaMomentum.TwitterName`. Make sure that you include the @ symbol
+		/// This value can be set in the Web.Config under AppSettings.json under `MetaMomentum.FacebookAppId`. Make sure that you include the @ symbol
 		/// </summary>
 		public string FacebookAppId { get; set; }
+
+		/// <summary>
+		/// This value can be set in the Web.Config under AppSettings.json under `MetaMomentum.FallbackImageUrl`. Make sure that you include the @ symbol
+		/// </summary>
+		public string FallbackImageUrl { get; set; }
 
 		[Obsolete("Please use ShareImageUrl instead")]
 		public IPublishedContent ShareImage { get; set; }
