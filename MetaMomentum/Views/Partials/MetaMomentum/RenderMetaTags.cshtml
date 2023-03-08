@@ -28,9 +28,18 @@
 
     @*Twitter Card ratio is 2:1 https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image *@
 	@*<meta name="twitter:image" content="@(Model.ShareImage.Url(mode: UrlMode.Absolute))?width=1200&height=628&bgcolor=white">*@
-	<meta name="twitter:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=600&bgcolor=white">
+    <meta name="twitter:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=600&bgcolor=white">
+}
+else if (!string.IsNullOrEmpty(Model.FallbackImageUrl))
+{
+    @* Meta(FB) require images at least 1200x630 https://developers.facebook.com/docs/sharing/webmasters/images/ *@
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content="@Model.FallbackImageUrl" />
 
-
+    @*Twitter Card ratio is 2:1 https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image *@
+	@*<meta name="twitter:image" content="@(Model.ShareImage.Url(mode: UrlMode.Absolute))?width=1200&height=628&bgcolor=white">*@
+    <meta name="twitter:image" content="@Model.FallbackImageUrl">
 }
 
 @if (Model.NoIndex)
