@@ -93,6 +93,7 @@
 							</label>
 							<!--<button type="button" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</button>-->
 							<uui-button type="button" look="default" color="default" class="btn-reset btn-link" style="float:right;" ng-click="toggleSocialPreview()" ng-attr-label="{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}">{{(showEditSocial)? "Hide Preview" : "Edit Preview"}}</uui-button>
+							
 						</div>
 					</div>
 
@@ -120,17 +121,20 @@
 						</uui-tab>
 					</uui-tab-group>
 
-					<uui-icon-registry-essential >
+					<uui-icon-registry-essential>
 						<uui-action-bar style="position:absolute;z-index:100;transform:translateX(5px) translateY(5px)">
 							<uui-button label="edit" look="secondary" color="default" ng-on-click="openSocialPreview()">
 								<uui-icon name="edit"></uui-icon> Edit
 							</uui-button>
-							
 						</uui-action-bar>
 					</uui-icon-registry-essential>
 
 					<div ng-if="model.config.showSocialPreviewFacebook == 1 && sharePreviewType==='facebook'" style="width:527px;font-family:Helvetica, Arial, sans-serif;position:relative;">
+						<uui-tag ng-if="!model.value.share.imageUrl && model.value.shareImageUrl" style="position: absolute;right: 0;z-index:100;transform: translateX(-5px) translateY(5px);" size="s" slot="tag" look="primary" color="default">Fallback Image Field</uui-tag>
+						<uui-tag ng-if="!model.value.shareImageUrl && siteFallbackImage" style="position: absolute;right: 0;z-index:100;transform: translateX(-5px) translateY(5px);" size="s" slot="tag" look="primary" color="default">Site Fallback Image</uui-tag>
 						<img ng-if="model.value.shareImageUrl" ng-src="{{model.value.shareImageUrl}}?width=540&height=281&mode=crop"
+							 style="border:1px solid #dddfe2;width:calc(100% - 2px);" />
+						<img ng-if="siteFallbackImage && !model.value.shareImageUrl" ng-src="{{siteFallbackImage}}?width=540&height=281&mode=crop"
 							 style="border:1px solid #dddfe2;width:calc(100% - 2px);" />
 						<div style="border:1px solid #dddfe2;background-color:#e9ebee;padding:10px 12px;">
 							<div style="color:#606770;text-transform:uppercase; line-height:11px;font-size:12px">
@@ -149,6 +153,8 @@
 					<div ng-if="model.config.showSocialPreviewTwitter== 1 && sharePreviewType==='twitter'" style="width:438px;font-family:'Helvetica Neue' ,Helvetica,Arial,sans-serif;font-size:14px;position:relative;line-height:1.3em;border-radius:.85714em;overflow:hidden;border:1px solid #dddfe2;">
 
 						<img ng-if="model.value.shareImageUrl" ng-src="{{model.value.shareImageUrl}}?width=438&height=220&mode=crop"
+							 style="border:1px solid #dddfe2;width:calc(100%);" />
+						<img ng-if="siteFallbackImage && !model.value.shareImageUrl" ng-src="{{siteFallbackImage}}?width=438&height=220&mode=crop"
 							 style="border:1px solid #dddfe2;width:calc(100%);" />
 						<div style="padding:10px 12px;">
 
@@ -171,6 +177,8 @@
 					<div ng-if="model.config.showSocialPreviewLinkedIn == 1 && sharePreviewType==='linkedIn'" style="width:438px;font-family:-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,F;font-size:14px;position:relative;line-height:1.3em;border-radius:.85714em;overflow:hidden;border:1px solid #dddfe2;">
 
 						<img ng-if="model.value.shareImageUrl" ng-src="{{model.value.shareImageUrl}}?width=502&height=263&mode=crop"
+							 style="border:1px solid #dddfe2;width:calc(100%);" />
+						<img ng-if="siteFallbackImage && !model.value.shareImageUrl" ng-src="{{siteFallbackImage}}?width=502&height=263&mode=crop"
 							 style="border:1px solid #dddfe2;width:calc(100%);" />
 						<div style="padding: 8px 12px; background-color: #E7EAEC">
 

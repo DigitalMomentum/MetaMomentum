@@ -171,7 +171,8 @@ namespace MetaMomentum.Core.ValueConverters {
 					NoIndex = md.NoIndex,
 					OGSiteName = _metaMomentumConfig.OGSiteName,
 					TwitterName = _metaMomentumConfig.TwitterName,
-					FacebookAppId = _metaMomentumConfig.FacebookAppId
+					FacebookAppId = _metaMomentumConfig.FacebookAppId,
+					FallbackImageUrl = _metaMomentumConfig?.FallbackImageUrl
 				};
 
 				return retVal;

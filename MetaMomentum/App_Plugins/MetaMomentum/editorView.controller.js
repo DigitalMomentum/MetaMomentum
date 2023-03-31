@@ -1,6 +1,6 @@
 angular.module("umbraco")
 	.controller("DM.MetaMomentum",
-		function ($scope, $filter, editorState, contentEditingHelper, editorService, mediaHelper, entityResource, $interval) {
+		function ($scope, $filter, $http, editorState, contentEditingHelper, editorService, mediaHelper, entityResource, $interval) {
 			var shareImgUpdateInterval;
 
 			$scope.sharePreviewType = null;
@@ -215,7 +215,6 @@ angular.module("umbraco")
 			$scope.updateShareImage = function () {
 				$scope.model.value.shareImage = null;
 
-
 				//check if there is one already set.
 				if ($scope.model.value.share.imageUrl != null) {
 					$scope.model.value.shareImageUrl = $scope.model.value.share.imageUrl;
@@ -281,12 +280,23 @@ angular.module("umbraco")
 										$scope.model.value.shareImage = null; //Share image is not rellevant, so reset to null;
 
 									}
-									return $scope.model.value.shareImageUrl;
+									console.log($scope.model)
+									if ($scope.model.value.shareImageUrl != null) {
+										return $scope.model.value.shareImageUrl;
+									}
 								}
 								//break rootLoop;
 							}
 						}
 					}
+				}
+				
+				if (!$scope.siteFallbackImage) {
+					$http.get('/Umbraco/MetaMomentum/Settings/FallbackImage').then(function successCallback(response) {
+						$scope.siteFallbackImage = response.data;
+					}, function errorCallback(response) {
+						console.log(`Error getting site fallback image: ${response}`)
+					});
 				}
 
 

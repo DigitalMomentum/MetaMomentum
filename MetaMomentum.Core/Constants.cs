@@ -6,7 +6,8 @@
 			internal const string OGSiteName = "OGSiteName";
 			internal const string TwitterName = "TwitterName";
 			internal const string FacebookId = "FacebookId";
-			internal const string CanonicalDomain = "CanonicalDomain";
+			internal const string FallbackImageUrl = "FallbackImageUrl";
+			//internal const string CanonicalDomain = "CanonicalDomain";
 		}
 	}
 }
