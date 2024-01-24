@@ -11,7 +11,7 @@ namespace MetaMomentum.Core.Composing {
 #if NET5_0_OR_GREATER
 	internal class MetaMomentumComposer : IComposer
 #else
-	[RuntimeLevel(MinLevel = RuntimeLevel.Run)]
+	[RuntimeLevel(MinLevel = RuntimeLevel.Install)]
 	public class MetaMomentumComposer : IUserComposer
 #endif
 	{
