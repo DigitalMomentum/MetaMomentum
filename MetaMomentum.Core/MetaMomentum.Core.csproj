@@ -2,10 +2,10 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net6.0;net5.0;net472</TargetFrameworks>
-	  <Version>2.2.0</Version>
+	  <Version>2.2.1</Version>
 	  <Description>Core MetaMomentum DLL for reference in class projects</Description>
 	  <Company>Digital Momentum</Company>
-	  <Product>MetaMomentum for Umbraco 8, 9 &amp; 10</Product>
+	  <Product>MetaMomentum for Umbraco 8 to 13</Product>
 	  <Authors>David Sheiles</Authors>
 	  <Copyright>Copyright ©  2022</Copyright>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>

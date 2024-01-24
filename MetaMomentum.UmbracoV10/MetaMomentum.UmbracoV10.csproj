@@ -4,10 +4,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="App_Plugins\MetaMomentum\editorView.html" />
-    <Content Include="App_Plugins\MetaMomentum\metamomentum.css" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms" Version="10.3.2" />
@@ -25,13 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="App_Plugins\" />
     <Folder Include="wwwroot" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="App_Plugins\MetaMomentum\editorView.controller.js" />
-    <None Include="App_Plugins\MetaMomentum\package.manifest" />
-    <None Include="App_Plugins\MetaMomentum\stripHtml.filter.js" />
   </ItemGroup>
 
   <ItemGroup>
