@@ -23,6 +23,9 @@
     <ItemGroup>
       <ProjectReference Include="..\MetaMomentum\MetaMomentum.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="App_Plugins\" />
+    </ItemGroup>
 
     <!--Set this to true ModelsBuilder mode is not PureLive -->
     <PropertyGroup>
