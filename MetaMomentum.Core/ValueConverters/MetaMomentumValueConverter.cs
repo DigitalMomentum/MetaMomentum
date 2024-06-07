@@ -1,6 +1,14 @@
 ﻿using MetaMomentum.Models;
 using MetaMomentum.Config;
 using System;
+
+
+
+
+
+
+
+
 #if NET5_0_OR_GREATER
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -9,6 +17,9 @@ using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Services;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Extensions;
+
 #else
 using Newtonsoft.Json;
 using Umbraco.Core;
@@ -33,7 +44,7 @@ namespace MetaMomentum.Core.ValueConverters {
 
 		public MetaMomentumValueConverter(
 			IPublishedSnapshotAccessor publishedSnapshotAccessor,
-			ILogger<MetaMomentumValueConverter> logger, 
+			ILogger<MetaMomentumValueConverter> logger,
 			MetaMomentumConfig metaMomentumConfig) {
 			_publishedSnapshotAccessor = publishedSnapshotAccessor ?? throw new ArgumentNullException(nameof(publishedSnapshotAccessor));
 			_metaMomentumConfig = metaMomentumConfig;
@@ -188,11 +199,22 @@ namespace MetaMomentum.Core.ValueConverters {
 
 			public string ShareTitle { get; set; }
 			public string ShareDescription { get; set; }
-			public string ShareImage { get; set; }
+			public dynamic ShareImage { get; set; }
 			public string ShareImageUrl { get; set; }
 
 			public GuidUdi GetShareImageUdi() {
-#if NET5_0_OR_GREATER
+#if NET6_0_OR_GREATER
+
+				string imgAsString = ShareImage as string;
+				if (imgAsString == null) return null;
+
+				if (UdiParser.TryParse(imgAsString, out Udi udi)) {
+					return udi as GuidUdi;
+				}
+
+#elif NET5_0_OR_GREATER
+	if(ShareImage == null) return null;
+
 				if (UdiParser.TryParse(ShareImage, out Udi udi)) {
 					return udi as GuidUdi;
 				}
