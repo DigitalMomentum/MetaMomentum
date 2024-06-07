@@ -10,10 +10,10 @@
 		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 		<DebugType>none</DebugType>
 		
-		<Version>2.2.1</Version>
+		<Version>2.2.2</Version>
 		<Description>Creates a Meta DataType for Umbraco 8, 9 and 10 to manage Search Engine results, Open Graph and Twitter Cards</Description>
 		<Company>Digital Momentum</Company>
-		<Product>MetaMomentum for Umbraco 8, 9 &amp; 10</Product>
+		<Product>MetaMomentum for Umbraco 8, 9 - 13</Product>
 		<Authors>David Sheiles</Authors>
 		<Copyright>Copyright ©  2022</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
