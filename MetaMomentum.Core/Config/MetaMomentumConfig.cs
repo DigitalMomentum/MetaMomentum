@@ -10,6 +10,7 @@ namespace MetaMomentum.Config {
 		public string OGSiteName { get; set; } = null;
 		public string TwitterName { get; set; } = null;
 		public string FacebookAppId { get; set; } = null;
+		public string FallbackImageUrl { get; set; }
 		//public string CanonicalDomain { get; set; } = null;
 
 #if NET5_0_OR_GREATER
@@ -23,6 +24,7 @@ namespace MetaMomentum.Config {
 				OGSiteName = configSection?.OGSiteName;
 				TwitterName = configSection?.TwitterName;
 				FacebookAppId = configSection?.FacebookAppId;
+				FallbackImageUrl = configSection?.FallbackImageUrl;
 				//CanonicalDomain = ValidateCanonicalDomain(configSection?.CanonicalDomain);
 			}
 		}
@@ -31,6 +33,7 @@ namespace MetaMomentum.Config {
 			OGSiteName = ConfigurationManager.AppSettings[$"{Constants.Configuration.SectionName}.{Constants.Configuration.OGSiteName}"];
 			TwitterName = ConfigurationManager.AppSettings[$"{Constants.Configuration.SectionName}.{Constants.Configuration.TwitterName}"];
 			FacebookAppId = ConfigurationManager.AppSettings[$"{Constants.Configuration.SectionName}.{Constants.Configuration.FacebookId}"];
+			FallbackImageUrl = ConfigurationManager.AppSettings[$"{Constants.Configuration.SectionName}.{Constants.Configuration.FallbackImageUrl}"];
 			//CanonicalDomain = MetaMomentumConfig.ValidateCanonicalDomain(ConfigurationManager.AppSettings[$"{Constants.Configuration.SectionName}.{Constants.Configuration.CanonicalDomain}"]);
 		}
 #endif
