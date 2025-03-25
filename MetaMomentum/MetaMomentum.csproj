@@ -1,77 +1,45 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+  </PropertyGroup>
 
-	<PropertyGroup>
-		<TargetFrameworks>net8.0;net7.0;net6.0;net5.0;net472</TargetFrameworks>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<ContentTargetFolders>.</ContentTargetFolders>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<EnableNETAnalyzers>False</EnableNETAnalyzers>
-		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-		<DebugType>none</DebugType>
-		
-		<Version>2.2.2</Version>
-		<Description>Creates a Meta DataType for Umbraco to 13 to manage Search Engine results, Open Graph and Twitter Cards</Description>
-		<Company>Digital Momentum</Company>
-		<Product>MetaMomentum for Umbraco to 13</Product>
-		<Authors>David Sheiles</Authors>
-		<Copyright>Copyright ©  2024</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/DigitalMomentum/MetaMomentum</PackageProjectUrl>
-		<PackageIcon>MetaMomentum-logo.png</PackageIcon>
-		<PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
-		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>Umbraco seo twitter opengraph Umbraco8 Umbraco9 Umbraco10 Datatype PropertyEditor dotnetcore dotnet5 umbraco-marketplace</PackageTags>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
-		<Nullable>disable</Nullable>
-		<PackageReleaseNotes>
-			- Update UI to use the new Umbraco UI Library
-			- RTE / Html fallbacks now strip the HTML tags
-			- Bug Fixes and performance inprovements
-		</PackageReleaseNotes>
-	</PropertyGroup>
+  <PropertyGroup>
+    <PackageId>MetaMomentum</PackageId>
+    <Product>MetaMomentum</Product>
+    <Title>MetaMomentum</Title>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\GithubFiles\Logo\MetaMomentum-logo.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="..\readme.nuget.md">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
-		</None>
 
-		<Content Include="App_Plugins\MetaMomentum\**\*.*">
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
-		</Content>
-		<Content Include="Views\Partials\MetaMomentum\**\*.*">
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
-		</Content>
-		
-		<None Include="build\**\*.*">
-			<Pack>True</Pack>
-			<PackagePath>build</PackagePath>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="*" />
+    <PackageReference Include="Umbraco.Cms.Web.Common" Version="*" />
+    <PackageReference Include="Umbraco.Cms.Api.Common" Version="*" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- Dont include the client folder as part of packaging nuget build -->
+    <Compile Remove="Composers\**" />
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Client\**" />
+    <Content Remove="Composers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Composers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Composers\**" />
+    <None Remove="Controllers\**" />
+    <Compile Remove="Constants.cs" />
 
-	<ItemGroup>
-	  <None Remove="App_Plugins\MetaMomentum\uui-loader.js" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\MetaMomentum.Core\MetaMomentum.Core.csproj" />
-	</ItemGroup>
-
-	<!-- The Below has been added because of https://github.com/dotnet/core/issues/6500 -->
-	<!-- Workaround for this bug (replace the analyzer name with the one you need to exclude (filename only, no extension) -->
-	<!--<Target Name="RemoveLoggingAnalyzer" BeforeTargets="CoreCompile">
-		<ItemGroup>
-			<Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />
-		</ItemGroup>
-	</Target>-->
-
+    <!-- However make the Umbraco-package.json included for dotnet pack or nuget package and visible to the solution -->
+    <None Include="Client\public\umbraco-package.json" Pack="false" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="wwwroot\App_Plugins\" />
+    <Folder Include="wwwroot\App_Plugins\MetaMomentum\" />
+  </ItemGroup>
+  
 </Project>

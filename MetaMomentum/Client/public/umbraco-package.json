@@ -1,0 +1,14 @@
+{
+  "id": "MetaMomentum",
+  "name": "MetaMomentum",
+  "version": "0.0.0",
+  "allowPackageTelemetry": true,
+  "extensions": [
+    {
+      "name": "Meta Momentum Bundle",
+      "alias": "MetaMomentum.Bundle",
+      "type": "bundle",
+      "js": "/App_Plugins/MetaMomentum/meta-momentum.js"
+    }
+  ]
+}

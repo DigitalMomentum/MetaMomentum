@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "MetaMomentum/Client"
+		}
+	],
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			
+			{
+				"type": "node-terminal",
+				"name": "Run Script: watch",
+				"request": "launch",
+				"command": "npm run watch",
+				"cwd": "${workspaceFolder}"
+			}
+		]
+	}
+}
