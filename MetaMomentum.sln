@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{42B04A7F-C766-4793-9223-28469B301D5B}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
+		.github\workflows\release.yml = .github\workflows\release.yml
+		umbraco-marketplace.json = umbraco-marketplace.json
 	EndProjectSection
 EndProject
 Global
@@ -23,5 +25,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0783DFCB-1315-47E9-ADF0-5FA0E79F27BA}
 	EndGlobalSection
 EndGlobal

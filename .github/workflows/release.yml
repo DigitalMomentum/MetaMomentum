@@ -1,76 +1,70 @@
-# This is a basic workflow to help you get started with Actions
+##################################################################################################################
+#
+# Setup Instructions:
+# - Create a NuGet API key from NuGet.org.
+# - Store the API key in your GitHub repository secrets (NUGET_API_KEY).
+# - Modify the .github/workflows/publish.yml to fit your project's name and versioning requirements.
+# - Tag a new release in GitHub to trigger the workflow.
+# 
+##################################################################################################################
 
-name: Release version to MyGet
 
-# Controls when the action will run. 
+
+name: Publish MetaMomentum to MyGet
+
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+   push:
+    branches: [ main ]
+   pull_request:
+    branches: [ main ]
+   # Allows you to run this workflow manually from the Actions tab
+   workflow_dispatch:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
 
-    runs-on: windows-latest
+    strategy:
+     matrix:
+       node-version: ['20.x']
 
     steps:
-      - uses: actions/checkout@master
-      - uses: nuget/setup-nuget@v1.0.2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          nuget-api-key: ${{ secrets.MYGETAPI }}
-          nuget-version: 'latest'
-        env:  
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        working-directory: MetaMomentum/Client/
+        run: npm ci
+
+      - name: Build Client
+        working-directory: MetaMomentum/Client/
+        run: npm run build
 
 
-      - name: setup-msbuild
-        uses: microsoft/setup-msbuild@v1
-        env:
-          working-directory: MetaMomentum/
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
 
- #     - name: Nuget Add Umbraco Prerelease Source
- #       run: dotnet nuget add source https://www.myget.org/F/umbracoprereleases/api/v3/index.json --name "Umbraco Prereleases" 
-
-      - name: Run Nuget restore
-        run: nuget restore metamomentum.sln
-
-      - name: Copy lucene analyser
-        run: |
-          $src = "C:\Users\runneradmin\.nuget\packages\lucene.net\4.8.0-beta00014\analyzers\dotnet\cs"
-          $dest = "C:\Users\runneradmin\.nuget\packages\lucene.net\3.0.3\analyzers\dotnet\cs"
-          if (!(Test-Path -Path $dest)) {
-            New-Item -ItemType directory -Path $dest
-          }
-          Copy-Item -Path $src\*.dll -Destination $dest 
-
-      - name: build
-        run: msbuild 
-        working-directory: MetaMomentum.Core/
-
-
-      - name: build
-        run: msbuild 
+      - name: Restore dependencies
         working-directory: MetaMomentum/
+        run: dotnet restore
 
-#- name: Nuget Add Source
-#  run: nuget sources Add -Name "nuget" -Source https://api.nuget.org/v3/index.json
-    
- #     - name: Nuget SetAPIKey
- #       run: nuget setapikey ${{ secrets.NUGETAPI }} #-Source "nuget"
+      - name: Build
+        working-directory: MetaMomentum/
+        run: dotnet build --configuration Release --no-restore
 
+      - name: Pack
+        working-directory: MetaMomentum/
+        run: dotnet pack --configuration Release --no-build --output ./nupkg
 
       - name: Publish MetaMomentum to MyGet
         working-directory: MetaMomentum/
         run: dotnet nuget push **\*.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/digital-momentum/api/v2/package  
 
-      - name: Publish MetaMomentum.core to MyGet
-        working-directory: MetaMomentum.Core/
-        run: dotnet nuget push **\*.nupkg --api-key ${{ secrets.MYGETAPI }} --source https://www.myget.org/F/digital-momentum/api/v2/package
-        
-        
+

@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+	<Version>3.0.0.1-alpha</Version>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -14,10 +15,10 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="*" />
-    <PackageReference Include="Umbraco.Cms.Web.Common" Version="*" />
-    <PackageReference Include="Umbraco.Cms.Api.Common" Version="*" />
-    <PackageReference Include="Umbraco.Cms.Api.Management" Version="*" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="15.2.3" />
+    <PackageReference Include="Umbraco.Cms.Web.Common" Version="15.2.3" />
+    <PackageReference Include="Umbraco.Cms.Api.Common" Version="15.2.3" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="15.2.3" />
   </ItemGroup>
   
   <ItemGroup>
