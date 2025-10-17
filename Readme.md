@@ -102,7 +102,7 @@ In your _ViewImports.cshtml file add the following line:
 
 Then in your header you can add the following tag helper to do the heavy lifting and add all the meta tags for you:
 ```html
-<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaTest"))"></meta-momentum>
+<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentumPropertyAlias"))"></meta-momentum>
 ```
 
 If you would like to add the tags manually, you can use individual tags helpers or use the MetaMomentum model to output the values manually.
@@ -171,7 +171,10 @@ If you would like manual control over the meta tags, you can create the followin
 The `<meta-momentum>` tag helper is used to output all the meta tags for the page.
 
 Attributes:
-- `meta-values` - The MetaMomentum model to use for the meta tags. 
+- `meta-values` - The MetaMomentum model to use for the meta tags.
+- `og-site-name` - Override the site name for Open Graph tags.
+- `twitter-name` - Override the Twitter name for Twitter Card tags.
+- `no-index` - Override the No Index setting for the page.
 
 Example:
 ``` html

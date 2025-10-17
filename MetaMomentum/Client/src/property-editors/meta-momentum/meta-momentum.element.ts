@@ -261,7 +261,6 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
   render() {
     return html`
-       
         <uui-icon-registry-essentials>
           <uui-box
             id="#SearchPreview"
@@ -275,7 +274,8 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
               label="Customise"
               @change=${this.#toggleSearchCustomiser}
             ></uui-toggle>
-
+			
+			${this.value}
 
             ${this.renderSearchPreview()} ${this.renderSearchCustomiser()}
             ${this.renderSearchIndexingSetting()}

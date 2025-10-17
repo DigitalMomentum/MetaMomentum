@@ -18,6 +18,11 @@ namespace MetaMomentum.TagHelpers {
 
 		public MetaValues? MetaValues { get; set; }
 
+		public string? OGSiteName { get; set; } = null;
+		public string? TwitterName { get; set; } = null;
+		public bool? NoIndex { get; set; } = null;
+
+
 		public override void Process(TagHelperContext context, TagHelperOutput output) {
 			output.Reinitialize(null, TagMode.StartTagAndEndTag);
 
@@ -25,7 +30,18 @@ namespace MetaMomentum.TagHelpers {
 				return;
 			}
 
-			
+			if(OGSiteName != null) {
+				MetaValues.OGSiteName = OGSiteName;
+			}
+
+			if(TwitterName != null) {
+				MetaValues.TwitterName = TwitterName;
+			}
+
+			if(NoIndex != null) {
+				MetaValues.NoIndex = NoIndex.Value;
+			}
+
 			output.Content = output.Content
 				.RenderMetaRobotsTag(MetaValues?.NoIndex)
 				.RenderMetaTitleTag(MetaValues?.Title)
