@@ -359,9 +359,9 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 		this.value = { ...this.value, ...{ shareImage: img } };
 
-		var result = await this.imagingRepository.requestThumbnailUrls(
-			[this.value.share!.image!], 0, 0
-		);
+		//var result = await this.imagingRepository.requestThumbnailUrls(
+		//	[this.value.share!.image!], 0, 0
+		//);
 
 		
 
