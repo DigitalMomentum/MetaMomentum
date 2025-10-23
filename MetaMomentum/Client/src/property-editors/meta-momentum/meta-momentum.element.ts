@@ -137,9 +137,16 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 				console.log("Observing changes for " + field);
 				context.propertyValueByAlias<Array<UmbMediaPickerPropertyValue>>(field).then((property) => {
 					property?.subscribe((propertyValue) => {
-						this.fallbackValues[field] = propertyValue ?? [];
 
-						console.log("Setting fallbackValue: " + field + " to " + propertyValue?.map((item) => item.mediaKey));
+						var images = propertyValue ?? [];
+
+						if (images.length > 0) {
+
+							this.fallbackValues[field] = images[0].mediaKey;
+						}
+
+						//console.log("Setting fallbackValue: " + field + " to " + propertyValue?.map((item) => item.mediaKey));
+						console.log("Setting fallbackValue: " + field + " to " + this.fallbackValues[field]);
 
 						// Update fallback values
 						this.#updateShareImage();
@@ -241,6 +248,8 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 	}
 
+
+
 	#toggleSearchCustomiser() {
 		this._showSearchCustomiser = !this._showSearchCustomiser;
 		if (this._showSearchCustomiser) {
@@ -315,10 +324,9 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	#onUpdateMetaCheckedInverse(e: InputEvent) {
 		let source = (e.target as HTMLInputElement);
 		let property: string = source.dataset.bind!;
-		console.log(source.checked);
 
 		this.value = { ...this.value, ...{ [property]: !source.checked } };
-		console.log(this.value);
+
 		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
@@ -329,18 +337,13 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
    */
 	async #onShareImageChanged(newShareImageValue: string | undefined) {
 
-		let newValue: MetaValue = {
-			...this.value,
-			...{
-				share: {
-					...this.value.share,
-					image: newShareImageValue
-				}
-			}
-		};
 
+		var share = { ...this.value.share, ...{ image: newShareImageValue } };
+		this.value = { ...this.value, ...{ share: share } };
+	
+		
 
-		newValue = await this.#updateShareImage(newValue);
+		await this.#updateShareImage();
 		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
@@ -349,42 +352,39 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	/**
   * @description Updates the share image with the overridden value or fallback value
   */
-	async #updateShareImage(value?: MetaValue) {
+	async #updateShareImage() {
 
-		if (this.value == undefined) {
-			return this.value;
-		}
-		if (value == undefined) {
-			value = this.value;
-		}
+
+		let img = this.#getFallbackStringValue(this.#config?.fallbackImageFields, this.value.share.image);
+
+		this.value = { ...this.value, ...{ shareImage: img } };
 
 		var result = await this.imagingRepository.requestThumbnailUrls(
-			[value.share!.image!], 0, 0
+			[this.value.share!.image!], 0, 0
 		);
 
-		console.log(result)
+		
 
+		//if (value?.share?.image !== undefined && value.share.image !== null) {
+		//	this.value = {
+		//		...value,
+		//		...{
+		//			shareImage: value.share.image,
+		//		},
+		//	};
+		//}
 
-		if (value?.share?.image !== undefined && value.share.image !== null) {
-			this.value = {
-				...value,
-				...{
-					shareImage: value.share.image,
-				},
-			};
-		}
-
-		if (value?.shareImage === undefined) {
-			this.value = {
-				...value,
-				...{
-					shareImage: undefined //this.#getImageFallbackValue(),
-				},
-			};
-		}
-		console.log(this.value)
+		//if (value?.shareImage === undefined) {
+		//	this.value = {
+		//		...value,
+		//		...{
+		//			shareImage: undefined //this.#getImageFallbackValue(),
+		//		},
+		//	};
+		//}
+		//console.log(this.value)
 		this.#updateShareImageUrls();
-		return value;
+
 	}
 
 	/**
@@ -513,12 +513,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
       </uui-icon-registry-essentials>
 
 
-      //	<pre>${JSON.stringify(this.value, null, 2)}</pre>
-      //<pre>${JSON.stringify(this.fallbackValues, null, 2)}</pre>
-
-
-
-
+     
           `;
 	}
 
@@ -794,7 +789,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
               <umb-input-media
                 slot="editor"
                 max="1"
-                value=${ifDefined(this.value?.shareImage)}
+                value=${ifDefined(this.value?.share.image)}
                 data-bind=""
                 @change=${async (e: any) => {
 				await this.#onShareImageChanged(e.target.value);
