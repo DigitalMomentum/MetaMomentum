@@ -13,7 +13,7 @@ namespace MetaMomentum.Models {
 
 		public string ShareTitle { get; set; }
 		public string ShareDescription { get; set; }
-		public Guid ShareImage { get; set; }
+		public string? ShareImage { get; set; }
 		public string ShareImageUrl { get; set; }
 
 		//public GuidUdi GetShareImageUdi() {

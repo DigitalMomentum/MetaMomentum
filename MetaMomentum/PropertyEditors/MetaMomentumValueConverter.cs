@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using MetaMomentum.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
@@ -31,7 +32,21 @@ namespace MetaMomentum.PropertyEditors {
 
 
 				//GuidUdi guidUdi = val.GetShareImageUdi();
-				var img = (val.ShareImage == null) ? null : publishedMediaCache.GetById(val.ShareImage);//.ConfigureAwait(false).GetAwaiter().GetResult();
+
+				if(!Guid.TryParse(val.ShareImage, out Guid imgGuid)){
+
+					// Old formatted Media, so convert
+					var udi = UdiParser.TryParse(val.ShareImage, out GuidUdi? guidUdi) ? guidUdi : null;
+
+					if(udi != null) {
+						imgGuid = udi.Guid;
+					} else {
+						val.ShareImage = null;
+					}
+					
+				}
+
+				var img = (val.ShareImage == null) ? null : publishedMediaCache.GetById(imgGuid);//.ConfigureAwait(false).GetAwaiter().GetResult();
 
 				//if (img != null && val.ShareImageUrl == null) {
 				//	//Handle Backwards compatibility where we used to store the image as an IPublished Content, rather than a URL
