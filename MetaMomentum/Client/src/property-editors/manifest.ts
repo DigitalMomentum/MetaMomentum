@@ -117,15 +117,15 @@ const propertyEditors: Array<ManifestPropertyEditorUi> = [
                     },
                     {
                         alias: "fallbackTitleFields",
-                        value: "title,pageTitle,name",
+                        value: "title,pageTitle,heroHeader,productName,name",
                     },
                     {
                         alias: "fallbackDescriptionFields",
-                        value: "description,desc",
+						value: "description,heroDescription,excerpt,seoMetaDescription",
                     },
                     {
                         alias: "fallbackImageFields",
-                        value: "featureImage,heroImage,mainImage",
+                        value: "featureImage,heroImage,mainImage,photo,photos,HeroBackgroundImage",
                     },
                 ]
             }

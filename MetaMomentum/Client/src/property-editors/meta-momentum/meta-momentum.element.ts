@@ -16,6 +16,8 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	private workspaceContext?: UmbDocumentWorkspaceContext;
 	private imagingRepository = new UmbImagingRepository(this);
 
+	public isDirty: boolean = false;
+
 
 	private fallbackValues: {
 		[alias: string]:
@@ -71,95 +73,114 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		};
 	}
 
+
 	constructor() {
 		super();
-
+		
+		
 		this.consumeContext(UMB_DOCUMENT_WORKSPACE_CONTEXT, (_instance) => {
 
 			this.workspaceContext = _instance;
-
-
+			
 			this.initValue();
+			
 			this.initNodeUrl();
 
-		});
+
+		//;
+		//	this.workspaceContext.urls?.subscribe((data) => {
+		//		debugger;
+		//		var previousNodeUrl = data;
+		//	});
 
 
-		this.consumeContext(UMB_PROPERTY_DATASET_CONTEXT, async (context) => {
-			const stringFields = [
-				...(this.#config?.fallbackTitleFields ?? []),
-				...(this.#config?.fallbackDescriptionFields ?? []),
-			];
-
-			this.#config?.fallbackTitleFields?.push("name");
-
-			const imageFields = [...(this.#config?.fallbackImageFields ?? [])];
-
-			// Keep track of the name field separately
-			this.observe(context.name, (name) => {
-				console.log("Setting fallbackValue: name to " + name);
-				this.fallbackValues["name"] = name ?? "";
-
-				// Update the fallback values
-				// this.#updateSearchTitle();
-				// this.#updateShareTitle();
-			});
-
-			// Loop though all fields to observe
-			stringFields.forEach(async (field) => {
 
 
-				//Keep track of the fields that we need to check and subscribe to changes
-				context?.propertyValueByAlias<string | RtePropertyValue>(field).then((property) => {
-					property?.subscribe((propertyValue) => {
+			this.consumeContext(UMB_PROPERTY_DATASET_CONTEXT, async (context) => {
+				const stringFields = [
+					...(this.#config?.fallbackTitleFields ?? []),
+					...(this.#config?.fallbackDescriptionFields ?? []),
+				];
+
+				this.#config?.fallbackTitleFields?.push("name");
+
+				const imageFields = [...(this.#config?.fallbackImageFields ?? [])];
+
+				// Keep track of the name field separately
+				this.observe(context.name, (name) => {
+					console.log("Setting fallbackValue: name to " + name);
+					this.fallbackValues["name"] = name ?? "";
+
+					// Update the fallback values
+					// this.#updateSearchTitle();
+					// this.#updateShareTitle();
+				});
+
+				// Loop though all fields to observe
+				stringFields.forEach(async (field) => {
 
 
-						if (typeof propertyValue === "string") {
-							this.fallbackValues[field] = propertyValue ?? "";
-							console.log("Setting fallbackValue: " + field + " to " + propertyValue);
+					//Keep track of the fields that we need to check and subscribe to changes
+					context?.propertyValueByAlias<string | RtePropertyValue>(field).then((property) => {
+						property?.subscribe((propertyValue) => {
 
-						} else if (typeof propertyValue === "object" && propertyValue !== null && "markup" in propertyValue) {
-							this.fallbackValues[field] = (propertyValue as RtePropertyValue).markup ?? "";
-							console.log("Setting fallbackValue: " + field + " to " + (propertyValue as RtePropertyValue).markup);
 
+							if (typeof propertyValue === "string") {
+								this.fallbackValues[field] = propertyValue ?? "";
+								console.log("Setting fallbackValue: " + field + " to " + propertyValue);
+
+							} else if (typeof propertyValue === "object" && propertyValue !== null && "markup" in propertyValue) {
+								this.fallbackValues[field] = (propertyValue as RtePropertyValue).markup ?? "";
+								console.log("Setting fallbackValue: " + field + " to " + (propertyValue as RtePropertyValue).markup);
+
+							}
+
+							this.#updatePreviewValues();
+
+						});
+
+					});
+				});
+
+
+				// keep track of image property value changes
+				imageFields.forEach(async (field) => {
+					console.log("Observing changes for " + field);
+					context.propertyValueByAlias<Array<UmbMediaPickerPropertyValue>>(field).then((property) => {
+						property?.subscribe((propertyValue) => {
+
+							var images = propertyValue ?? [];
+
+							if (images.length > 0) {
+
+								this.fallbackValues[field] = images[0].mediaKey;
+							}
+
+							//console.log("Setting fallbackValue: " + field + " to " + propertyValue?.map((item) => item.mediaKey));
+							console.log("Setting fallbackValue: " + field + " to " + this.fallbackValues[field]);
+
+							// Update fallback values
+							this.#updateShareImage();
+
+							this.#updatePreviewValues();
 						}
-
-						this.#updatePreviewValues();
-
+						);
 					});
 
 				});
-			});
 
-
-			// keep track of image property value changes
-			imageFields.forEach(async (field) => {
-				console.log("Observing changes for " + field);
-				context.propertyValueByAlias<Array<UmbMediaPickerPropertyValue>>(field).then((property) => {
-					property?.subscribe((propertyValue) => {
-
-						var images = propertyValue ?? [];
-
-						if (images.length > 0) {
-
-							this.fallbackValues[field] = images[0].mediaKey;
-						}
-
-						//console.log("Setting fallbackValue: " + field + " to " + propertyValue?.map((item) => item.mediaKey));
-						console.log("Setting fallbackValue: " + field + " to " + this.fallbackValues[field]);
-
-						// Update fallback values
-						this.#updateShareImage();
-
-						this.#updatePreviewValues();
-					}
-					);
-				});
+			
 
 			});
+
+
+
+
 
 		});
 
+
+		
 
 
 	}
@@ -196,16 +217,16 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		//this.value = { ...this.value, ...{shareImage: this.value.shareImage?.convertUdiToGuid() } };
 
 
-		this.#updateShareImageUrls();
+		//this.#updateShareImageUrls();
 
-		this.#updatePreviewValues();
+		//this.#updatePreviewValues();
 	}
 
 
 	// Updates the preview values based on the current value and fallback values
 	#updatePreviewValues() {
-
-		let title = this.#getFallbackStringValue(this.#config?.fallbackTitleFields, this.value.default.title);
+		this.initValue();
+		let title = this.#getFallbackStringValue(this.#config?.fallbackTitleFields, this.value.default?.title);
 		let description = this.#getFallbackStringValue(this.#config?.fallbackDescriptionFields, this.value.default.description);
 
 
@@ -213,15 +234,12 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		let shareDescription = this.#getFallbackStringValue(this.#config?.fallbackDescriptionFields, this.value.share.description, this.value.default.description);
 
 		this.value = { ...this.value, ...{ title: title, description: description, shareTitle: shareTitle, shareDescription: shareDescription } };
-
-
-
-		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
 	// Works out what value to use based on custom value, custom fallback value and then loop though the field aliases to find a value
 	#getFallbackStringValue(fieldAliases: Array<string> | undefined, customValue: string | undefined, customFallbackValue: string | null = null): string {
 		let result: string = "";
+		this.initValue();
 
 		if (customValue !== undefined && customValue !== "") {
 			return customValue;
@@ -301,9 +319,10 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		// Update default.title or default.description
 		var defaults = { ...this.value.default, ...{ [property]: source.value } };
 		this.value = { ...this.value, ...{ default: defaults } };
-
+		this.isDirty = true;
 		this.#updatePreviewValues();
 
+		//Notify Umbraco that the value has changed to do IsDirty Check
 		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
@@ -315,9 +334,10 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		// Update default.title or default.description
 		var share = { ...this.value.share, ...{ [property]: source.value } };
 		this.value = { ...this.value, ...{ share: share } };
-
+		this.isDirty = true;
 		this.#updatePreviewValues();
 
+		//Notify Umbraco that the value has changed to do IsDirty Check
 		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
@@ -327,7 +347,6 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 		this.value = { ...this.value, ...{ [property]: !source.checked } };
 
-		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
 
@@ -344,6 +363,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		
 
 		await this.#updateShareImage();
+		//Notify Umbraco that the value has changed to do IsDirty Check
 		this.dispatchEvent(new UmbPropertyValueChangeEvent());
 	}
 
@@ -433,13 +453,20 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 
 
-
+	renderDebug() {
+		return html``;
+		//return html`
+		//<p>Update Pending: ${this.isUpdatePending}</p>
+		//<p>IsDirty: ${this.isDirty}</p>
+		//	<pre>${JSON.stringify(this.value, null, 1)}</pre>
+		//`
+	}
 
 
 
 	render() {
 		return html`
-
+		 ${this.renderDebug()} 
         <uui-icon-registry-essentials>
           <uui-box
             id="#SearchPreview"

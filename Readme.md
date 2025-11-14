@@ -1,19 +1,8 @@
 # Meta Momentum for Umbraco
 
-## Note: This is an alpha version for Umbraco 15.0+ and is not yet ready for production use. Please use the Umbraco 8.x version for production sites.
+## Note: This version is for Umbraco 14.0+.
 
-#### Completed Features:
-- [X] Supports V15+
-- [x] Search and Socials previews (although, I'll need to come back and review these to perfect the latest changes in the platforms)
-- [x] Support Migration from V2.x to V3.0, so no data migration needs to occur
-- [x] Replace the partial view for rendering tags with TagHelpers. `<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum>`
-- [x] Add additional tag helpers to allow for customisation of tags (see [TagHelpers](https://github.com/DigitalMomentum/MetaMomentum/tree/V3/3.0.0?tab=readme-ov-file#tag-helpers) in the V3 Readme
-- [x] Remove MetaMomentum.Core - As this is now a RazorClass Library as a DLL, there are no front end files to mess up our class projects.
-- [x] Remove FacebookAppId: Facebook no longer uses this
-- [x] Move OGSiteName and TwitterName into the data type config
-- [x] Remove services.AddMetaMomentum(). No longer needed
-- [ ] UI previews to handle fall backs 
-- [ ] Move fall-back logic to server side, so that programmatic changes to the content node will automatically be reflected on the front end
+
 
 
 #### A DataType to manage Search engine results (Title, Description & No Follow) /  open Graph (Facebook / LinkedIn) / Twitter cards
@@ -41,6 +30,20 @@ You can specify fall backs to other fields for the share title and description.
 ![Google  Editor previews](GithubFiles/Images/Edit_SEO_Screenshot.png)
 ![Facebook Editor previews](GithubFiles/Images/Edit_SocialShare_Screenshot.png)
 
+#### New Features for V3:
+- [X] Supports V14+
+- [x] Search and Socials previews
+- [x] Support Migration from V2.x to V3.0, so no data migration needs to occur
+- [x] Replace the partial view for rendering tags with TagHelpers. `<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum>`
+- [x] Add additional tag helpers to allow for customisation of tags (see [TagHelpers](https://github.com/DigitalMomentum/MetaMomentum/tree/V3/3.0.0?tab=readme-ov-file#tag-helpers) in the V3 Readme
+- [x] Remove MetaMomentum.Core - Only a single package is now needed
+- [x] Remove FacebookAppId: Facebook no longer uses this
+- [x] Move OGSiteName and TwitterName into the data type config
+- [x] Remove services.AddMetaMomentum(). No longer needed
+- [x] UI previews to handle fall backs 
+- [ ] Update previews for Google Search, Linked in, Facebook and X (Twitter) to match latest designs
+- [ ] Move fall-back logic to server side, so that programmatic changes to the content node will automatically be reflected on the front end
+
 
 ## Installation
 Installation of the package is done via NuGet package manager.
@@ -56,16 +59,56 @@ Install stable releases via Nuget; development releases are available via MyGet.
 | Package Name                   | Release (NuGet) | Nightly (MyGet) |
 |--------------------------------|-----------------|-----------------|
 | `MetaMomentum`         | [![NuGet](https://img.shields.io/nuget/v/MetaMomentum.svg)](https://www.nuget.org/packages/MetaMomentum/) | [![MyGet](https://img.shields.io/myget/digital-momentum/vpre/MetaMomentum.svg)](https://www.myget.org/feed/digital-momentum/package/nuget/MetaMomentum) |
-| `MetaMomentum.Core`         | [![NuGet](https://img.shields.io/nuget/v/MetaMomentum.Core.svg)](https://www.nuget.org/packages/MetaMomentum.Core/) | [![MyGet](https://img.shields.io/myget/digital-momentum/vpre/MetaMomentum.Core.svg)](https://www.myget.org/feed/digital-momentum/package/nuget/MetaMomentum.Core) |
 
 Previous Versions can be used for earlier versions of Umbraco.
 
 | Umbraco Version | MetaMomentum Version |
 |-----------------|----------------------|
 | 8.x - 13.x      | 1.x  - 2.x           |
-| 15.x            | 3.x                  |
+| 14.x - 17.x     | 3.x                  |
 
 
+
+## First Time Setup Instructions
+
+### V3.0+ (Umbraco 14+)
+
+#### Setup Your Datatype
+After installing the package, create a new Data Type of type Meta Momentum via the Umbraco backoffice.
+
+Configure the Data Type settings as per your requirements. See the [Configuration](#configuration) section for more details.
+
+Add this data type to all the Document Types you would like to manage the meta tags for. I like to setup a composition that can be added to each Document Type
+
+#### Adding Meta Tags to your Views
+
+The easiest way to use MetaMomentum is though the help of Tag Helpers.
+
+In your _ViewImports.cshtml file add the following line:
+```c#
+@addTagHelper *, MetaMomentum
+```
+
+Then in your header you can add the following tag helper to do the heavy lifting and add all the meta tags for you:
+```html
+<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentumPropertyAlias"))"></meta-momentum>
+```
+
+If you would like to add the tags manually, you can use individual tags helpers or use the MetaMomentum model to output the values manually.
+
+
+## Migrating from V2.x to V3.0 (Upgrade Guide)
+
+1. AppSettings config has been moved to the datatype setings. If you have a `MetaMomentum` section in your app.config, you will need to copy these across to the settings in the Data Type editor for the following Fields:
+ - **OGSiteName:** copy `Site Name`
+ - **TwitterName:** copy `Twitter Name`
+ - **FacebookId:** Facebook no longer uses this, so it can be safely removed
+2. If you have created settings in the `startup.cs` or `program.cs` file, you can remove the `services.AddMetaMomentum()` and move any of the settings over to the Data Type settings as per point 1.
+3. If you have used the `@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))` HTML Partial, you can remove this and replace it with the `<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum` Tag Helper. Make sure you add the `@addTagHelper *, MetaMomentum` to your _ViewImports.cshtml file.
+  
+
+
+  
 ## Configuration
 Configuration can be done via the following Data Type setting fields: 
 
@@ -88,82 +131,6 @@ If turned off the content editor will not be able to edit the title and descript
 - *Facebook, Twitter, LinkedIn share preview*: These 3 options will allow you to turn on / off the different share previews available to the content editor. 
 
 
-## Usage
-
-### V3.0+ (Umbraco 15+) - Tag Helpers
-
-
-The easiest way to use MetaMomentum is though the help of Tag Helpers.
-
-In your _ViewImports.cshtml file add the following line:
-```c#
-@addTagHelper *, MetaMomentum
-```
-
-Then in your header you can add the following tag helper to do the heavy lifting and add all the meta tags for you:
-```html
-<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentumPropertyAlias"))"></meta-momentum>
-```
-
-If you would like to add the tags manually, you can use individual tags helpers or use the MetaMomentum model to output the values manually.
-
-
-### V2.0+ (Umbraco 8.x+ to 15+)
-
-If you would like manual control over the meta tags, you can create the following partial view to output the tags and adjust as necessary.
-
-`@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))`
-
-```html
-@inherits UmbracoViewPage<MetaValues>
-@using MetaMomentum.Models;
-
-@{	if (Model == null) { return; } }
-@if (!string.IsNullOrWhiteSpace(Model.Title)){
-	<title>@(Model.Title)</title>
-}
-
-<meta name="description" content="@Model.Description">
-
-<meta property="og:title" content='@Model.ShareTitle' />
-<meta property="og:description" content="@Model.ShareDescription" />
-@if (Model.ShareImageUrl != null)
-{
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-	<meta property="og:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=630&bgcolor=white" />
-	<meta name="twitter:image" content="@Model.GetAbsoluteShareImageUrl(Context.Request)?width=1200&height=600&bgcolor=white">
-}
-
-@if (Model.NoIndex){
-	<meta name="robots" content="noindex">
-}
-
-<meta property="og:type" content="website" />
-@if (Model.OGSiteName != null){
-	<meta property="og:site_name" content="@Model.OGSiteName" />
-}
-@if (Model.TwitterName != null){
-	<meta name="twitter:site" content="@Html.Raw(Model.TwitterName)">
-}
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="@Model.ShareTitle">
-<meta name="twitter:description" content="@Model.ShareDescription">
-
-```
-
-## Migrating from V2.x to V3.0
-
-1. AppSettings config has been moved to the datatype setings. If you have a `MetaMomentum` section in your app.config, you will need to copy these across to the settings in the Data Type editor for the following Fields:
- - **OGSiteName:** copy `Site Name`
- - **TwitterName:** copy `Twitter Name`
- - **FacebookId:** Facebook no longer uses this, so it can be safely removed
-2. If you have created settings in the `startup.cs` or `program.cs` file, you can remove the `services.AddMetaMomentum()` and move any of the settings over to the Data Type settings as per point 1.
-3. If you have used the `@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))` HTML Partial, you can remove this and replace it with the `<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum` Tag Helper. Make sure you add the `@addTagHelper *, MetaMomentum` to your _ViewImports.cshtml file.
-  
-
-
 # Tag Helpers
 
 ## \<meta-momentum>
@@ -178,7 +145,7 @@ Attributes:
 
 Example:
 ``` html
-<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum>``
+<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum>
 ```
 
 
@@ -206,6 +173,8 @@ Attributes:
 
 
 ##### V3.0:
+- Targets Umbraco 14.0 - 16.x
+- Migrate from .NET 6 to .NET 8
 - Update UI to be fully compatible with Umbraco 15 web components
 - move from HTML Partial to Tag Helpers
 - Remove Facebook AppId tag as its no longer used by Facebook - https://yoast.com/help/fb-app-id-warnings/

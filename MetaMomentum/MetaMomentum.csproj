@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
-	<Version>3.0.0.2-alpha</Version>
+	<Version>3.0.0.3-alpha</Version>
   </PropertyGroup>
 
   <PropertyGroup>
