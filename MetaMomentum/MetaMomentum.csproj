@@ -1,46 +1,84 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
-	<Version>3.0.0.3-alpha</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <PackageId>MetaMomentum</PackageId>
-    <Product>MetaMomentum</Product>
-    <Title>MetaMomentum</Title>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Version>3.0.0.3-beta</Version>
+		<PackageId>MetaMomentum</PackageId>
+		<Title>MetaMomentum</Title>
+		<Description>Creates a Meta DataType for Umbraco to 14 to manage Search Engine results, Open Graph and Twitter Cards</Description>
+		<Company>Digital Momentum</Company>
+		<Product>MetaMomentum for Umbraco to 14+</Product>
+		<Authors>David Sheiles</Authors>
+		<Copyright>Copyright ©  2020-2025</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/DigitalMomentum/MetaMomentum</PackageProjectUrl>
+		<PackageIcon>MetaMomentum-logo.png</PackageIcon>
+		<PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
+		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Umbraco seo twitter opengraph Umbraco14 Umbraco15 Umbraco16 Datatype PropertyEditor dotnetcore dotnet8 umbraco-marketplace</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
+		<Nullable>disable</Nullable>
+		<PackageReleaseNotes>
+			- Upgraded to support Umbraco 14 - 16
+			- Moved from Angular JS to Web Components for the backoffice UI
+			- Moved from HTML views to TagHelpers for rendering meta tags
+			- performance improvements and bug fixes
+		</PackageReleaseNotes>
+
+	</PropertyGroup>
+	
+	
 
 
-  <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="14.3.4" />
-    <PackageReference Include="Umbraco.Cms.Web.Common" Version="14.3.4" />
-    <PackageReference Include="Umbraco.Cms.Api.Common" Version="14.3.4" />
-    <PackageReference Include="Umbraco.Cms.Api.Management" Version="14.3.4" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <!-- Dont include the client folder as part of packaging nuget build -->
-    <Compile Remove="Composers\**" />
-    <Compile Remove="Controllers\**" />
-    <Content Remove="Client\**" />
-    <Content Remove="Composers\**" />
-    <Content Remove="Controllers\**" />
-    <EmbeddedResource Remove="Composers\**" />
-    <EmbeddedResource Remove="Controllers\**" />
-    <None Remove="Composers\**" />
-    <None Remove="Controllers\**" />
-    <Compile Remove="Constants.cs" />
+	<ItemGroup>
+		<PackageReference Include="Umbraco.Cms.Web.Website" Version="14.3.4" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="14.3.4" />
+		<PackageReference Include="Umbraco.Cms.Api.Common" Version="14.3.4" />
+		<PackageReference Include="Umbraco.Cms.Api.Management" Version="14.3.4" />
+	</ItemGroup>
 
-    <!-- However make the Umbraco-package.json included for dotnet pack or nuget package and visible to the solution -->
-    <None Include="Client\public\umbraco-package.json" Pack="false" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="wwwroot\App_Plugins\" />
-    <Folder Include="wwwroot\App_Plugins\MetaMomentum\" />
-  </ItemGroup>
-  
+
+	<ItemGroup>
+
+		<None Include="..\GithubFiles\Logo\MetaMomentum-logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\readme.nuget.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	
+	
+
+	<ItemGroup>
+		<!-- Dont include the client folder as part of packaging nuget build -->
+		<Compile Remove="Composers\**" />
+		<Compile Remove="Controllers\**" />
+		<Content Remove="Client\**" />
+		<Content Remove="Composers\**" />
+		<Content Remove="Controllers\**" />
+		<EmbeddedResource Remove="Composers\**" />
+		<EmbeddedResource Remove="Controllers\**" />
+		<None Remove="Composers\**" />
+		<None Remove="Controllers\**" />
+		<Compile Remove="Constants.cs" />
+
+		<!-- However make the Umbraco-package.json included for dotnet pack or nuget package and visible to the solution -->
+		<None Include="Client\public\umbraco-package.json" Pack="false" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\App_Plugins\" />
+		<Folder Include="wwwroot\App_Plugins\MetaMomentum\" />
+	</ItemGroup>
+
 </Project>

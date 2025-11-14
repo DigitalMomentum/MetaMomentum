@@ -76,22 +76,63 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 	constructor() {
 		super();
-		
-		
+
+
 		this.consumeContext(UMB_DOCUMENT_WORKSPACE_CONTEXT, (_instance) => {
 
 			this.workspaceContext = _instance;
-			
+
+			//this.value has been loaded, so we can do any migration or initialisation required here
+
+			if (!this.value) {
+				this.value = {
+					title: "",
+					description: "",
+					noIndex: false,
+					shareTitle: "",
+					shareDescription: "",
+					shareImage: undefined,
+					default: {
+						title: "",
+						description: "",
+					},
+					share: {
+						title: "",
+						description: "",
+						image: undefined,
+					},
+				};
+
+			}
+
+
+			// Migrate old image format if needed
+
+			if (this.value.share?.image) {
+				let testOldImgFormat: any = this.value.share.image as any;
+				if (testOldImgFormat?.key) {
+					var share = {
+
+						...this.value.share,
+						...{ image: testOldImgFormat.key }
+					};
+					this.value = { ...this.value, ...{ share: share } };
+
+				}
+			}
+
+
+
 			this.initValue();
-			
+
 			this.initNodeUrl();
 
 
-		//;
-		//	this.workspaceContext.urls?.subscribe((data) => {
-		//		debugger;
-		//		var previousNodeUrl = data;
-		//	});
+			//;
+			//	this.workspaceContext.urls?.subscribe((data) => {
+			//		debugger;
+			//		var previousNodeUrl = data;
+			//	});
 
 
 
@@ -106,6 +147,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 				const imageFields = [...(this.#config?.fallbackImageFields ?? [])];
 
+				if (!context) return; //for some reason the context is undefined sometimes
 				// Keep track of the name field separately
 				this.observe(context.name, (name) => {
 					console.log("Setting fallbackValue: name to " + name);
@@ -169,7 +211,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 				});
 
-			
+
 
 			});
 
@@ -180,7 +222,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		});
 
 
-		
+
 
 
 	}
@@ -191,30 +233,27 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	initValue() {
 
 
-		if (!this.value) {
-			this.value = {
-				title: "",
-				description: "",
-				noIndex: false,
-				shareTitle: "",
-				shareDescription: "",
-				shareImage: undefined,
-				default: {
-					title: "",
-					description: "",
-				},
-				share: {
-					title: "",
-					description: "",
-					image: undefined,
-				},
-			};
+		//if (!this.value) {
+		//	this.value = {
+		//		title: "",
+		//		description: "",
+		//		noIndex: false,
+		//		shareTitle: "",
+		//		shareDescription: "",
+		//		shareImage: undefined,
+		//		default: {
+		//			title: "",
+		//			description: "",
+		//		},
+		//		share: {
+		//			title: "",
+		//			description: "",
+		//			image: undefined,
+		//		},
+		//	};
 
-		}
+		//}
 
-		// This is for backwards compatibility. Previous versions stored the media as a UDI string, and we now just use the guid
-		//TODO: come back and check backwards compatibility
-		//this.value = { ...this.value, ...{shareImage: this.value.shareImage?.convertUdiToGuid() } };
 
 
 		//this.#updateShareImageUrls();
@@ -226,12 +265,12 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	// Updates the preview values based on the current value and fallback values
 	#updatePreviewValues() {
 		this.initValue();
-		let title = this.#getFallbackStringValue(this.#config?.fallbackTitleFields, this.value.default?.title);
-		let description = this.#getFallbackStringValue(this.#config?.fallbackDescriptionFields, this.value.default.description);
+		let title = this.#getFallbackStringValue(this.#config?.fallbackTitleFields, this.value?.default?.title);
+		let description = this.#getFallbackStringValue(this.#config?.fallbackDescriptionFields, this.value?.default?.description);
 
 
-		let shareTitle = this.#getFallbackStringValue(this.#config?.fallbackTitleFields, this.value.share.title, this.value.default.title);
-		let shareDescription = this.#getFallbackStringValue(this.#config?.fallbackDescriptionFields, this.value.share.description, this.value.default.description);
+		let shareTitle = this.#getFallbackStringValue(this.#config?.fallbackTitleFields, this.value?.share?.title, this.value?.default?.title);
+		let shareDescription = this.#getFallbackStringValue(this.#config?.fallbackDescriptionFields, this.value?.share?.description, this.value?.default?.description);
 
 		this.value = { ...this.value, ...{ title: title, description: description, shareTitle: shareTitle, shareDescription: shareDescription } };
 	}
@@ -241,11 +280,12 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		let result: string = "";
 		this.initValue();
 
-		if (customValue !== undefined && customValue !== "") {
+		if (customValue) {
 			return customValue;
-		} else if (customFallbackValue !== null && customFallbackValue !== "") {
+		} else if (customFallbackValue) {
 			return customFallbackValue;
 		} else {
+			//fallback to external fields
 			for (let i = 0; i < (fieldAliases?.length ?? 0); i++) {
 
 				let field = fieldAliases![i];
@@ -359,8 +399,8 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 		var share = { ...this.value.share, ...{ image: newShareImageValue } };
 		this.value = { ...this.value, ...{ share: share } };
-	
-		
+
+
 
 		await this.#updateShareImage();
 		//Notify Umbraco that the value has changed to do IsDirty Check
@@ -383,7 +423,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		//	[this.value.share!.image!], 0, 0
 		//);
 
-		
+
 
 		//if (value?.share?.image !== undefined && value.share.image !== null) {
 		//	this.value = {
@@ -414,11 +454,13 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 		const unique = this.value?.shareImage !== undefined ? this.value?.shareImage : undefined;
 
-
 		console.log(unique)
 		if (unique == undefined || unique == "") {
 			return;
 		}
+
+
+
 
 		let imageData = (
 			await this.imagingRepository.requestThumbnailUrls(

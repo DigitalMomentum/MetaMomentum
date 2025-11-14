@@ -87,7 +87,6 @@ The easiest way to use MetaMomentum is though the help of Tag Helpers.
 In your _ViewImports.cshtml file add the following line:
 ```c#
 @addTagHelper *, MetaMomentum
-@using MetaMomentum.Models
 ```
 
 Then in your header you can add the following tag helper to do the heavy lifting and add all the meta tags for you:
@@ -185,11 +184,11 @@ Attributes:
 ##### V2.2:
 - Update UI to use the new Umbraco UI Library
 - RTE / Html fallbacks now strip the HTML tags
-- Bug Fixes and performance improvements
+- Bug Fixes and performance inprovements
 - 
 ##### V2.1.1:
-- Bugfix: Umbraco displays "Discard Changes?" when changing between social previews
-- Feature: Allow hiding the "No Index" toggle via settings
+- Bugfix: Umbraco displays "Discard Changes?" when changing bewteen social previews
+- Featue: Allow hiding the "No Index" toggle via settings
 
 ##### V2.1:
 - Split Compiled DLL into separate MetaMomentum.Core project
