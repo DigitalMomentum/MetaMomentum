@@ -7,6 +7,7 @@
 		"Url": "https://www.digitalmomentum.com.au",
 		"ImageUrl": "https://www.digitalmomentum.com.au/media/1041/david-sheiles-bw-600-x-600.jpg"
 	},
+	"Description": "Creates a Meta DataType for Umbraco to 14-16 to manage Search Engine results, Open Graph and Twitter Cards with friendly preview",
 	"Categories": "Editor Tools",
 	"AlternateCategory": "Campaign & Marketing",
 	"LicenseType": [ "Free" ],

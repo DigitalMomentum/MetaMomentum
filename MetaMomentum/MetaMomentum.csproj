@@ -7,10 +7,10 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Version>3.0.0.3-beta</Version>
+		<Version>3.0.1</Version>
 		<PackageId>MetaMomentum</PackageId>
 		<Title>MetaMomentum</Title>
-		<Description>Creates a Meta DataType for Umbraco to 14 to manage Search Engine results, Open Graph and Twitter Cards</Description>
+		<Description>Creates a Meta DataType for Umbraco to 14-16 to manage Search Engine results, Open Graph and Twitter Cards with a friendly preview</Description>
 		<Company>Digital Momentum</Company>
 		<Product>MetaMomentum for Umbraco to 14+</Product>
 		<Authors>David Sheiles</Authors>
@@ -38,10 +38,10 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Umbraco.Cms.Web.Website" Version="14.3.4" />
-		<PackageReference Include="Umbraco.Cms.Web.Common" Version="14.3.4" />
-		<PackageReference Include="Umbraco.Cms.Api.Common" Version="14.3.4" />
-		<PackageReference Include="Umbraco.Cms.Api.Management" Version="14.3.4" />
+		<PackageReference Include="Umbraco.Cms.Web.Website" Version="[14.3.3,17)" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="[14.3.3,17)" />
+		<PackageReference Include="Umbraco.Cms.Api.Common" Version="[14.3.3,17)" />
+		<PackageReference Include="Umbraco.Cms.Api.Management" Version="[14.3.3,17)" />
 	</ItemGroup>
 
 
