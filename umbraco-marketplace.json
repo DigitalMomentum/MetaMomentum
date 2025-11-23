@@ -8,7 +8,8 @@
 		"ImageUrl": "https://www.digitalmomentum.com.au/media/1041/david-sheiles-bw-600-x-600.jpg"
 	},
 	"Categories": "Editor Tools",
-	"LicenseType": "Free",
+	"AlternateCategory": "Campaign & Marketing",
+	"LicenseType": [ "Free" ],
 	"PackageType": "Package",
 	"PackagesByAuthor": [ "MetaMomentum" ],
 	"RelatedPackages": [],
@@ -32,13 +33,10 @@
 		"seo",
 		"twitter",
 		"opengraph",
-		"Umbraco8",
-		"Umbraco9",
-		"Umbraco15",
+		"Umbraco13",
+		"Umbraco16",
 		"Datatype",
 		"PropertyEditor",
 		"Google Search"
-	],
-	"Umbraco8PackageId": "MetaMomentum",
-	"VideoUrl": ""
+	]
 }

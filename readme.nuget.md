@@ -98,14 +98,15 @@ If you would like to add the tags manually, you can use individual tags helpers 
 
 
 ## Migrating from V2.x to V3.0 (Upgrade Guide)
-
-1. AppSettings config has been moved to the datatype setings. If you have a `MetaMomentum` section in your app.config, you will need to copy these across to the settings in the Data Type editor for the following Fields:
+1. Update the MetaMomentum NuGet package to the latest V3.0 version
+2. Remove MetaMomentum.Core project reference if you have it, as its no longer needed as a separate package.
+3. AppSettings config has been moved to the datatype settings. If you have a `MetaMomentum` section in your app.config, you will need to copy these across to the settings in the Data Type editor for the following Fields:
  - **OGSiteName:** copy `Site Name`
  - **TwitterName:** copy `Twitter Name`
  - **FacebookId:** Facebook no longer uses this, so it can be safely removed
-2. If you have created settings in the `startup.cs` or `program.cs` file, you can remove the `services.AddMetaMomentum()` and move any of the settings over to the Data Type settings as per point 1.
-3. If you have used the `@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))` HTML Partial, you can remove this and replace it with the `<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum` Tag Helper. Make sure you add the `@addTagHelper *, MetaMomentum` to your _ViewImports.cshtml file.
-  
+4. If you have created settings in the `startup.cs` or `program.cs` file, you can remove the `services.AddMetaMomentum()` and move any of the settings over to the Data Type settings as per point 1.
+5. If you have used the `@Html.Partial("MetaMomentum/RenderMetaTags", Model.Value("metaMomentum"))` HTML Partial, you can remove this and replace it with the `<meta-momentum meta-values="@(Model.Value<MetaValues>("MetaMomentum"))"></meta-momentum` Tag Helper. Make sure you add the `@addTagHelper *, MetaMomentum` to your _ViewImports.cshtml file.
+
 
 
   
@@ -178,17 +179,18 @@ Attributes:
 - Update UI to be fully compatible with Umbraco 15 web components
 - move from HTML Partial to Tag Helpers
 - Remove Facebook AppId tag as its no longer used by Facebook - https://yoast.com/help/fb-app-id-warnings/
-- AppSettings config moved to DataType Editor
+- AppSettings config moved to DataType Editor (See Migration Notes)
+- Remove MetaMomentum.Core project - single package now
 
 
 ##### V2.2:
 - Update UI to use the new Umbraco UI Library
 - RTE / Html fallbacks now strip the HTML tags
-- Bug Fixes and performance inprovements
+- Bug Fixes and performance improvements
 - 
 ##### V2.1.1:
-- Bugfix: Umbraco displays "Discard Changes?" when changing bewteen social previews
-- Featue: Allow hiding the "No Index" toggle via settings
+- Bugfix: Umbraco displays "Discard Changes?" when changing between social previews
+- Feature: Allow hiding the "No Index" toggle via settings
 
 ##### V2.1:
 - Split Compiled DLL into separate MetaMomentum.Core project
