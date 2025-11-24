@@ -33,6 +33,12 @@
 		</PackageReleaseNotes>
 
 	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Enable generation of symbol packages (.snupkg)	- https://docs.myget.org/docs/reference/symbols-->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 	
 	
 
