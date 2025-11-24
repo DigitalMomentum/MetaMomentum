@@ -23,6 +23,7 @@ namespace MetaMomentum.TagHelpers {
 		public bool? NoIndex { get; set; } = null;
 
 
+
 		public override void Process(TagHelperContext context, TagHelperOutput output) {
 			output.Reinitialize(null, TagMode.StartTagAndEndTag);
 
@@ -42,12 +43,19 @@ namespace MetaMomentum.TagHelpers {
 				MetaValues.NoIndex = NoIndex.Value;
 			}
 
+
+			//var assisngedDomain = await _domainService.GetAssignedDomainsAsync();
+
+			//var request = _httpContextAccessor.HttpContext.Request;
+			//var currentDomain = $"{request.Scheme}://{request.Host}";
+
+
 			output.Content = output.Content
 				.RenderMetaRobotsTag(MetaValues?.NoIndex)
 				.RenderMetaTitleTag(MetaValues?.Title)
 				.RenderMetaDescriptionTag(MetaValues?.Description)
-				.RenderTwitterCardTags(MetaValues?.ShareTitle, MetaValues?.ShareDescription, MetaValues?.ShareImageUrl, MetaValues?.TwitterName)
-				.RenderOpenGraphTags(MetaValues?.ShareTitle, MetaValues?.ShareDescription, MetaValues?.ShareImageUrl, MetaValues?.OGSiteName, MetaValues?.FacebookAppId);
+				.RenderTwitterCardTags(MetaValues?.RootDomain, MetaValues?.ShareTitle, MetaValues?.ShareDescription, MetaValues?.ShareImageUrl, MetaValues?.TwitterName)
+				.RenderOpenGraphTags(MetaValues?.RootDomain, MetaValues?.ShareTitle, MetaValues?.ShareDescription, MetaValues?.ShareImageUrl, MetaValues?.OGSiteName, MetaValues?.FacebookAppId);
 		}
 
 	}

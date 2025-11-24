@@ -50,10 +50,10 @@ namespace MetaMomentum.Extensions {
 
 		}
 
-		public static TagHelperContent RenderOpenGraphImageTag(this TagHelperContent content, string? url) {
+		public static TagHelperContent RenderOpenGraphImageTag(this TagHelperContent content, string host, string? url) {
 			if (string.IsNullOrWhiteSpace(url)) return content;
 			//Meta(FB) require images at least 1200x630 https://developers.facebook.com/docs/sharing/webmasters/images/
-			return content.AppendHtml($"<meta property='og:image:width' content='1200' /><meta property='og:image:height' content='630' /><meta property='og:image' content='{url}?width=1200&height=630&bgcolor=white' />"); //TODO: Better handling of query string needed here
+			return content.AppendHtml($"<meta property='og:image:width' content='1200' /><meta property='og:image:height' content='630' /><meta property='og:image' content='{host}{url}?width=1200&height=630&bgcolor=white' />"); //TODO: Better handling of query string needed here
 
 		}
 
@@ -86,32 +86,32 @@ namespace MetaMomentum.Extensions {
 
 		}
 
-		public static TagHelperContent RenderTwitterImageTag(this TagHelperContent content, string? url) {
+		public static TagHelperContent RenderTwitterImageTag(this TagHelperContent content, string host, string? url) {
 			if (string.IsNullOrWhiteSpace(url)) return content;
 
 			//Twitter Card ratio is 2:1 https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
-			return content.AppendHtml($"<meta name='twitter:image' content='{url}?width=1200&height=600&bgcolor=white' />"); //TODO: Better handling of query string needed here
+			return content.AppendHtml($"<meta name='twitter:image' content='{host}{url}?width=1200&height=600&bgcolor=white' />"); //TODO: Better handling of query string needed here
 
 		}
 
 
-		public static TagHelperContent RenderTwitterCardTags(this TagHelperContent content, string? title, string? description, string? imageUrl, string? twitterSiteName = null) {
+		public static TagHelperContent RenderTwitterCardTags(this TagHelperContent content, string host, string? title, string? description, string? imageUrl, string? twitterSiteName = null) {
 
 			return content
 				.AppendHtml("<meta name='twitter:card' content='summary_large_image' />")
 				.RenderTwitterTitleTag(title)
 				.RenderTwitterDescriptionTag(description)
-				.RenderTwitterImageTag(imageUrl)
+				.RenderTwitterImageTag(host, imageUrl)
 				.RenderTwitterSiteNameTag(twitterSiteName);
 		}
 
-		public static TagHelperContent RenderOpenGraphTags(this TagHelperContent content, string? title, string? description, string? imageUrl, string? siteName = null, string? facebookAppId = null) {
+		public static TagHelperContent RenderOpenGraphTags(this TagHelperContent content, string host, string? title, string? description, string? imageUrl, string? siteName = null, string? facebookAppId = null) {
 
 			return content
 				.AppendHtml("<meta property='og:type' content='website' />")
 				.RenderOpenGraphTitleTag(title)
 				.RenderOpenGraphDescriptionTag(description)
-				.RenderOpenGraphImageTag(imageUrl)
+				.RenderOpenGraphImageTag(host, imageUrl)
 				.RenderOpenGraphSiteNameTag(siteName);
 		}
 	}

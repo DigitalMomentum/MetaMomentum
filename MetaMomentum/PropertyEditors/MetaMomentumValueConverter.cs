@@ -5,16 +5,18 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using MetaMomentum.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Core.PublishedCache;
+using Umbraco.Cms.Core.Services;
 using Umbraco.Extensions;
 
 namespace MetaMomentum.PropertyEditors {
-	public class MetaMomentumValueConverter(IPublishedMediaCache publishedMediaCache, ILogger<MetaMomentumValueConverter> logger) : IPropertyValueConverter {
+	public class MetaMomentumValueConverter(IPublishedMediaCache publishedMediaCache, ILogger<MetaMomentumValueConverter> logger, IDomainService domainService, IHttpContextAccessor httpContextAccessor) : IPropertyValueConverter {
 
 
 		
@@ -62,7 +64,13 @@ namespace MetaMomentum.PropertyEditors {
 					logger.LogWarning("MetaMomentum Upgrade warning: Please open up the {alias} Data Type and click save to upgrade the data type and be rid of this warning", propertyType.Alias);
 				}
 
+
+				var domains = domainService.GetAssignedDomainsAsync(owner.Key, true).GetAwaiter().GetResult().OrderBy(r=>r.SortOrder);
+
+
 				var retVal = new MetaValues() {
+					NodeKey = owner.Key,
+					RootDomain = null,
 					Description = val.Description,
 					ShareDescription = val.ShareDescription,
 					//ShareImage = img,
@@ -75,7 +83,32 @@ namespace MetaMomentum.PropertyEditors {
 					TwitterName = config?.GetValueAsString("twitterName")
 				};
 
-				return retVal;
+
+				//TODO: Some of the domains set on the Umbraco home node may or may not end in a path. e.g. /en/.
+				//Should we trim the path and always use the root domain, or could the media be stored under the sub directory. Hard to make that judgment call!
+				//For now we'll need to assume the root
+
+
+				
+				if (domains != null && domains.Any()) {
+					retVal.RootDomain = domains.FirstOrDefault().DomainName;
+					//normalise domain
+					if (!retVal.RootDomain.ToLower().StartsWith("http")) {
+						retVal.RootDomain = "https://" + retVal.RootDomain;
+					}
+
+					int idx = retVal.RootDomain.IndexOf('/', 8);
+					if(idx > 0) {
+						retVal.RootDomain = retVal.RootDomain.Substring(0, idx);
+					}
+
+					retVal.RootDomain += "/"; //Ensure always a trailing slash
+				} else {
+					var request = httpContextAccessor.HttpContext.Request;
+					retVal.RootDomain = $"{request.Scheme}://{request.Host}";
+				}
+
+					return retVal;
 
 			}
 
