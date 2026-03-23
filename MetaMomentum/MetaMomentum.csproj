@@ -27,7 +27,7 @@
 		<Nullable>disable</Nullable>
 		<PackageReleaseNotes>
 			- Upgraded to support Umbraco 17
-			- Fix Backwards compatibility for upgrades of pre umbraco 15 versions
+			- Fixed backwards compatibility for upgrades from pre-Umbraco 15 versions
 		</PackageReleaseNotes>
 
 	</PropertyGroup>
