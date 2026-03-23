@@ -141,11 +141,9 @@ namespace MetaMomentum.PropertyEditors {
 			return typeof(MetaValues);
 		}
 
-		
-
 		public bool IsConverter(IPublishedPropertyType propertyType) {
-			return propertyType.EditorUiAlias.Equals(MetaMomentum.Constants.EditorAlias) || 
-				propertyType.EditorAlias.Equals(MetaMomentum.Constants.EditorAlias); //Editor Alias should be Umbraco.Plain.Json, however on upgrade from pre Umb 15, the old editor alias may still be in place, so we need to check both.
+			return propertyType.EditorUiAlias.Equals(MetaMomentumConstants.EditorAlias) || 
+				propertyType.EditorAlias.Equals(MetaMomentumConstants.EditorAlias); //Editor Alias should be Umbraco.Plain.Json, however on upgrade from pre Umb 15, the old editor alias may still be in place and EditorUiAlias may be empty, so we need to check both.
 		}
 
 		public bool? IsValue(object? value, PropertyValueLevel level) {

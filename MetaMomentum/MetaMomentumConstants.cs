@@ -1,7 +1,7 @@
 ﻿
 
 namespace MetaMomentum {
-	public static class Constants {
+	public static class MetaMomentumConstants {
 		public const string EditorAlias = "DM.MetaMomentum";
 	}
 }
