@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Version>17.0.0</Version>
+		<Version>17.0.1</Version>
 		<PackageId>MetaMomentum</PackageId>
 		<Title>MetaMomentum</Title>
 		<Description>Creates a Meta DataType for Umbraco to manage Search Engine results, Open Graph and Twitter Cards with a friendly preview</Description>
@@ -25,7 +25,10 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
 		<Nullable>disable</Nullable>
-		<PackageReleaseNotes>- Upgraded to support Umbraco 17</PackageReleaseNotes>
+		<PackageReleaseNotes>
+			- Upgraded to support Umbraco 17
+			- Fixed backwards compatibility for upgrades from pre-Umbraco 15 versions
+		</PackageReleaseNotes>
 
 	</PropertyGroup>
 
@@ -71,7 +74,6 @@
 		<EmbeddedResource Remove="Controllers\**" />
 		<None Remove="Composers\**" />
 		<None Remove="Controllers\**" />
-		<Compile Remove="Constants.cs" />
 
 		<!-- However make the Umbraco-package.json included for dotnet pack or nuget package and visible to the solution -->
 		<None Include="Client\public\umbraco-package.json" Pack="false" />
