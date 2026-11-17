@@ -74,7 +74,7 @@ namespace MetaMomentum.PropertyEditors {
 					Description = val.Description,
 					ShareDescription = val.ShareDescription,
 					//ShareImage = img,
-					ShareImageUrl = val.ShareImageUrl ?? img?.MediaUrl(),
+					ShareImageUrl = GetShareImageUrl(img, val.ShareImageUrl),
 					ShareTitle = val.ShareTitle,
 					Title = val.Title,
 					NoIndex = val.NoIndex,
@@ -117,6 +117,19 @@ namespace MetaMomentum.PropertyEditors {
 
 
 			return inter;
+		}
+
+		/// <summary>
+		/// Prefer the picked ShareImage. The legacy ShareImageUrl (stored by older versions) is only used as a fallback
+		/// when no image is picked or the picked media has no URL. See #21.
+		/// </summary>
+		private static string? GetShareImageUrl(IPublishedContent? img, string? legacyShareImageUrl) {
+			var mediaUrl = img?.MediaUrl();
+			if (!string.IsNullOrWhiteSpace(mediaUrl)) {
+				return mediaUrl;
+			}
+
+			return string.IsNullOrWhiteSpace(legacyShareImageUrl) ? null : legacyShareImageUrl;
 		}
 
 		public object? ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object? source, bool preview) {

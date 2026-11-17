@@ -8,6 +8,9 @@ export class MetaValue {
     shareDescription: string = "";
     shareImage: string | undefined = undefined;
 
+    // Legacy: stored by older versions. Only used server side as a fallback when shareImage is not set. Cleared when the share image is changed (#21)
+    shareImageUrl?: string;
+
     // The default section holds the values when a custom value is set by the user. Dont be misled by the name, this is not a fallback value or default value
     default: MetaCustomValues = {} as MetaCustomValues;
 
@@ -25,4 +28,7 @@ export class MetaCustomShareValues {
     title: string = "";
     description: string = "";
     image: string | undefined = undefined;
+
+    // Legacy: stored by older versions. Cleared when the share image is changed (#21)
+    imageUrl?: string;
 }

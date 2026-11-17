@@ -397,8 +397,10 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	async #onShareImageChanged(newShareImageValue: string | undefined) {
 
 
-		var share = { ...this.value.share, ...{ image: newShareImageValue } };
-		this.value = { ...this.value, ...{ share: share } };
+		// Clear the legacy image URLs from older versions, otherwise they would be used as the share image
+		// when the picker is cleared (#21). Undefined values are dropped when the value is serialised.
+		var share = { ...this.value.share, ...{ image: newShareImageValue, imageUrl: undefined } };
+		this.value = { ...this.value, ...{ share: share, shareImageUrl: undefined } };
 
 
 
