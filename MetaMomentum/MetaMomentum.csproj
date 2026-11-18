@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Version>17.0.1</Version>
+		<Version>17.0.2</Version>
 		<PackageId>MetaMomentum</PackageId>
 		<Title>MetaMomentum</Title>
 		<Description>Creates a Meta DataType for Umbraco to manage Search Engine results, Open Graph and Twitter Cards with a friendly preview</Description>
@@ -26,8 +26,11 @@
 		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
 		<Nullable>disable</Nullable>
 		<PackageReleaseNotes>
-			- Upgraded to support Umbraco 17
-			- Fixed backwards compatibility for upgrades from pre-Umbraco 15 versions
+			- Fixed the share image preview showing a stale image URL after the image is changed (#21)
+			- Fixed change detection in the property editor so edits correctly mark the document as having unsaved changes
+			- Fixed scrolling to the Search and Social previews in the backoffice
+			- Updated the search preview URL lookup to use the Umbraco 17 document URL API
+			- Updated backoffice client dependencies for Umbraco 17.8
 		</PackageReleaseNotes>
 
 	</PropertyGroup>
