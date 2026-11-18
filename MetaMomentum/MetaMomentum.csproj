@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Version>17.0.2</Version>
+		<Version>18.0.0</Version>
 		<PackageId>MetaMomentum</PackageId>
 		<Title>MetaMomentum</Title>
 		<Description>Creates a Meta DataType for Umbraco to manage Search Engine results, Open Graph and Twitter Cards with a friendly preview</Description>
@@ -21,16 +21,16 @@
 		<PackageIconUrl>https://user-images.githubusercontent.com/12960162/114866380-d1c98680-9e36-11eb-92d4-a78c1dbf5def.png</PackageIconUrl>
 		<RepositoryUrl>https://github.com/DigitalMomentum/MetaMomentum</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>Umbraco seo twitter opengraph meta metaTag socialmedia meta-description Umbraco-13 Umbraco-17 Datatype PropertyEditor dotnetcore dotnet-11 dotnet-10 umbraco-marketplace</PackageTags>
+		<PackageTags>Umbraco seo twitter opengraph meta metaTag socialmedia meta-description Umbraco-13 Umbraco-17 Umbraco-18 Datatype PropertyEditor dotnetcore dotnet-11 dotnet-10 umbraco-marketplace</PackageTags>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
 		<Nullable>disable</Nullable>
 		<PackageReleaseNotes>
-			- Fixed the share image preview showing a stale image URL after the image is changed (#21)
-			- Fixed change detection in the property editor so edits correctly mark the document as having unsaved changes
-			- Fixed scrolling to the Search and Social previews in the backoffice
-			- Updated the search preview URL lookup to use the Umbraco 17 document URL API
-			- Updated backoffice client dependencies for Umbraco 17.8
+			- Upgraded to support Umbraco 18
+			- Includes all fixes from 17.0.2:
+			  - Fixed the share image preview showing a stale image URL after the image is changed (#21)
+			  - Fixed change detection in the property editor so edits correctly mark the document as having unsaved changes
+			  - Fixed scrolling to the Search and Social previews in the backoffice
 		</PackageReleaseNotes>
 
 	</PropertyGroup>
@@ -45,10 +45,10 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Umbraco.Cms.Web.Website" Version="17.0.0" />
-		<PackageReference Include="Umbraco.Cms.Web.Common" Version="17.0.0" />
-		<PackageReference Include="Umbraco.Cms.Api.Common" Version="17.0.0" />
-		<PackageReference Include="Umbraco.Cms.Api.Management" Version="17.0.0" />
+		<PackageReference Include="Umbraco.Cms.Web.Website" Version="18.0.0" />
+		<PackageReference Include="Umbraco.Cms.Web.Common" Version="18.0.0" />
+		<PackageReference Include="Umbraco.Cms.Api.Common" Version="18.0.0" />
+		<PackageReference Include="Umbraco.Cms.Api.Management" Version="18.0.0" />
 	</ItemGroup>
 
 
