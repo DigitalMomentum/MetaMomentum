@@ -9,9 +9,8 @@
     "generate-client": "node scripts/generate-openapi.js https://localhost:5000/umbraco/swagger/metamomentum/swagger.json"
   },
 	"devDependencies": {
-		"@hey-api/client-fetch": "0.12.0",
-		"@hey-api/openapi-ts": "0.71.0",
-		"@umbraco-cms/backoffice": "18.3.1",
+		"@hey-api/openapi-ts": "0.99.0",
+		"@umbraco-cms/backoffice": "17.8.2",
 		"chalk": "^5.4.1",
 		"cross-env": "^7.0.3",
 		"node-fetch": "^3.3.2",

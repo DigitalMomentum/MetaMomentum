@@ -2,14 +2,14 @@ import { html, customElement, property, state, nothing, ifDefined, css } from "@
 import type { UmbPropertyEditorConfigCollection, UmbPropertyEditorUiElement } from "@umbraco-cms/backoffice/property-editor";
 import { UmbChangeEvent } from "@umbraco-cms/backoffice/event";
 import { MetaValue } from "../../types/metaValue";
-import { UMB_DOCUMENT_WORKSPACE_CONTEXT, UmbDocumentWorkspaceContext } from "@umbraco-cms/backoffice/document";
+import { UMB_DOCUMENT_WORKSPACE_CONTEXT, UmbDocumentUrlRepository, UmbDocumentUrlsDataResolver, type UmbDocumentWorkspaceContext } from "@umbraco-cms/backoffice/document";
 import { UmbLitElement } from "@umbraco-cms/backoffice/lit-element";
 import "../../extensions/string"
 import { UmbImagingRepository } from "@umbraco-cms/backoffice/imaging";
 import { ImageCropModeModel } from "@umbraco-cms/backoffice/external/backend-api";
 import { UMB_PROPERTY_DATASET_CONTEXT } from "@umbraco-cms/backoffice/property";
 import { RtePropertyValue } from "../../types/rtePropertyValue";
-import { UmbMediaPickerPropertyValue } from "@umbraco-cms/backoffice/media";
+import type { UmbMediaPickerPropertyValueEntry } from "@umbraco-cms/backoffice/media";
 import { MetaEditorConfig } from "../../types/metaEditorConfig";
 
 @customElement('dm-meta-momentum')
@@ -24,7 +24,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		[alias: string]:
 		| string
 		| Array<string>
-		| Array<UmbMediaPickerPropertyValue>;
+		| Array<UmbMediaPickerPropertyValueEntry>;
 	} = {};
 
 
@@ -189,7 +189,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 				// keep track of image property value changes
 				imageFields.forEach(async (field) => {
 					//console.log("Observing changes for " + field);
-					context.propertyValueByAlias<Array<UmbMediaPickerPropertyValue>>(field).then((property) => {
+					context.propertyValueByAlias<Array<UmbMediaPickerPropertyValueEntry>>(field).then((property) => {
 						property?.subscribe((propertyValue) => {
 
 							var images = propertyValue ?? [];
@@ -335,27 +335,40 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	}
 
 
-	initNodeUrl() {
-		if (this.workspaceContext != undefined) {
-			if (this.workspaceContext.urls != undefined) {
-				this.workspaceContext.urls.subscribe((_urls) => {
-					if ((_urls?.length ?? 0) == 0 || _urls[0].url == undefined) {
-						return;
-					}
-					if (_urls[0].url.startsWith("/")) {
-						this._nodeUrl = _urls[0].url;
-					} else if (_urls[0].url.startsWith("http")) {
-						const endOfDomain = _urls[0].url.split("/", 3).join("/").length;
-						this._host = _urls[0].url.substring(0, endOfDomain);
-						this._nodeUrl = _urls[0].url.substring(endOfDomain);
-					}
+	#urlRepository = new UmbDocumentUrlRepository(this);
+	#urlsResolver = new UmbDocumentUrlsDataResolver(this);
 
-					if (this._nodeUrl) {
-						this._nodeUrl = this._nodeUrl.replace(/\/$/g, "").replace(/\//g, " > ");
-					}
-				});
+	initNodeUrl() {
+		if (this.workspaceContext == undefined) return;
+
+		// The document workspace context no longer exposes `urls` in Umbraco 17,
+		// so request them from the URL repository and filter to the current culture.
+		this.observe(this.workspaceContext.unique, async (unique) => {
+			if (!unique) return;
+			const culture = await this.#urlsResolver.getRequestCulture();
+			const { asObservable } = await this.#urlRepository.requestUrls([unique], culture);
+			if (!asObservable) return;
+			this.observe(asObservable(), (items) => {
+				this.#urlsResolver.setData(items?.find((x) => x.unique === unique)?.urls);
+			}, "_observeDocumentUrls");
+		}, "_observeDocumentUnique");
+
+		this.observe(this.#urlsResolver.urls, (_urls) => {
+			const url = _urls?.[0]?.url;
+			if (!url) return;
+
+			if (url.startsWith("/")) {
+				this._nodeUrl = url;
+			} else if (url.startsWith("http")) {
+				const endOfDomain = url.split("/", 3).join("/").length;
+				this._host = url.substring(0, endOfDomain);
+				this._nodeUrl = url.substring(endOfDomain);
 			}
-		}
+
+			if (this._nodeUrl) {
+				this._nodeUrl = this._nodeUrl.replace(/\/$/g, "").replace(/\//g, " > ");
+			}
+		}, "_observeResolvedUrls");
 	}
 
 
