@@ -1,5 +1,6 @@
 import { html, customElement, property, state, nothing, ifDefined, css } from "@umbraco-cms/backoffice/external/lit";
-import { UmbPropertyEditorConfigCollection, UmbPropertyEditorUiElement, UmbPropertyValueChangeEvent } from "@umbraco-cms/backoffice/property-editor";
+import type { UmbPropertyEditorConfigCollection, UmbPropertyEditorUiElement } from "@umbraco-cms/backoffice/property-editor";
+import { UmbChangeEvent } from "@umbraco-cms/backoffice/event";
 import { MetaValue } from "../../types/metaValue";
 import { UMB_DOCUMENT_WORKSPACE_CONTEXT, UmbDocumentWorkspaceContext } from "@umbraco-cms/backoffice/document";
 import { UmbLitElement } from "@umbraco-cms/backoffice/lit-element";
@@ -77,7 +78,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 	constructor() {
 		super();
 
-
+	
 		this.consumeContext(UMB_DOCUMENT_WORKSPACE_CONTEXT, (_instance) => {
 
 			this.workspaceContext = _instance;
@@ -150,7 +151,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 				if (!context) return; //for some reason the context is undefined sometimes
 				// Keep track of the name field separately
 				this.observe(context.name, (name) => {
-					console.log("Setting fallbackValue: name to " + name);
+					//console.log("Setting fallbackValue: name to " + name);
 					this.fallbackValues["name"] = name ?? "";
 
 					// Update the fallback values
@@ -187,7 +188,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 				// keep track of image property value changes
 				imageFields.forEach(async (field) => {
-					console.log("Observing changes for " + field);
+					//console.log("Observing changes for " + field);
 					context.propertyValueByAlias<Array<UmbMediaPickerPropertyValue>>(field).then((property) => {
 						property?.subscribe((propertyValue) => {
 
@@ -199,7 +200,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 							}
 
 							//console.log("Setting fallbackValue: " + field + " to " + propertyValue?.map((item) => item.mediaKey));
-							console.log("Setting fallbackValue: " + field + " to " + this.fallbackValues[field]);
+							//console.log("Setting fallbackValue: " + field + " to " + this.fallbackValues[field]);
 
 							// Update fallback values
 							this.#updateShareImage();
@@ -308,22 +309,29 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 
 
-	#toggleSearchCustomiser() {
+	async #toggleSearchCustomiser() {
 		this._showSearchCustomiser = !this._showSearchCustomiser;
 		if (this._showSearchCustomiser) {
-			document.querySelector("#SearchPreview")?.scrollIntoView({
-				behavior: "smooth",
-			});
+			await this.#scrollIntoView("#SearchPreview");
 		}
 	}
 
-	#toggleSocialCustomiser() {
+	async #toggleSocialCustomiser() {
 		this._showSocialCustomiser = !this._showSocialCustomiser;
 		if (this._showSocialCustomiser) {
-			document.querySelector("#SocialPreview")?.scrollIntoView({
-				behavior: "smooth",
-			});
+			await this.#scrollIntoView("#SocialPreview");
 		}
+	}
+
+	/**
+	* @description Scrolls an element in this component into view. The element lives in this component's
+	* shadow DOM, so document.querySelector can't see it. Waits for the render so the customiser is shown first.
+	*/
+	async #scrollIntoView(selector: string) {
+		await this.updateComplete;
+		this.renderRoot.querySelector(selector)?.scrollIntoView({
+			behavior: "smooth",
+		});
 	}
 
 
@@ -363,7 +371,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		this.#updatePreviewValues();
 
 		//Notify Umbraco that the value has changed to do IsDirty Check
-		this.dispatchEvent(new UmbPropertyValueChangeEvent());
+		this.dispatchEvent(new UmbChangeEvent());
 	}
 
 	// Called when the custom share title or description fields are updated
@@ -378,7 +386,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		this.#updatePreviewValues();
 
 		//Notify Umbraco that the value has changed to do IsDirty Check
-		this.dispatchEvent(new UmbPropertyValueChangeEvent());
+		this.dispatchEvent(new UmbChangeEvent());
 	}
 
 	#onUpdateMetaCheckedInverse(e: InputEvent) {
@@ -386,7 +394,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		let property: string = source.dataset.bind!;
 
 		this.value = { ...this.value, ...{ [property]: !source.checked } };
-
+		this.dispatchEvent(new UmbChangeEvent());
 	}
 
 
@@ -406,7 +414,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 		await this.#updateShareImage();
 		//Notify Umbraco that the value has changed to do IsDirty Check
-		this.dispatchEvent(new UmbPropertyValueChangeEvent());
+		this.dispatchEvent(new UmbChangeEvent());
 	}
 
 
@@ -456,7 +464,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 
 		const unique = this.value?.shareImage !== undefined ? this.value?.shareImage : undefined;
 
-		console.log(unique)
+
 		if (unique == undefined || unique == "") {
 			return;
 		}
@@ -513,7 +521,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
 		 ${this.renderDebug()} 
         <uui-icon-registry-essentials>
           <uui-box
-            id="#SearchPreview"
+            id="SearchPreview"
             headline="Search Engine Appearance"
             headline-variant="h5"
             style="margin-bottom:20px;"
@@ -534,7 +542,7 @@ export default class MetaMomentumPropertyEditorUIElement extends UmbLitElement i
           </uui-box>
     
       <uui-box
-        id="#SocialPreview"
+        id="SocialPreview"
         headline="Social Share Appearance"
         headline-variant="h5"
         style="min-width:620px; padding-bottom:20px;"

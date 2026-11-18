@@ -1,0 +1,8 @@
+	#onUpdateMetaCheckedInverse(e: InputEvent) {
+		let source = (e.target as HTMLInputElement);
+		let property: string = source.dataset.bind!;
+
+		this.value = { ...this.value, ...{ [property]: !source.checked } };
+		this.isDirty = true;
+		this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+	}
